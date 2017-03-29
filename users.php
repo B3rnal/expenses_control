@@ -32,8 +32,8 @@
 	
 	<header id="main-head" class="row">
 		<div class="logo ">
-			 <img src="../img/hangar_logo.png" alt="Hangar Logo">
-			 <h1>Expense Report System</h1> 
+			 <img src="../img/hangar_logo.png" alt="Hangar Logo"><h1>Expense Report System</h1> 
+			
 		</div>
 		<div class="user-info ">
 			<h2>Bernal Araya, Admin User</h2>
@@ -42,41 +42,25 @@
 	<!-- menu -->
 	<div id="nav-section" class="row">
 		<ul class="menu dropdown medium-12" data-dropdown-menu>
-		  <li class="active"><a href="#">Home</a></li>
-		  <li>
+		  <li><a href="index.php">Home</a></li>
+		  <li class="active">
 		  	<a>Settings</a>
 			<ul class="menu">
 				<li><a href="travels.php">Manage Travels</a></li>
-				<li><a href="users.php">Users</a></li>
+				<li class="active"><a href="users.php">Users</a></li>
 			</ul>
 		  </li>
 		  <li><a href="reports.php">Reports</a></li>
 		</ul>
 	</div>
 	<!-- /menu -->
-	
-	<!-- dates -->
-	<div id="content" class="row">
-		<div class="columns small-12 medium-4">
-			<label class="left">Pending Expense Reports
-			  <select id="currentExpenseReport">
-			    <option value="1">NY - set 2 2016</option>
-			    <option value="2">Toronto - ene 20 2017</option>
-			  </select>
-			</label>
-			
+	<div id="content">
+		<!-- table -->
+		<div class="row">	
+		<div id="usersTableContainer"></div>
 		</div>
-		<div class="columns small-12">
-			<a id="loadExpenseData" class="button">Update</a>
-		</div>
+		<!-- /table -->
 	</div>
-	<!-- /dates -->
-
-	<!-- table -->
-	<div class="row">	
-	<div id="expensesTableContainer"></div>
-	</div>
-	<!-- /table -->
 	
 </body>
 

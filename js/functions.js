@@ -2,9 +2,16 @@
 $(document).ready(function(){
     $(document).foundation();
 	loadHomeDatePickers();	
-    loadTable();	    
+    loadExpensesTable();
+    message("cargando");
+    loadUserTable();	    
 });
-var currentTable;
+var currentExpenseTable;
+var currentUserTable;
+
+function message(string){
+    console.log(string);
+}
 
 function loadHomeDatePickers(){
 	
@@ -20,29 +27,31 @@ function loadHomeDatePickers(){
 
 }
 
-function loadTable(){
+// Index.php
+// load Expenses Table
+function loadExpensesTable(){
     $("#loadExpenseData").click(function(){
         var currentReport=$("#currentExpenseReport").val();
         var reportName=$("#currentExpenseReport :selected").text();
-        initTable(reportName,currentReport);
+        initExpenseTable(reportName,currentReport);
     });
 }
 
-function initTable(name,id){
-    if(currentTable){
+function initExpenseTable(name,id){
+    if(currentExpenseTable){
         $('#expensesTableContainer').jtable('destroy');
     }
-    currentTable=$('#expensesTableContainer').jtable({
+    currentExpenseTable=$('#expensesTableContainer').jtable({
             title: 'Expense Report : '+name,
             paging: false, //Enable paging
             pageSize: 10, //Set page size (default: 10)
             sorting: true, //Enable sorting
             defaultSorting: 'Name ASC', //Set default sorting
             actions: {
-                listAction: '/listExpenses.php',
-                deleteAction: '/deleteExpenses.php',
-                updateAction: '/updateExpenses.php',
-                createAction: '/createExpenses.php'
+                listAction: '/tables/listExpenses.php',
+                deleteAction: '/tables/deleteExpenses.php',
+                updateAction: '/tables/updateExpenses.php',
+                createAction: '/tables/createExpenses.php'
             },
             fields: {
                 expenseId: {
@@ -54,30 +63,39 @@ function initTable(name,id){
 
                 date: {
                     title: 'Date',
-                    width: '15%',
+                    width: '7%',
                     type: 'date',
                     displayFormat: 'yy-mm-dd'
                 },
 
+                place: {
+                    title: 'Place/Location',
+                    type: 'textarea',
+                    list: true,
+                    width: '13%'
+                },
+
                 type:{
+                    width: '15%',
                     title: 'Type',
-                    options: { '1': 'Personal Meal', '2': 'Internet', '3': 'Lodging, Hotel', '4': 'Auto Rental & Gas', '5': 'Transportation', '6': 'Parking'  }
+                    options: { '1': 'Transportation', '2': 'Lodging, Hotel', '3': 'Auto Rental & Gas', '4': 'Parking', '5': 'Business Meals', '6': 'Personal Meals', '7': 'Internet', '8': 'Mobile', '9': 'Telephone & Fax', '10': 'Enterneiment', '11': 'Supplies', '12': 'Other'  }
                 },
 
                 description: {
-                    title: 'Expense description',
+                    title: 'Description',
                     type: 'textarea',
-                    list: false
+                    list: true,
+                    width: '30%',
                 },
 
                 amount:{
                     title: 'Amount',
-                    width: '15%'
+                    width: '10%'
                 },
 
                 currency:{
                     title: 'Currency',
-                    options: { '1': 'CA Dollar', '2': 'Colones', '3': 'US Dollars' }
+                    options: { '1': 'US Dollar', '2': 'CA Dollar', '3': 'Colones' }
                 },
 
                 recordDate: {
@@ -90,4 +108,67 @@ function initTable(name,id){
             }
         });
     $('#expensesTableContainer').jtable('load');
+}
+
+// Users.php
+// load users Table
+function loadUserTable(){
+    message("dentro de load User");
+    initUserTable();
+}
+
+function initUserTable(){
+    if(currentUserTable){
+        $('#usersTableContainer').jtable('destroy');
+    }
+    currentUserTable=$('#usersTableContainer').jtable({
+            title: 'Users',
+            paging: true, //Enable paging
+            pageSize: 20, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            defaultSorting: 'Name ASC', //Set default sorting
+            actions: {
+                listAction: '/tables/listUsers.php',
+                deleteAction: '/tables/deleteUsers.php',
+                updateAction: '/tables/updateUsers.php',
+                createAction: '/tables/createUsers.php'
+            },
+            fields: {
+                userId: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+
+                name: {
+                    title: 'Name',
+                    type: 'textarea',
+                    list: true,
+                    // width: '30%',
+                },
+
+                department: {
+                    title: 'Department',
+                    type: 'textarea',
+                    list: true,
+                    // width: '30%',
+                },
+
+                email: {
+                    title: 'Email',
+                    type: 'textarea',
+                    list: true,
+                    // width: '30%',
+                },
+
+                phone: {
+                    title: 'Phone',
+                    type: 'textarea',
+                    list: true,
+                    width: '30%',
+                }
+            }
+        });
+    $('#usersTableContainer').jtable('load');
 }
