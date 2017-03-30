@@ -139,34 +139,41 @@ function initUserTable(){
                     create: false,
                     edit: false,
                     list: false
+
                 },
 
                 name: {
                     title: 'Name',
                     type: 'textarea',
                     list: true,
-                    // width: '30%',
+                    width: '20%',
                 },
 
                 department: {
                     title: 'Department',
                     type: 'textarea',
                     list: true,
-                    // width: '30%',
+                    width: '20%',
+                },
+
+                type: {
+                    title: 'User Type',
+                    options: { '1': 'Admin', '2': 'Basic'},
+                    width: '20%',
                 },
 
                 email: {
                     title: 'Email',
                     type: 'textarea',
                     list: true,
-                    // width: '30%',
+                    width: '20%',
                 },
 
                 phone: {
                     title: 'Phone',
                     type: 'textarea',
                     list: true,
-                    width: '30%',
+                    width: '20%',
                 }
             }
         });
