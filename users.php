@@ -43,7 +43,7 @@
 	<div id="nav-section" class="row">
 		<ul class="menu dropdown medium-12" data-dropdown-menu>
 		  <li><a href="index.php">Home</a></li>
-		  <li class="active">
+		  <li>
 		  	<a>Settings</a>
 			<ul class="menu">
 				<li><a href="travels.php">Manage Travels</a></li>

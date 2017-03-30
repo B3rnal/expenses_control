@@ -1,0 +1,125 @@
+
+Partes del sistema (BD)
+Tablas 	
+	-Usuarios
+	-Expense report
+	-Factura cliente (Ligada al Expense)
+	-Rubros Expenses 
+	-Rubros Facturas
+	-Tipo de cambio
+	-Proyectos
+	-Clientes
+	-Tipo Usuario
+	-Estados de expense 
+	-Historial Expenses 
+	-Tipo de gasto
+	-Tipo moneda
+
+
+
+Usuarios
+	-Id
+	-numero empleado
+	-Nombre
+	-mail
+	-Expenses
+	-Tipo usuario
+
+
+
+Expense report
+	-ID
+	-Consecutivo
+	-Id proyecto
+	-Id Usuario
+	-Bilieable
+	-Tipo de cambio
+	-Fecha de creacion
+	-Fecha inicio
+	-Fecha final
+	-Detalle del viaje
+	-Adelanto
+	-Reembolso
+	-Id Usuario Supervisor
+	-Estado
+	-Departamento
+	-Ciudad?
+
+Factura cliente
+	-ID
+	-Consecutivo
+	-Id Usuario
+	-Id Cliente
+	-Fecha de creacion
+	-Fecha de Inicio
+	-Fecha final
+	-Detalle
+	-Id Expense report
+
+Rubros Expenses 
+	-Id
+	-Fecha
+	-Id Expense Report
+	-Id Tipo de gasto
+	-Detalle gasto
+	-Lugar
+	-Monto
+	-Tipo moneda 
+	-Record date
+	-file path
+
+Rubros Facturas
+	-Id
+	-Fecha
+	-Id Factura
+	-Id Tipo de gasto
+	-Detalle gasto
+	-Lugar
+	-Monto
+	-id Tipo moneda 
+	-Record date
+	-file path
+
+Tipo de cambio
+	-Id
+	-fecha
+	-vaor
+	-Id Tipo moneda
+
+Proyectos
+	-ID
+	-Nombre
+	-Id Cliente
+	-Codigo
+
+Clientes
+	-Id
+	-Nombre
+
+Tipo Usuario
+	-id
+	-Tipo
+
+Estados de expense
+	-Id
+	-Estado 
+
+Historial Expenses
+	-Id
+	-Id Expense
+	-Id de estado
+	-fecha
+
+Tipo de gasto
+	-id
+	-Tipo
+
+-Tipo moneda
+	-id
+	-nombre
+	-codigo
+
+
+
+
+

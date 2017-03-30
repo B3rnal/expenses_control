@@ -38,24 +38,29 @@
 /*Navigations*/
 	
 /*Side Nav*/
-#nav-sections .side-nav{
-	background-color: #EEEEEE;
-	float: left;
-	padding: 400px;
+#nav-section {
+	margin-bottom: 30px;
+	color: #fff;
 }
-#nav-sections .main-nav{
-	background-color: #FFFFFF;
-	padding: 400px;
 
+#nav-section .menu .active a{
+	background-color: #000;
+	color: #fff;
+}
+#nav-section  a {
+	color: #000;
+}
+
+#nav-section  a::after{
+	border-color: #000 transparent transparent;
 }
 
 /*Content*/
 
-#expensesTable {
-	margin-top: 30px;
+#content {
 	border-bottom: 1px solid #DDDDDD;
 }
-#expensesTable label{
+#content label{
 	font-size: 17px;
 }
 
