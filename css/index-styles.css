@@ -1,0 +1,24 @@
+#tableContainer #tableMenu {
+	display: none;
+}
+
+#tableContainer #tableMenu{
+	font-size: 14px;
+	background-color: #dedede;
+	padding: 4px 9px;
+}
+#tableContainer #expenseStatus{
+	font-size: 13px;
+	padding: 0px 5px;
+	float: right;
+	width: 20%;
+}
+#tableContainer #expenseStatus span{
+	background-color: #bf0a0acc;
+	border-radius: 5px;
+	text-align: center;
+	width: 140px;
+	margin-left: 15px;
+	padding: 0 55px;
+}
+

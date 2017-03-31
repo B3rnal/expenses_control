@@ -2,29 +2,11 @@
 $(document).ready(function(){
     $(document).foundation();
 	loadHomeDatePickers();	
-    loadExpensesTable();
-    message("cargando");
-    loadUserTable();	    
+    loadExpensesTable();	    
 });
 var currentExpenseTable;
-var currentUserTable;
-
 function message(string){
     console.log(string);
-}
-
-function loadHomeDatePickers(){
-	
-    $("#dp1").fdatepicker({
-        initialDate: '02-12-1989',
-        format: 'mm-dd-yyyy',
-        disableDblClickSelection: true,
-        leftArrow:'<<',
-        rightArrow:'>>',
-        closeIcon:'X',
-        closeButton: true
-    });
-
 }
 
 // Index.php
@@ -34,6 +16,9 @@ function loadExpensesTable(){
         var currentReport=$("#currentExpenseReport").val();
         var reportName=$("#currentExpenseReport :selected").text();
         initExpenseTable(reportName,currentReport);
+        $("#tableMenu").show();
+        $("#expenseStatus").show();
+
     });
 }
 
@@ -108,74 +93,4 @@ function initExpenseTable(name,id){
             }
         });
     $('#expensesTableContainer').jtable('load');
-}
-
-// Users.php
-// load users Table
-function loadUserTable(){
-    message("dentro de load User");
-    initUserTable();
-}
-
-function initUserTable(){
-    if(currentUserTable){
-        $('#usersTableContainer').jtable('destroy');
-    }
-    currentUserTable=$('#usersTableContainer').jtable({
-            title: 'Users',
-            paging: true, //Enable paging
-            pageSize: 20, //Set page size (default: 10)
-            sorting: true, //Enable sorting
-            defaultSorting: 'Name ASC', //Set default sorting
-            actions: {
-                listAction: '/tables/listUsers.php',
-                deleteAction: '/tables/deleteUsers.php',
-                updateAction: '/tables/updateUsers.php',
-                createAction: '/tables/createUsers.php'
-            },
-            fields: {
-                userId: {
-                    key: true,
-                    create: false,
-                    edit: false,
-                    list: false
-
-                },
-
-                name: {
-                    title: 'Name',
-                    type: 'textarea',
-                    list: true,
-                    width: '20%',
-                },
-
-                department: {
-                    title: 'Department',
-                    type: 'textarea',
-                    list: true,
-                    width: '20%',
-                },
-
-                type: {
-                    title: 'User Type',
-                    options: { '1': 'Admin', '2': 'Basic'},
-                    width: '20%',
-                },
-
-                email: {
-                    title: 'Email',
-                    type: 'textarea',
-                    list: true,
-                    width: '20%',
-                },
-
-                phone: {
-                    title: 'Phone',
-                    type: 'textarea',
-                    list: true,
-                    width: '20%',
-                }
-            }
-        });
-    $('#usersTableContainer').jtable('load');
 }
