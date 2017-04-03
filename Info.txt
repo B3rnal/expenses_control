@@ -30,20 +30,19 @@ Usuarios
 Expense report
 	-ID
 	-Consecutivo
-	-Id proyecto
 	-Id Usuario
+	-Id Usuario Supervisor
+	-Id proyecto
 	-Bilieable
-	-Tipo de cambio
 	-Fecha de creacion
 	-Fecha inicio
 	-Fecha final
 	-Detalle del viaje
 	-Adelanto
 	-Reembolso
-	-Id Usuario Supervisor
 	-Estado
 	-Departamento
-	-Ciudad?
+	-Tipo de cambio
 
 Factura cliente
 	-ID

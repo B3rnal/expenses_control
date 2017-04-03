@@ -1,0 +1,30 @@
+#content h1{
+	font-size: 2rem;
+	font-size: 2rem;
+	border-bottom: solid 1px #000;
+	margin-bottom: 30px;
+}
+#content label{
+	font-size: 15px;
+}
+#content input , #content select {
+	height: auto;
+	font-size: 15px;
+	padding:0;
+}
+
+#content select {
+	position: relative;
+	bottom: 5px;
+	font-size: 13px;
+	-moz-appearance: unset;
+	padding-right: 23px;
+}
+
+#content .filter-section{
+	padding-bottom: 40px;
+}
+#content .button{
+	padding: 2px 16px;
+    margin-top: 22px;
+}
