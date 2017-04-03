@@ -4,55 +4,17 @@ echo '{
  "Records":[
   {
   	"expenseId":1,
-  	"date":"\/Date(1320259705710)\/",
-  	"place":"Toronto,CA",
-  	"type":1,
-  	"description":"Plane ticket",
-  	"amount":200,
-  	"currency":2,
-  	"recordDate":"\/Date(1320259705710)\/"
-  },
-  {
-  	"expenseId":2,
-  	"date":"\/Date(1320259705710)\/",
-  	"place":"Toronto,CA",
-  	"type":2,
-  	"description":"One nigth in Hotel Clarendon ",
-  	"amount":100,
-  	"currency":2,
-  	"recordDate":"\/Date(1320259705710)\/"
-  },
-  {
-  	"expenseId":3,
-  	"date":"\/Date(1320259705710)\/",
-  	"place":"Toronto,CA",
-  	"type":3,
-  	"description":"Toyota rental",
-  	"amount":100,
-  	"currency":2,
-  	"recordDate":"\/Date(1320259705710)\/"
-  },
-  {
-  	"expenseId":4,
-  	"date":"\/Date(1320259705710)\/",
-  	"place":"Toronto,CA",
-  	"type":6,
-  	"description":"Breakfast at Macdonalds",
-  	"amount":10,
-  	"currency":2,
-  	"recordDate":"\/Date(1320259705710)\/"
-  },
-  {
-  	"expenseId":5,
-  	"date":"\/Date(1320259705710)\/",
-  	"place":"Toronto,CA",
-  	"type":6,
-  	"description":"Lunch at Hooters ",
-  	"amount":20,
-  	"currency":2,
-  	"recordDate":"\/Date(1320259705710)\/"
+  	"expCustomId":"20170405",
+  	"userName":"Bernal Araya",
+    "suppervisorName":"Luis Angel Rodriguez",
+  	"proyect":"1503",
+  	"bill":1,
+  	"detail":"Toronto - ene 20 2017",
+    "initDate":"\/Date(1320259705710)\/",
+    "end":"\/Date(1320259705710)\/",
+    "cashAdvance":"$300",
+    "status":3
   }
-
  ]
 }';
 

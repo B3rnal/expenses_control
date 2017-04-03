@@ -32,7 +32,7 @@ function initExpenseTable(){
             sorting: true, //Enable sorting
             defaultSorting: 'Name ASC', //Set default sorting
             actions: {
-                //listAction: '/tables/listManageExp.php',
+                listAction: '/tables/listManageExp.php',
                 deleteAction: '/tables/deleteExpenses.php',
                 updateAction: '/tables/updateExpenses.php',
                 createAction: '/tables/createExpenses.php'
@@ -76,7 +76,7 @@ function initExpenseTable(){
 
                 bill:{
                     title: 'Billable',
-                    options: { '0': 'Yes', '1': 'No'}
+                    options: { '0': 'No', '1': 'Yes'}
                 },
 
                 detail:{
@@ -107,7 +107,7 @@ function initExpenseTable(){
 
                 status:{
                     title: 'Status',
-                    type: 'textarea',
+                    options: { '1': 'Open', '2': 'Waiting Approval', '3': 'Approved' , '4': 'Closed'},
                     list: true,
                 }
             }
