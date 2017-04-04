@@ -1,5 +1,4 @@
 
-
 $(document).ready(function(){
     $(document).foundation();
     loadHomeDatePickers();  
@@ -21,11 +20,11 @@ function loadExpensesTable(){
 function initExpenseTable(){
     message('If del init');
     if(currentExpenseTable){
-        $('#expensesTableContainer').jtable('destroy');
+        $('#proyectTableContainer').jtable('destroy');
         message('Dentro del I');
     }
     message('entrando al currentExpenses');
-    currentExpenseTable=$('#expensesTableContainer').jtable({
+    currentExpenseTable=$('#proyectTableContainer').jtable({
 
             title: '    ',
             paging: false, //Enable paging
@@ -33,7 +32,7 @@ function initExpenseTable(){
             sorting: true, //Enable sorting
             defaultSorting: 'Name ASC', //Set default sorting
             actions: {
-                listAction: '/tables/listManageExp.php',
+                // listAction: '/tables/listProyects.php',
                 deleteAction: '/tables/deleteExpenses.php',
                 updateAction: '/tables/updateExpenses.php',
                 createAction: '/tables/createExpenses.php'
@@ -46,72 +45,40 @@ function initExpenseTable(){
                     list: false
                 },
 
-                expCustomId: {
-                    title: 'Expense Id',
-                    // width: '7%',
-                    type: 'textarea',
-                    
-                },
-
-                userName: {
-                    title: 'User Name',
+                Id: {
+                    title: 'Id',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
 
-                suppervisorName: {
-                    title: 'Suppervisor',
-                    type: 'textarea',
-                    list: false,
-                    // width: '13%'
-                },
-
-
-                proyect:{
-                    title: 'Proyect',
+                name: {
+                    title: 'Name',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
-
-                bill:{
-                    title: 'Billable',
-                    options: { '0': 'No', '1': 'Yes'}
+                department: {
+                    title: 'Department',
+                    type: 'textarea',
+                    list: true,
+                    // width: '13%'
                 },
-
-                detail:{
-                    title: 'Detail',
+                email:{
+                    title: 'eMail',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
 
-                initDate: {
-                    title: 'Start Date',
-                    // width: '7%',
-                    type: 'date',
-                    displayFormat: 'yy-mm-dd'
-                },
-                endDate: {
-                    title: ' End Date',
-                    // width: '7%',
-                    type: 'date',
-                    displayFormat: 'yy-mm-dd',
-                    list: false,
-                },
-
-               cashAdvance:{
-                    title: 'Cash Advance',
-                    // width: '10%'
-                },
-
-                status:{
-                    title: 'Status',
-                    options: { '1': 'Open', '2': 'Waiting Approval', '3': 'Approved' , '4': 'Closed'},
+                type:{
+                    title: 'type',
+                    type: 'textarea',
                     list: true,
+                    // width: '13%'
                 }
+
             }
         });
-    $('#expensesTableContainer').jtable('load');
+    $('#proyectTableContainer').jtable('load');
 }

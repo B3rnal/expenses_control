@@ -14,7 +14,7 @@
 	<link href="../jtable/themes/metro/blue/jtable.min.css" rel="stylesheet" type="text/css" >
 	<!-- Custom -->
 	<link rel="stylesheet" type="text/css" href="../css/main-styles.css" >
-	<link rel="stylesheet" type="text/css" href="../css/index-styles.css" >
+	<link rel="stylesheet" type="text/css" href="../css/manage-expenses-styles.css" >
 
 	<!-- JS -->
 	<!-- Jquey -->
@@ -27,7 +27,7 @@
 	<script src="../jtable/jquery.jtable.min.js" type="text/javascript"></script>
 	<!-- Custom -->
 	<script type="text/javascript" src="../js/main-functions.js"></script>
-	<script type="text/javascript" src="../js/manage-expenses-functions.js"></script>
+	<script type="text/javascript" src="../js/manage-invoice-functions.js"></script>
 </head>
 
 <body>
@@ -48,8 +48,8 @@
 		  <li  class="active" id="expenses" >
 		  	<a>Expenses</a>
 			<ul class="menu">
-				<li class="unactive" ><a href="manage-expenses.php">Manage Expenses</a></li>
-				<li class="active"><a class="unactive" href="#">External Invoices</a></li>
+				<li class="active" ><a href="manage-expenses.php">Manage Expenses</a></li>
+				<li class="unactive"><a class="unactive" href="#">External Invoices</a></li>
 			</ul>
 		  </li>
 		  <li id="users" ><a href="users.php">Usuers</a></li>
@@ -61,9 +61,37 @@
 	
 	<!-- page-content -->
 	<div id="content" class="row">
+		<!-- search filter -->
+		<div class="columns small-12">
+			<h1>Invoice Managment</h1>
+			Filter by:
+			<form class="filter-section small-12 columns">
+				
+				<div class="small-2 columns" >
+					<label for="expId">Id</label>
+					<input type="text" name="expId">
+				</div>
+				<div class="small-2 columns">
+					<label for="expUser" >Expense Id</label>
+					<input type="text" name="expUser">
+				</div>
+				<div class="small-2 columns">
+					<label for="expProyect" >Proyect</label>
+					<input type="text" name="expProyect">
+				</div>
+				<div class="small-2 columns">
+					<label for="expDpt" >Client</label>
+					<input type="text" name="expDpt">
+				</div>
+				<div class="small-4 columns">
+					<input class="button" type="submit" value="Search">
+				</div>
+			</form>
+		</div>
+		<!-- /expenses-list -->
 		<!-- table -->
 		<div id="tableContainer" class="columns small-12">
-			<div id="expensesTableContainer"></div>
+			<div id="invoiceTableContainer"></div>
 		</div>
 		<!-- /table -->
 	</div>

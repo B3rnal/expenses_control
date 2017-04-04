@@ -49,7 +49,7 @@
 		  	<a>Expenses</a>
 			<ul class="menu">
 				<li><a href="manage-expenses.php">Manage Expenses</a></li>
-				<li><a href="users.php">External Invoices</a></li>
+				<li><a href="manage-invoices.php">External Invoices</a></li>
 			</ul>
 		  </li>
 		  <li id="users" ><a href="users.php">Usuers</a></li>

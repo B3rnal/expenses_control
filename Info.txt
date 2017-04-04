@@ -38,7 +38,7 @@ Expense report
 	-Fecha inicio
 	-Fecha final
 	-Detalle del viaje
-	-Adelanto
+	-Adelanto???
 	-Reembolso
 	-Estado
 	-Departamento
@@ -50,8 +50,8 @@ Factura cliente
 	-Id Usuario
 	-Id Cliente
 	-Fecha de creacion
-	-Fecha de Inicio
-	-Fecha final
+	-Fecha de Inicio?
+	-Fecha final?
 	-Detalle
 	-Id Expense report
 

@@ -13,7 +13,8 @@
 	<!-- JTABLE -->
 	<link href="../jtable/themes/metro/blue/jtable.min.css" rel="stylesheet" type="text/css" >
 	<!-- Custom -->
-	<link rel="stylesheet" type="text/css" href="../css/main_styles.css" >
+	<link rel="stylesheet" type="text/css" href="../css/main-styles.css" >
+	<link rel="stylesheet" type="text/css" href="../css/manage-expenses-styles.css" >
 
 	<!-- JS -->
 	<!-- Jquey -->
@@ -25,59 +26,80 @@
 	<!-- JTABLE -->
 	<script src="../jtable/jquery.jtable.min.js" type="text/javascript"></script>
 	<!-- Custom -->
-	<script type="text/javascript" src="../js/functions.js"></script>
+	<script type="text/javascript" src="../js/main-functions.js"></script>
+	<script type="text/javascript" src="../js/proyect-functions.js"></script>
 </head>
 
 <body>
 	
-	<header id="main-head" class="row">
+	<header id="mainHead" class="row">
 		<div class="logo ">
 			 <img src="../img/hangar_logo.png" alt="Hangar Logo">
-			 <h1>Expense Report System</h1> 
+			 <h1>Manage Expenses</h1> 
 		</div>
 		<div class="user-info ">
 			<h2>Bernal Araya, Admin User</h2>
 		</div>
 	</header>
 	<!-- menu -->
-	<div id="nav-section" class="row">
+	<div id="navSection" class="row">
 		<ul class="menu dropdown medium-12" data-dropdown-menu>
-		  <li class="active"><a href="#">Home</a></li>
-		  <li>
-		  	<a>Settings</a>
+		  <li id="home"><a href="index.php">Home</a></li>
+		  <li id="expenses" >
+		  	<a>Expenses</a>
 			<ul class="menu">
-				<li><a href="travels.php">Manage Travels</a></li>
-				<li><a href="users.php">Users</a></li>
+				<li class="active" ><a href="manage-expenses.php">Manage Expenses</a></li>
+				<li class="unactive"><a class="unactive" href="manage-invoices.php">External Invoices</a></li>
 			</ul>
 		  </li>
-		  <li><a href="reports.php">Reports</a></li>
+		  <li id="users" ><a href="users.pho">Usuers</a></li>
+		  <li class="active" id="client-proyect" ><a href="#">Clients & Proyects</a></li>
+		  <li id="reports" ><a href="reports.php">Reports</a></li>
 		</ul>
 	</div>
 	<!-- /menu -->
 	
-	<!-- dates -->
+	<!-- page-content -->
 	<div id="content" class="row">
-		<div class="columns small-12 medium-4">
-			<label class="left">Pending Expense Reports
-			  <select id="currentExpenseReport">
-			    <option value="1">NY - set 2 2016</option>
-			    <option value="2">Toronto - ene 20 2017</option>
-			  </select>
-			</label>
-			
-		</div>
+		<!-- search filter -->
 		<div class="columns small-12">
-			<a id="loadExpenseData" class="button">Update</a>
+			<h1>Proyects Managment</h1>
+			Filter by:
+			<form class="filter-section small-12 columns">
+				
+				<div class="small-2 columns" >
+					<label for="Id">Id</label>
+					<input type="text" name="expId">
+				</div>
+				<div class="small-2 columns">
+					<label for="name" >Code</label>
+					<input type="text" name="expUser">
+				</div>
+				<div class="small-2 columns">
+					<label for="email" >Name</label>
+					<input type="text" name="expProyect">
+				</div>
+				<div class="small-2 columns">
+					<label for="email" >Client</label>
+					<input type="text" name="expProyect">
+				</div>
+				<div class="small-4 columns">
+					<input class="button" type="submit" value="Search">
+				</div>
+			</form>
 		</div>
+		<!-- /expenses-list -->
+		<!-- table -->
+		<div id="tableContainer" class="columns small-12">
+			<div id="proyectTableContainer"></div>
+		</div>
+		<!-- /table -->
 	</div>
-	<!-- /dates -->
+	<!-- /page-content -->
+	<footer>
+		
+	</footer>
 
-	<!-- table -->
-	<div class="row">	
-	<div id="expensesTableContainer"></div>
-	</div>
-	<!-- /table -->
-	
 </body>
 
 </html>
