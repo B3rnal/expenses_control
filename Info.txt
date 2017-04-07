@@ -22,9 +22,8 @@ Usuarios
 	-numero empleado
 	-Nombre
 	-mail
-	-Expenses
 	-Tipo usuario
-
+	-Suppervisor
 
 
 Expense report
