@@ -16,34 +16,31 @@ Tablas
 	-Tipo moneda
 
 
-
-Usuarios
+User
 	-Id
 	-numero empleado
 	-Nombre
 	-mail
-	-Expenses
 	-Tipo usuario
-
+	-Suppervisor
 
 
 Expense report
 	-ID
 	-Consecutivo
-	-Id proyecto
 	-Id Usuario
+	-Id Usuario Supervisor
+	-Id proyecto
 	-Bilieable
-	-Tipo de cambio
 	-Fecha de creacion
 	-Fecha inicio
 	-Fecha final
 	-Detalle del viaje
-	-Adelanto
+	-Adelanto???
 	-Reembolso
-	-Id Usuario Supervisor
 	-Estado
 	-Departamento
-	-Ciudad?
+	-Tipo de cambio
 
 Factura cliente
 	-ID
@@ -51,12 +48,12 @@ Factura cliente
 	-Id Usuario
 	-Id Cliente
 	-Fecha de creacion
-	-Fecha de Inicio
-	-Fecha final
+	-Fecha de Inicio?
+	-Fecha final?
 	-Detalle
 	-Id Expense report
 
-Rubros Expenses 
+Expense Line 
 	-Id
 	-Fecha
 	-Id Expense Report
@@ -68,7 +65,7 @@ Rubros Expenses
 	-Record date
 	-file path
 
-Rubros Facturas
+Expense Line
 	-Id
 	-Fecha
 	-Id Factura
@@ -86,17 +83,17 @@ Tipo de cambio
 	-vaor
 	-Id Tipo moneda
 
-Proyectos
+Proyect
 	-ID
 	-Nombre
 	-Id Cliente
 	-Codigo
 
-Clientes
+Client
 	-Id
 	-Nombre
 
-Tipo Usuario
+UserType
 	-id
 	-Tipo
 
@@ -104,17 +101,17 @@ Estados de expense
 	-Id
 	-Estado 
 
-Historial Expenses
+Status Log
 	-Id
 	-Id Expense
 	-Id de estado
 	-fecha
 
-Tipo de gasto
+Expense Type
 	-id
 	-Tipo
 
--Tipo moneda
+-Currency
 	-id
 	-nombre
 	-codigo

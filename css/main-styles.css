@@ -1,68 +1,64 @@
 
 
 /*Header*/
-#main-head{
+#mainHead{
 	background-color: #000;
 	color:#fff;
 }
-#main-head .logo{
+#mainHead .logo{
 	float: left;
 	padding-left: 4%
 }
 
-#main-head .logo h1{
+#mainHead .logo h1{
 	font-size: 14px;
 	text-align: left;
 	margin: 0 0 10px 0;
 }
 
-#main-head .logo img{
+#mainHead .logo img{
 	margin-top: 6px;
 	height: 40px;
 }
-/*#main-head .logo span{
-	font-size: 14px;
-}*/
 
-#main-head .user-info{
+#mainHead .user-info{
 	float: right;
 	text-align: right;
 	font-size: 12px;
 	padding-right: 4%	
 }
-#main-head .user-info h2{
+#mainHead .user-info h2{
 	font-size: 15px;
 	margin:20px 0;	
 }
 
-/*Navigations*/
 	
-/*Side Nav*/
-#nav-section {
+/*Navigation*/
+#navSection {
 	margin-bottom: 30px;
 	color: #fff;
 }
 
-#nav-section .menu .active a{
+#navSection .menu .active a{
 	background-color: #000;
 	color: #fff;
 }
-#nav-section  a {
+#navSection  a {
 	color: #000;
 }
 
-#nav-section  a::after{
+#navSection  a::after{
 	border-color: #000 transparent transparent;
 }
 
 /*Content*/
 
-#content {
-	border-bottom: 1px solid #DDDDDD;
-}
 #content label{
 	font-size: 17px;
 }
+
+/*Footer*/
+footer 
 
 
 
