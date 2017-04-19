@@ -16,8 +16,7 @@ Tablas
 	-Tipo moneda
 
 
-
-Usuarios
+User
 	-Id
 	-numero empleado
 	-Nombre
@@ -54,7 +53,7 @@ Factura cliente
 	-Detalle
 	-Id Expense report
 
-Rubros Expenses 
+Expense Line 
 	-Id
 	-Fecha
 	-Id Expense Report
@@ -66,7 +65,7 @@ Rubros Expenses
 	-Record date
 	-file path
 
-Rubros Facturas
+Expense Line
 	-Id
 	-Fecha
 	-Id Factura
@@ -84,17 +83,17 @@ Tipo de cambio
 	-vaor
 	-Id Tipo moneda
 
-Proyectos
+Proyect
 	-ID
 	-Nombre
 	-Id Cliente
 	-Codigo
 
-Clientes
+Client
 	-Id
 	-Nombre
 
-Tipo Usuario
+UserType
 	-id
 	-Tipo
 
@@ -102,17 +101,17 @@ Estados de expense
 	-Id
 	-Estado 
 
-Historial Expenses
+Status Log
 	-Id
 	-Id Expense
 	-Id de estado
 	-fecha
 
-Tipo de gasto
+Expense Type
 	-id
 	-Tipo
 
--Tipo moneda
+-Currency
 	-id
 	-nombre
 	-codigo
