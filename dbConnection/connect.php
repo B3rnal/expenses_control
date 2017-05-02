@@ -2,9 +2,10 @@
 $servername = "localhost";
 $username = "root";
 $password = "root";
+$dbname = "ExpRep_DB"
 
 // Create connection
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli($servername, $username, $password,);
 
 // Check connection
 if ($conn->connect_error) {
@@ -18,7 +19,8 @@ $conn->select_db( "ExpRep_DB" );
 echo "<br>DB Selected<br>";
 // /choosing DB
 
-// query
+// querys
+//select
 
 $sql = "SELECT idUser, Name, Email FROM User";
 
@@ -32,18 +34,20 @@ if ($result->num_rows > 0) {
 } else {
     echo "0 results";
 }
+// /select
+//include
 $adding = "INSERT INTO `ExpRep_DB`.`User` (`EmployeeNumber`, `Name`, `Email`, `UserTypeId`) VALUES ('3', 'Nancy', 'nanaromo@gmail.com', '2');";
 echo $adding;
 
 
 if ($conn->query($adding) === TRUE) {
-    echo "New record created successfully";
+    echo "<br>New record created successfully";
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "<br>Error: " . $sql . "<br>" . $conn->error;
 }
+// /include
 
-
-// /query 	
+	
 // close connection
 $conn->close();
 ?>
