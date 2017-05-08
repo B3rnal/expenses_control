@@ -1,3 +1,9 @@
+Cosas por hacer
+-manipular bd
+-convertir de query a json
+-cargar tablas.
+
+
 
 Partes del sistema (BD)
 Tablas 	
