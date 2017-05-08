@@ -11,7 +11,7 @@
     public static function getConnection() {
       if (!isset(self::$instance)) {
         self::$instance = new mysqli("localhost", "root", "root", "ExpRep_DB");
-        echo "Starting Db object connection<br>";
+        //echo "Starting Db object connection<br>";
       }
       return self::$instance;
     }

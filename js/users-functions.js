@@ -32,47 +32,47 @@ function initExpenseTable(){
             sorting: true, //Enable sorting
             defaultSorting: 'Name ASC', //Set default sorting
             actions: {
-                listAction: '/tables/listUsers.php',
+                listAction: '/tables/listUsers.php?action=list',
                 deleteAction: '/tables/deleteExpenses.php',
-                updateAction: '/tables/updateExpenses.php',
+                updateAction: '/tables/updateUsers.php?action="update"',
                 createAction: '/tables/createExpenses.php'
             },
             fields: {
-                expenseId: {
+                idUser: {
                     key: true,
                     create: false,
                     edit: false,
                     list: false
                 },
 
-                Id: {
+                EmployeeNumber: {
                     title: 'Id',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
 
-                name: {
+                Name: {
                     title: 'Name',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
-                department: {
+                Department: {
                     title: 'Department',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
-                email:{
-                    title: 'eMail',
+                Email:{
+                    title: 'EMail',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
 
-                type:{
-                    title: 'type',
+                UserTypeId:{
+                    title: 'UserTypeId',
                     type: 'textarea',
                     list: true,
                     // width: '13%'

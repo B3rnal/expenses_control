@@ -10,7 +10,10 @@ function getUsers(){
 		while($r = $result->fetch_assoc()) {
 		    $rows[] = $r;
 		}
-		return json_encode($rows);
+		$jTableResult = array();
+		$jTableResult['Result'] = "OK";
+		$jTableResult['Records'] = $rows;
+		return json_encode($jTableResult);
 	}
 	return $result;	
 }
@@ -77,8 +80,8 @@ function deleteUser($id){
 
 
 
-print deleteUser(1);
-print getUsers();
+//print deleteUser(1);
+//
 // print getUserByNumber(320);
 
 
