@@ -8,7 +8,7 @@ function selectUsers(){
 	$sql = "SELECT * FROM User";
 	$result = $conn->query($sql);
 	if ($result->num_rows == 0){
-		return "0 results";
+		return false;
 	}
 	return $result;
 }
@@ -17,34 +17,29 @@ function selectUsers(){
 function selectSpecificUser($userId){
 	global $conn;
 	$sql = "SELECT * FROM User where idUser = " . $userId;
-	echo"<br>Select from selectSpecificUser: "  . $sql . "<br>";
 	$result = $conn->query($sql);
-	if ($result->num_rows == 0){
-		return "0 results";
+	if ($result->num_rows != 0){
+		return $result;
 	}
-	return $result;
+	return false;
 }
 
 // Select specific User By Employee Number
 function selectUserByNumber($employeeNumber){
 	global $conn;
 	$sql = "SELECT * FROM User where EmployeeNumber = " . $employeeNumber;
-	echo"<br>Select from selecUserByNumber: "  . $sql . "<br>";
 	$result = $conn->query($sql);
-	if ($result->num_rows == 0){
-		return "0 results";
+	if ($result->num_rows != 0){
+		return $result;
 	}
-	return $result;
+	return false;
 }
 
 // Add User
 function addUser($employeeNumber, $name, $email, $department, $type){
 	global $conn;
-	//INSERT INTO `ExpRep_DB`.`User` (`EmployeeNumber`, `Name`, `Email`, `UserTypeId`) VALUES ('318', 'Bernal', 'bernala@thehanger.cr', '1');
 	$sql = "INSERT INTO `User` (`EmployeeNumber`, `Name`, `Email`, `Department`, `UserTypeId`) VALUES ( '" . $employeeNumber . "', '" . $name . "', '" . $email . "', '" . $department . "', '" . $type . "');";
-	echo "<br>Select from add User:" . $sql . "<br>";
 	$result = $conn->query($sql);
-	echo "<br>" . $result ."<br>";
 	return $result;
 
 }
@@ -55,9 +50,7 @@ function addUser($employeeNumber, $name, $email, $department, $type){
 function updateUser($id, $employeeNumber, $name, $email, $department, $type){
 	global $conn;
 	$sql = "UPDATE `User` SET `EmployeeNumber` = \"" . $employeeNumber ."\" , `Name` = \"" . $name . "\" , `Email` = \"" . $email . "\" , `Department` = \"" . $department . "\" , `UserTypeId` = \"" . $type . "\" WHERE `idUser`=  \"" . $id . "\"";
-	echo"<br>Select from selectSpecificUser=" . $sql . "<br>";
 	$result = $conn->query($sql);
-	//echo "<br>" . $result ."<br>";
 	return $result;
 
 }
@@ -66,19 +59,9 @@ function updateUser($id, $employeeNumber, $name, $email, $department, $type){
 function deleteUserById($id){
 	global $conn;
 	$sql = "DELETE FROM User WHERE `idUser`=  \"" . $id . "\"";
-	echo"<br>Select from selectSpecificUser=" . $sql . "<br>";
 	$result = $conn->query($sql);
 	return $result;
 }
-
-
-// $result = selectUsers();
-// $rows = array();
-// while($r = $result->fetch_assoc()) {
-//     $rows[] = $r;
-// }
-// print json_encode($rows);
-
 ?>
 
 

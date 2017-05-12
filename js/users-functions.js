@@ -33,9 +33,9 @@ function initExpenseTable(){
             defaultSorting: 'Name ASC', //Set default sorting
             actions: {
                 listAction: '/tables/listUsers.php?action=list',
-                deleteAction: '/tables/deleteExpenses.php',
-                updateAction: '/tables/updateUsers.php?action="update"',
-                createAction: '/tables/createExpenses.php'
+                deleteAction: '/tables/listUsers.php?action=delete',
+                updateAction: '/tables/listUsers.php?action=update',
+                createAction: '/tables/listUsers.php?action=create'
             },
             fields: {
                 idUser: {
@@ -72,9 +72,8 @@ function initExpenseTable(){
                 },
 
                 UserTypeId:{
-                    title: 'UserTypeId',
-                    type: 'textarea',
-                    list: true,
+                    title: 'Permission',
+                    options: { '1': 'Basic','2': 'Administrator'}
                     // width: '13%'
                 }
 
