@@ -52,7 +52,7 @@
 				<li class="unactive"><a class="unactive" href="manage-invoices.php">External Invoices</a></li>
 			</ul>
 		  </li>
-		  <li   class="active"  id="users" ><a href="#">Usuers</a></li>
+		  <li   class="active"  id="users" ><a href="#">Users</a></li>
 		  <li id="client-proyect" ><a href="client-proyect.php">Clients & Proyects</a></li>
 		  <li id="reports" ><a href="reports.php">Reports</a></li>
 		</ul>

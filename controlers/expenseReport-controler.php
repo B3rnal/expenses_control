@@ -20,17 +20,17 @@ function getExpenses(){
 	return json_encode($jTableResult);
 }
 
-echo getExpenses();
 
-// // Select specific User by Id
-// function getSpecificUser($userId){
-// 	$result = selectSpecificUser($userId);//funcition from user-model
-// 	if ($result) { //cheking if exist
-// 		$data = $result->fetch_assoc();
-// 		return $data;
-// 	}
-// 	return false;	
-// }
+
+// Select specific Expense by Id
+function getSpecificExpense($expenseId){
+	$result = selectExpenseById($expenseId);//funcition from Expenses Report model
+	if ($result) { //cheking if exist
+		$data = $result->fetch_assoc();
+		return $data;
+	}
+	return false;	
+}
 
 
 // // Select specific User By Employee Number
@@ -43,45 +43,48 @@ echo getExpenses();
 // 	return false;	
 // }
 
-// //Add User
-// function newUser($employeeNumber, $name, $email, $department, $type){
-// 	$result = getUserByNumber($employeeNumber);
-// 	$jTableResult = array();
-// 	if (!$result){//if there is no result
-// 		$result = addUser($employeeNumber, $name, $email, $department, $type);//funcition from user-model
-// 		$data = getUserByNumber($employeeNumber);
-// 		//$newUser data = $newUser->fetch_assoc();
-// 		$jTableResult['Result'] = "OK";
-// 		$jTableResult['Record'] = $data;
-// 		return json_encode($jTableResult);
-// 	}
-// 	$jTableResult['Result'] = "Error";
-// 	$jTableResult['Message'] = "The Id is already created";
-// 	return json_encode($jTableResult);
-// }
+//Add Expense 
+function newExpense($expenseCustomId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status){
+	$result = selectExpenseByCustomId($expenseCustomId);
+	$jTableResult = array();
+	if (!$result){//if there is no result
+		$result = addExpense($expenseCustomId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status);//funcition from Expense-model
+		$data = selectExpenseByCustomId($expenseCustomId);
+		//$newUser data = $newUser->fetch_assoc();
+		$jTableResult['Result'] = "OK";
+		$jTableResult['Record'] = $data;
+		return json_encode($jTableResult);
+	}
+	$jTableResult['Result'] = "Error";
+	$jTableResult['Message'] = "The Id is already created";
+	return json_encode($jTableResult);
+}
 
 
-// //Update user
-// function modifyUser($id, $employeeNumber, $name, $email, $department, $type){
-// 	$oldData = getSpecificUser($id); //get data from Id
-// 	$newData = getUserByNumber($employeeNumber); //get data from Employee number
-// 	if(!$newData || $oldData["idUser"] == $newData["idUser"]){ //compare if the update of the employee number is not interfering with other one
-// 		$result = updateUser($id, $employeeNumber, $name, $email, $department, $type);
-// 		$jTableResult['Result'] = "OK";
-// 		return json_encode($jTableResult);
-// 	}
-// 	$jTableResult['Result'] = "Error";
-// 	$jTableResult['Message'] = "The Id is already created";
-// 	return json_encode($jTableResult);
-// }
+//Update Expense
+function modifyExpense($expenseCustomId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status){
+	$result = updateExpense($expenseCustomId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status);
+	$jTableResult['Result'] = "OK";
+	return json_encode($jTableResult);
 
-// //Delete user
-// function deleteUser($id){
-// 	$result = deleteUserById($id);
-// 	$jTableResult['Result'] = "OK";
-// 	return json_encode($jTableResult);
+	// $oldData = getSpecificUser($id); //get data from Id
+	// $newData = getUserByNumber($employeeNumber); //get data from Employee number
+	// if(!$newData || $oldData["idUser"] == $newData["idUser"]){ //compare if the update of the employee number is not interfering with other one
+	// 	$result = updateUser($id, $employeeNumber, $name, $email, $department, $type);
+	// 	$jTableResult['Result'] = "OK";
+	// 	return json_encode($jTableResult);
+	// }
+	// $jTableResult['Result'] = "Error";
+	// $jTableResult['Message'] = "The Id is already created";
+	// return json_encode($jTableResult);
+}
 
-// }
+//Delete Expense 
+function deleteExpense($id){
+	$result = deleteExpenseById($id);
+	$jTableResult['Result'] = "OK";
+	return json_encode($jTableResult);
+}
 
 
 // while($row = $result->fetch_assoc()) {

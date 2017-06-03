@@ -33,84 +33,144 @@ function initExpenseTable(){
             sorting: true, //Enable sorting
             defaultSorting: 'Name ASC', //Set default sorting
             actions: {
-                listAction: '/tables/listManageExp.php',
-                deleteAction: '/tables/deleteExpenses.php',
-                updateAction: '/tables/updateExpenses.php',
-                createAction: '/tables/createExpenses.php'
+                listAction: '/tables/listManageExp.php?action=list',
+                deleteAction: '/tables/listManageExp.php?action=delete',
+                updateAction: '/tables/listManageExp.php?action=update',
+                createAction: '/tables/listManageExp.php?action=create'
             },
             fields: {
-                expenseId: {
+                idExpenseReport: {
                     key: true,
                     create: false,
                     edit: false,
                     list: false
                 },
 
-                expCustomId: {
-                    title: 'Expense Id',
+                ExpenseCustomId: {
+                    title: 'Id',
                     // width: '7%',
-                    type: 'textarea',
+                    type: 'text',
+                    edit: false,
+
                     
                 },
 
-                userName: {
-                    title: 'User Name',
+                Name: {
+                    title: 'Expense Name',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
 
-                suppervisorName: {
-                    title: 'Suppervisor',
+                Billable:{
+                    title: 'Billable',
+                    type: 'radiobutton',
+                    options: { '0': 'No', '1': 'Yes' },
+                    defaultValue: '0',
+                },
+
+                Department: {
+                    title: 'Department',
                     type: 'textarea',
-                    list: false,
+                    list: true,
+                    // width: '13%'
+                },
+
+                User: {
+                    title: 'User',
+                    type: 'textarea',
+                    list: true,
+                    // width: '13%'
+                },
+
+                Supervisor: {
+                    title: 'Supervisor',
+                    type: 'textarea',
+                    list: true,
                     // width: '13%'
                 },
 
 
-                proyect:{
+                Proyect:{
                     title: 'Proyect',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
 
-                bill:{
-                    title: 'Billable',
-                    options: { '0': 'No', '1': 'Yes'}
-                },
-
-                detail:{
+                ReportDetail:{
                     title: 'Detail',
                     type: 'textarea',
+                    list: false,
+                    // width: '13%'
+                },
+
+                CreationDate:{
+                    title: 'Creation Date',
+                    type: 'date',
+                    displayFormat: 'yy-mm-dd',
                     list: true,
                     // width: '13%'
                 },
 
-                initDate: {
-                    title: 'Start Date',
-                    // width: '7%',
-                    type: 'date',
-                    displayFormat: 'yy-mm-dd'
-                },
-                endDate: {
-                    title: ' End Date',
-                    // width: '7%',
+                StartDate:{
+                    title: 'StartDate',
                     type: 'date',
                     displayFormat: 'yy-mm-dd',
                     list: false,
+                    // width: '13%'
                 },
 
-               cashAdvance:{
-                    title: 'Cash Advance',
+                EndDate:{
+                    title: 'End Date',
+                    type: 'date',
+                    displayFormat: 'yy-mm-dd',
+                    list: true,
+                    // width: '13%'
+                },
+
+               CashAdvance:{
+                    title: 'Cash Advance (USD)',
+                    list: true
                     // width: '10%'
                 },
 
-                status:{
+                Refund:{
+                    title: 'Refund',
+                    list: false
+                    // width: '10%'
+                },
+
+                ExpenseStatusId:{
                     title: 'Status',
-                    options: { '1': 'Open', '2': 'Waiting Approval', '3': 'Approved' , '4': 'Closed'},
+                    options: { '1': 'Open', '2': 'Waiting Approval', '3': 'Approved' , '4': 'Processed', '5': 'Closed'},
                     list: true,
-                }
+                },
+
+                Value:{
+                    title: 'USD Value',
+                    list: false,
+                    edit:false,
+                    create:false,
+                },
+            },
+            //Initialize validation logic when a form is created
+            formCreated: function (event, data) {
+                data.form.find('input[name="ExpenseCustomId"]').addClass('validate[required]');
+                /*data.form.find('input[name="EmailAddress"]').addClass('validate[required,custom[email]]');
+                data.form.find('input[name="Password"]').addClass('validate[required]');
+                data.form.find('input[name="BirthDate"]').addClass('validate[required,custom[date]]');
+                data.form.find('input[name="Education"]').addClass('validate[required]');*/
+                data.form.validationEngine();
+            },
+            //Validate form when it is being submitted
+            formSubmitting: function (event, data) {
+                return data.form.validationEngine('validate');
+            },
+            //Dispose validation logic when form is closed
+            formClosed: function (event, data) {
+                data.form.validationEngine('hide');
+                data.form.validationEngine('detach');
             }
         });
     $('#expensesTableContainer').jtable('load');

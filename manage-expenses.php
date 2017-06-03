@@ -16,6 +16,9 @@
 	<link rel="stylesheet" type="text/css" href="../css/main-styles.css" >
 	<link rel="stylesheet" type="text/css" href="../css/manage-expenses-styles.css" >
 
+	<link rel="stylesheet" type="text/css" href="../jquery_validation/css/validationEngine.jquery.css" >
+	
+
 	<!-- JS -->
 	<!-- Jquey -->
 	<script type="text/javascript" src="../js/jquery-3.2.0.js"></script>
@@ -25,6 +28,9 @@
 	<script type="text/javascript" src="../foundation/js/datepicker.js"></script>
 	<!-- JTABLE -->
 	<script src="../jtable/jquery.jtable.min.js" type="text/javascript"></script>
+
+	<script type="text/javascript" src="../jquery_validation/js/jquery.validationEngine.js"></script>
+	<script type="text/javascript" src="../jquery_validation/js/languages/jquery.validationEngine-en.js"></script>
 	<!-- Custom -->
 	<script type="text/javascript" src="../js/main-functions.js"></script>
 	<script type="text/javascript" src="../js/manage-expenses-functions.js"></script>
@@ -52,7 +58,7 @@
 				<li class="unactive"><a class="unactive" href="manage-invoices.php">External Invoices</a></li>
 			</ul>
 		  </li>
-		  <li id="users" ><a href="users.php">Usuers</a></li>
+		  <li id="users" ><a href="users.php">Users</a></li>
 		  <li id="client-proyect" ><a href="client-proyect.php">Clients & Proyects</a></li>
 		  <li id="reports" ><a href="reports.php">Reports</a></li>
 		</ul>

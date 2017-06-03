@@ -63,7 +63,7 @@ function newUser($employeeNumber, $name, $email, $department, $type){
 function modifyUser($id, $employeeNumber, $name, $email, $department, $type){
 	$oldData = getSpecificUser($id); //get data from Id
 	$newData = getUserByNumber($employeeNumber); //get data from Employee number
-	if(!$newData || $oldData["idUser"] == $newData["idUser"]){ //compare if the update of the employee number is not interfering with other one
+	if(!$newData || $oldData["idUser"] == $newData["idUser"]){ //(if the new employee number already exist || if the existint Id mathes with the exmployee user)compare if the update of the employee number is not interfering with other one
 		$result = updateUser($id, $employeeNumber, $name, $email, $department, $type);
 		$jTableResult['Result'] = "OK";
 		return json_encode($jTableResult);
