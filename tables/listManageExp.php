@@ -1,9 +1,14 @@
 <?php
 include ("../controlers/expenseReport-controler.php");
+/*error_reporting(E_ALL);
+ini_set('display_errors', '1');*/
+
 
 
 if($_GET['action']=='list'){
-  echo getExpenses();
+	//debug("hola");
+	//var_dump("hola");
+	echo getExpenses();
 }
 
 
@@ -13,12 +18,12 @@ if($_GET['action']=='delete'){
 
 if($_GET['action']=='create'){
   //if (!isset($_POST["Billable"])){$_POST["Billable"]=0}
-  echo newExpense($_POST['ExpenseCustomId'], $_POST['Name'], $_POST['Billable'], $_POST['Department'], $_POST['Proyect'], $_POST['CreationDate'], $_POST['StartDate'], $_POST['EndDate'], $_POST['ReportDetail'], $_POST['CashAdvance'], $_POST['Refund'], $_POST['User'], $_POST['Supervisor'], $_POST['ExpenseStatusId']);
+  echo newExpense($_POST['ExpenseCustomId'], $_POST['Name'], $_POST['Billable'], $_POST['Department'], $_POST['Proyect'], $_POST['CreationDate'], $_POST['StartDate'], $_POST['EndDate'], $_POST['ReportDetail'], $_POST['CashAdvance'], $_POST['Refund'], $_POST['EmployeeId'], $_POST['SupervisorId'], $_POST['ExpenseStatusId']);
   // $expenseCustomId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status
 }
 
 if($_GET['action']=='update'){
-  echo modifyExpense($_POST['idUser'],$_POST['EmployeeNumber'], $_POST['Name'], $_POST['Email'], $_POST['Department'], $_POST['UserTypeId']);
+  echo modifyExpense($_POST['ExpenseCustomId'], $_POST['Name'], $_POST['Billable'], $_POST['Department'], $_POST['Proyect'], $_POST['CreationDate'], $_POST['StartDate'], $_POST['EndDate'], $_POST['ReportDetail'], $_POST['CashAdvance'], $_POST['Refund'], $_POST['EmployeeId'], $_POST['SupervisorId'], $_POST['ExpenseStatusId']);
 }
 
 

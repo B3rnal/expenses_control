@@ -31,9 +31,12 @@
 
 	<script type="text/javascript" src="../jquery_validation/js/jquery.validationEngine.js"></script>
 	<script type="text/javascript" src="../jquery_validation/js/languages/jquery.validationEngine-en.js"></script>
+	<!-- Chosen js -->
+	<script src="../js/chosen/chosen.jquery.js" type="text/javascript"></script>
 	<!-- Custom -->
 	<script type="text/javascript" src="../js/main-functions.js"></script>
 	<script type="text/javascript" src="../js/manage-expenses-functions.js"></script>
+	
 </head>
 
 <body>

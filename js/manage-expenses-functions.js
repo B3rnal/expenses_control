@@ -76,17 +76,20 @@ function initExpenseTable(){
                     // width: '13%'
                 },
 
-                User: {
+                EmployeeId: {
                     title: 'User',
-                    type: 'textarea',
+                    //type: 'textarea',
+                    options: '/tables/listUsers.php?action=listUsers',
                     list: true,
+                    inputClass:"chosen-select",
                     // width: '13%'
                 },
 
-                Supervisor: {
+                SupervisorId: {
                     title: 'Supervisor',
-                    type: 'textarea',
+                    options: '/tables/listUsers.php?action=listUsers',
                     list: true,
+                    inputClass:"chosen-select",
                     // width: '13%'
                 },
 
@@ -125,7 +128,7 @@ function initExpenseTable(){
                     title: 'End Date',
                     type: 'date',
                     displayFormat: 'yy-mm-dd',
-                    list: true,
+                    list: false,
                     // width: '13%'
                 },
 
@@ -174,4 +177,5 @@ function initExpenseTable(){
             }
         });
     $('#expensesTableContainer').jtable('load');
+
 }

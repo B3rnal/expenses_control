@@ -19,4 +19,8 @@ if($_GET['action']=='update'){
 	echo modifyUser($_POST['idUser'],$_POST['EmployeeNumber'], $_POST['Name'], $_POST['Email'], $_POST['Department'], $_POST['UserTypeId']);
 }
 
+if($_GET['action']=='listUsers'){
+	echo listAllUsers();
+}
+
 ?>

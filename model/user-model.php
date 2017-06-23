@@ -62,6 +62,18 @@ function deleteUserById($id){
 	$result = $conn->query($sql);
 	return $result;
 }
+
+//Selecting  Users and Employee numbers 
+function listUsers(){
+	global $conn;
+	$sql = "SELECT EmployeeNumber as Value, Name as DisplayText FROM User";
+	$result = $conn->query($sql);
+	if ($result->num_rows == 0){
+		return false;
+	}
+	return $result;
+}
+
 ?>
 
 

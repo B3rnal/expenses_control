@@ -81,6 +81,28 @@ function deleteUser($id){
 
 }
 
+//List users
+function listAllUsers(){
+	$result = listUsers();//funcition from user-model
+	if ($result){ //cheking type of data.
+		$rows = array();
+		while($r = $result->fetch_assoc()) {
+		    $rows[] = $r;
+		}
+		$jTableResult = array();
+		$jTableResult['Result'] = "OK";
+		$jTableResult['Options'] = $rows;
+		return json_encode($jTableResult);
+	}
+	$jTableResult = array();
+	$jTableResult['Result'] = "ERROR";
+	$jTableResult['Message'] = "Emtpy Data";
+	return json_encode($jTableResult);
+
+}
+
+//echo listAllUsers();
+
 
 // while($row = $result->fetch_assoc()) {
 // echo "<br>- id: " . $row["idUser"]. " - EmpNum: " . $row["EmployeeNumber"] . " - Name: " . $row["Name"]. " - Email " . $row["Email"]. "<br>";
