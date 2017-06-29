@@ -15,6 +15,9 @@
 	<!-- Custom -->
 	<link rel="stylesheet" type="text/css" href="../css/main-styles.css" >
 	<link rel="stylesheet" type="text/css" href="../css/manage-expenses-styles.css" >
+	<!-- Chosen css -->
+	<!-- <script src="../js/chosen/chosen.jquery.js" type="text/javascript"></script> -->
+	<link rel="stylesheet" href="../js/chosen/chosen.css">
 
 	<link rel="stylesheet" type="text/css" href="../jquery_validation/css/validationEngine.jquery.css" >
 	
@@ -44,7 +47,7 @@
 	<header id="mainHead" class="row">
 		<div class="logo ">
 			 <img src="../img/hangar_logo.png" alt="Hangar Logo">
-			 <h1>Manage Expenses</h1> 
+			 <h1>Expenses Manager</h1> 
 		</div>
 		<div class="user-info ">
 			<h2>Bernal Araya, Admin User</h2>
@@ -75,39 +78,48 @@
 			<h1>Expenses Managment</h1>
 			Search Expense Report by:
 			<form class="filter-section small-12 columns">
-				
-				<div class="small-2 columns" >
-					<label for="expId">Id</label>
-					<input type="text" name="expId">
+				<div class="row">
+					<div class="small-2 columns" >
+						<label for="expId">Id</label>
+						<input type="text" name="expId">
+					</div>
+					<div class="small-2 columns">
+						<label for="expUser" >User</label>
+						<input type="text" name="expUser">
+					</div>
+					<div class="small-2 columns">
+						<label for="expProyect" >Proyect</label>
+						<input type="text" name="expProyect">
+					</div>
+					<div class="small-2 columns">
+						<label for="expDpt" >Department</label>
+						<input type="text" name="expDpt">
+					</div>
+					<div class="small-2 columns">
+						<label class="left">Status
+						  <select id="expStatus" class="chosen-select">
+						    <option value="1">Open</option>
+						    <option value="2">Waiting Approval</option>
+						    <option value="3">Approved</option>
+							<option value="4">Closed</option>
+						  </select>
+						</label>
+					</div>
+					<div class="small-2 columns">
+						<label for="billiable">Billiable</label> 
+						<input type="radio" name="expBill" id="billiable" value="billiable">
+					</div>
 				</div>
-				<div class="small-2 columns">
-					<label for="expUser" >User</label>
-					<input type="text" name="expUser">
-				</div>
-				<div class="small-2 columns">
-					<label for="expProyect" >Proyect</label>
-					<input type="text" name="expProyect">
-				</div>
-				<div class="small-2 columns">
-					<label for="expDpt" >Department</label>
-					<input type="text" name="expDpt">
-				</div>
-				<div class="small-2 columns">
-					<label class="left">Status
-					  <select id="expStatus">
-					    <option value="1">Open</option>
-					    <option value="2">Waiting Approval</option>
-					    <option value="3">Approved</option>
-						<option value="4">Closed</option>
-					  </select>
-					</label>
-				</div>
-				<div class="small-1 columns">
-					<label for="billiable">Billiable</label> 
-					<input type="radio" name="expBill" id="billiable" value="billiable">
-				</div>
-				<div class="small-1 columns">
-					<input class="button" type="submit" value="Search">
+				<div class="row">
+					<div class="small-1 columns">
+						<input class="button" type="submit" value="Search">
+					</div>
+					<div class="small-1 columns">
+						<input class="button" type="submit" value="Clear">
+					</div>
+					<div class="small-10 columns">
+						<!-- <input class="button" type="submit" value="Clear"> -->
+					</div>
 				</div>
 			</form>
 		</div>

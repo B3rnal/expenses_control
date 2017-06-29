@@ -1,9 +1,9 @@
-
-
 $(document).ready(function(){
     $(document).foundation();
     loadHomeDatePickers();  
-    loadExpensesTable();        
+    loadExpensesTable();
+    
+            
 });
 var currentExpenseTable;
 function message(string){
@@ -24,14 +24,17 @@ function initExpenseTable(){
         $('#expensesTableContainer').jtable('destroy');
         message('Dentro del I');
     }
-    message('entrando al currentExpenses');
-    currentExpenseTable=$('#expensesTableContainer').jtable({
+    message('entrando al currentExpenses');     currentExpenseTable=$('#expensesTableContainer').jtable({
 
             title: '    ',
             paging: false, //Enable paging
             pageSize: 10, //Set page size (default: 10)
             sorting: true, //Enable sorting
             defaultSorting: 'Name ASC', //Set default sorting
+            //selecting: true, //Enable selecting
+            //multiselect: true, //Allow multiple selecting
+            //selectingCheckboxes: true, //Show checkboxes on first column
+            //selectOnRowClick: true,
             actions: {
                 listAction: '/tables/listManageExp.php?action=list',
                 deleteAction: '/tables/listManageExp.php?action=delete',
@@ -97,7 +100,7 @@ function initExpenseTable(){
                 Proyect:{
                     title: 'Proyect',
                     type: 'textarea',
-                    list: true,
+                    list: false,
                     // width: '13%'
                 },
 
@@ -112,7 +115,7 @@ function initExpenseTable(){
                     title: 'Creation Date',
                     type: 'date',
                     displayFormat: 'yy-mm-dd',
-                    list: true,
+                    list: false,
                     // width: '13%'
                 },
 
@@ -156,6 +159,17 @@ function initExpenseTable(){
                     edit:false,
                     create:false,
                 },
+                TestColumn: {
+                    /*title: 'Test',*/
+                    dependsOn: 'ExpenseCustomId',
+                    display: function (data) {
+                        //return '<button onclick="myFunction()">Click me</button>'; //here you can call JavaScript function using  onclick
+                        //return '<input class="' + $ExpenseCustomId + '" type="button">';
+
+
+                    },
+                    width: '3%',
+                }
             },
             //Initialize validation logic when a form is created
             formCreated: function (event, data) {
@@ -165,6 +179,7 @@ function initExpenseTable(){
                 data.form.find('input[name="BirthDate"]').addClass('validate[required,custom[date]]');
                 data.form.find('input[name="Education"]').addClass('validate[required]');*/
                 data.form.validationEngine();
+                data.form.find('.chosen-select').chosen({}); 
             },
             //Validate form when it is being submitted
             formSubmitting: function (event, data) {
