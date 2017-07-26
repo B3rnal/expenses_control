@@ -21,6 +21,7 @@
 	font-size: 13px;
 	-moz-appearance: unset;
 	padding-right: 23px;
+	margin-top: 8px;
 }
 
 #content .filter-section{
@@ -37,4 +38,8 @@
 	width: 100%;
 	background-size: 21px;
 	height: 28px;
+}
+
+.filter-section #CheckExpense{
+	width: 100%;
 }

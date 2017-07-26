@@ -5,11 +5,15 @@ $conn = Db::getConnection();
 
 
 // Select all Expenses
-function selectExpenses(){
+function selectExpenses($ExpenseCustomId){
 	global $conn;
 	$sql = "SELECT ExpenseReport.idExpenseReport, ExpenseReport.ExpenseCustomId, ExpenseReport.Name, ExpenseReport.Billable, ExpenseReport.Department, ExpenseReport.Proyect, ExpenseReport.CreationDate, ExpenseReport.StartDate, ExpenseReport.EndDate, ExpenseReport.ReportDetail, ExpenseReport.CashAdvance, ExpenseReport.Refund, ExpenseReport.EmployeeId, ExpenseReport.SupervisorId, ExpenseReport.ExpenseStatusId, c.Value
 			FROM ExpenseReport
-			INNER JOIN CurrencyValue AS c ON ExpenseReport.CreationDate=c.Date;";
+			INNER JOIN CurrencyValue AS c ON ExpenseReport.CreationDate=c.Date";
+	if($ExpenseCustomId!=""){
+		$sql.=" WHERE ExpenseReport.ExpenseCustomId='".$ExpenseCustomId."'";
+	}
+	//var_dump($sql);
 	/*$sql = "SELECT ExpenseReport.idExpenseReport, ExpenseReport.ExpenseCustomId, ExpenseReport.Name, ExpenseReport.Billable, ExpenseReport.Department, ExpenseReport.Proyect, ExpenseReport.CreationDate, ExpenseReport.StartDate, ExpenseReport.EndDate, ExpenseReport.ReportDetail, ExpenseReport.CashAdvance, ExpenseReport.Refund, a.Name AS 'User', b.Name AS 'Supervisor', ExpenseReport.ExpenseStatusId, c.Value
 			FROM ExpenseReport
 			INNER JOIN User AS a ON ExpenseReport.EmployeeId=a.EmployeeNumber
@@ -89,6 +93,15 @@ function deleteExpenseById($id){
 	$result = $conn->query($sql);
 	return $result;
 }
+
+function getAllIds(){
+	global $conn;
+	$sql = "SELECT ExpenseCustomId FROM ExpenseReport;";
+	$result = $conn->query($sql);
+	return $result;
+}
+
+
 ?>
 
 

@@ -7,8 +7,8 @@ include ("../model/expenseReport-model.php");
 // }
 
 // Select all users 
-function getExpenses(){
-	$result = selectExpenses();//funcition from user-model
+function getExpenses($ExpenseCustomId){
+	$result = selectExpenses($ExpenseCustomId);//funcition from user-model
 	if ($result){ //cheking type of data.
 		$rows = array();
 		while($r = $result->fetch_assoc()) {
@@ -61,29 +61,32 @@ function newExpense($expenseCustomId, $name, $billable, $department, $proyect, $
 
 //Update Expense
 function modifyExpense($expenseCustomId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status){
-	$result = updateExpense($expenseCustomId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status);
+	$result = updateExpense($expenseCustomId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status);//funcition from Expense-model
 	$jTableResult['Result'] = "OK";
 	return json_encode($jTableResult);
 
-	// $oldData = getSpecificUser($id); //get data from Id
-	// $newData = getUserByNumber($employeeNumber); //get data from Employee number
-	// if(!$newData || $oldData["idUser"] == $newData["idUser"]){ //compare if the update of the employee number is not interfering with other one
-	// 	$result = updateUser($id, $employeeNumber, $name, $email, $department, $type);
-	// 	$jTableResult['Result'] = "OK";
-	// 	return json_encode($jTableResult);
-	// }
-	// $jTableResult['Result'] = "Error";
-	// $jTableResult['Message'] = "The Id is already created";
-	// return json_encode($jTableResult);
 }
 
 //Delete Expense 
 function deleteExpense($id){
-	$result = deleteExpenseById($id);
+	$result = deleteExpenseById($id);//funcition from Expense-model
 	$jTableResult['Result'] = "OK";
 	return json_encode($jTableResult);
 }
 
+function getExpenseIds(){
+	$result = getAllIds();//funcition from Expense-model
+	$rows = array();
+	while($r = $result->fetch_assoc()) {
+		    $rows[] = $r["ExpenseCustomId"];
+		}
+	return json_encode($rows);
+}
+
+//var_dump("prueba");
+//var_dump(getExpenses(""));
+
+//getExpenseIds();
 
 // while($row = $result->fetch_assoc()) {
 // echo "<br>- id: " . $row["idUser"]. " - EmpNum: " . $row["EmployeeNumber"] . " - Name: " . $row["Name"]. " - Email " . $row["Email"]. "<br>";

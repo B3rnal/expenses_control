@@ -16,7 +16,6 @@
 	<link rel="stylesheet" type="text/css" href="../css/main-styles.css" >
 	<link rel="stylesheet" type="text/css" href="../css/manage-expenses-styles.css" >
 	<!-- Chosen css -->
-	<!-- <script src="../js/chosen/chosen.jquery.js" type="text/javascript"></script> -->
 	<link rel="stylesheet" href="../js/chosen/chosen.css">
 
 	<link rel="stylesheet" type="text/css" href="../jquery_validation/css/validationEngine.jquery.css" >
@@ -31,7 +30,7 @@
 	<script type="text/javascript" src="../foundation/js/datepicker.js"></script>
 	<!-- JTABLE -->
 	<script src="../jtable/jquery.jtable.min.js" type="text/javascript"></script>
-
+	<!-- JTABLE VALIDATION -->
 	<script type="text/javascript" src="../jquery_validation/js/jquery.validationEngine.js"></script>
 	<script type="text/javascript" src="../jquery_validation/js/languages/jquery.validationEngine-en.js"></script>
 	<!-- Chosen js -->
@@ -81,43 +80,54 @@
 				<div class="row">
 					<div class="small-2 columns" >
 						<label for="expId">Id</label>
-						<input type="text" name="expId">
+						<input type="text" name="expId" id="expId">
 					</div>
 					<div class="small-2 columns">
 						<label for="expUser" >User</label>
-						<input type="text" name="expUser">
+						<input type="text" name="expUser" id="expUser">
 					</div>
-					<div class="small-2 columns">
+					<!-- <div class="small-2 columns">
 						<label for="expProyect" >Proyect</label>
-						<input type="text" name="expProyect">
-					</div>
+						<input type="text" name="expProyect" id="expProyect">
+					</div> -->
 					<div class="small-2 columns">
 						<label for="expDpt" >Department</label>
-						<input type="text" name="expDpt">
+						<input type="text" name="expDpt" id="expDpt">
 					</div>
 					<div class="small-2 columns">
-						<label class="left">Status
-						  <select id="expStatus" class="chosen-select">
+						<label class="left">Status</label>
+						<select id="expStatus" >
+							<option value="">All</option>
 						    <option value="1">Open</option>
 						    <option value="2">Waiting Approval</option>
 						    <option value="3">Approved</option>
 							<option value="4">Closed</option>
-						  </select>
-						</label>
+						</select>
 					</div>
 					<div class="small-2 columns">
 						<label for="billiable">Billiable</label> 
-						<input type="radio" name="expBill" id="billiable" value="billiable">
+						<select id="billiable" >
+							<option value="">All</option>
+						    <option value="1">Yes</option>
+						    <option value="2">No</option>
+						</select>
+					</div>
+					<div class="small-1 columns">
+						<input class="button" type="submit" value="Search" id="search">
+					</div>
+					<div class="small-1 columns">
+						<input class="button" type="submit" value="Clear" id="search">
 					</div>
 				</div>
 				<div class="row">
-					<div class="small-1 columns">
-						<input class="button" type="submit" value="Search">
+					
+					<div class="small-2 columns">
+						<input class="button ExpenseSelected" type="submit" id="CheckExpense" value="Check Expense">
 					</div>
-					<div class="small-1 columns">
-						<input class="button" type="submit" value="Clear">
+					<div class="small-2 columns">
+						<input class="button ExpenseSelected"  type="submit" id="CreateInvoice" value="Create External Invoice">
 					</div>
-					<div class="small-10 columns">
+					<div class="small-6 columns">
 						<!-- <input class="button" type="submit" value="Clear"> -->
 					</div>
 				</div>
@@ -134,6 +144,10 @@
 	<footer>
 		
 	</footer>
+	<script type="text/javascript">
+		$( ".ExpenseSelected" ).prop( "disabled", true );
+	</script>
+	
 
 </body>
 

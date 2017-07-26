@@ -6,6 +6,7 @@ $(document).ready(function(){
             
 });
 var currentExpenseTable;
+var currentExpenseNumber;
 function message(string){
     console.log(string);
 }
@@ -31,15 +32,15 @@ function initExpenseTable(){
             pageSize: 10, //Set page size (default: 10)
             sorting: true, //Enable sorting
             defaultSorting: 'Name ASC', //Set default sorting
-            //selecting: true, //Enable selecting
+            selecting: true, //Enable selecting
             //multiselect: true, //Allow multiple selecting
             //selectingCheckboxes: true, //Show checkboxes on first column
-            //selectOnRowClick: true,
+            //9selectOnRowClick: true,
             actions: {
-                listAction: '/tables/listManageExp.php?action=list',
-                deleteAction: '/tables/listManageExp.php?action=delete',
-                updateAction: '/tables/listManageExp.php?action=update',
-                createAction: '/tables/listManageExp.php?action=create'
+                listAction: '/tables/listExpenses.php?action=list',
+                deleteAction: '/tables/listExpenses.php?action=delete',
+                updateAction: '/tables/listExpenses.php?action=update',
+                createAction: '/tables/listExpenses.php?action=create'
             },
             fields: {
                 idExpenseReport: {
@@ -159,8 +160,8 @@ function initExpenseTable(){
                     edit:false,
                     create:false,
                 },
-                TestColumn: {
-                    /*title: 'Test',*/
+                /*TestColumn: {
+                    title: 'Test',
                     dependsOn: 'ExpenseCustomId',
                     display: function (data) {
                         //return '<button onclick="myFunction()">Click me</button>'; //here you can call JavaScript function using  onclick
@@ -169,7 +170,7 @@ function initExpenseTable(){
 
                     },
                     width: '3%',
-                }
+                }*/
             },
             //Initialize validation logic when a form is created
             formCreated: function (event, data) {
@@ -189,8 +190,53 @@ function initExpenseTable(){
             formClosed: function (event, data) {
                 data.form.validationEngine('hide');
                 data.form.validationEngine('detach');
+            },
+            selectionChanged: function () {
+                message("columna seleccionada");
+                $( ".ExpenseSelected" ).prop( "disabled", false );
+                //Get all selected rows
+                var $selectedRows = $('#expensesTableContainer').jtable('selectedRows');
+                $('#SelectedRowList').empty();
+                if ($selectedRows.length > 0) {
+                    //Show selected rows
+                    $selectedRows.each(function () {
+                        var record = $(this).data('record');
+                       //console.log(record.ExpenseCustomId);
+                       currentExpenseNumber=record.ExpenseCustomId;
+                       console.log(currentExpenseNumber);
+                    });
+                } else {
+                    //No rows selected
+                    console.log('No row selected! Select rows to see here...');
+                }
             }
+
         });
+
+        //Load all records when page is first shown
+    //$('#LoadRecordsButton').click();
+    //$('#expensesTableContainer').jtable('load');
     $('#expensesTableContainer').jtable('load');
+    $('#search').click(function (e) {
+            e.preventDefault();
+            $('#expensesTableContainer').jtable('load', {
+                ExpenseCustomId:$("#expId").val(),  
+                //User: $('#cityId').val()
+            });
+        });
+
 
 }
+
+function getAllIds(){
+    $.post( "/tables/listExpenses.php", { action: "listIds" } ,function( data ) {
+        data=JSON.parse(data);
+        if( ! data.error) {
+            //hace lo que tiene que hacer con los datos
+             console.log(data.result);
+        }else{
+            console.log(data.error);
+        }
+    });
+}
+getAllIds();

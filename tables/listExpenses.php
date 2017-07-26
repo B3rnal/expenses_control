@@ -1,59 +1,44 @@
 <?php
-echo '{
- "Result":"OK",
- "Records":[
-  {
-  	"expenseId":1,
-  	"date":"\/Date(1320259705710)\/",
-  	"place":"Toronto,CA",
-  	"type":1,
-  	"description":"Plane ticket",
-  	"amount":200,
-  	"currency":2,
-  	"recordDate":"\/Date(1320259705710)\/"
-  },
-  {
-  	"expenseId":2,
-  	"date":"\/Date(1320259705710)\/",
-  	"place":"Toronto,CA",
-  	"type":2,
-  	"description":"One nigth in Hotel Clarendon ",
-  	"amount":100,
-  	"currency":2,
-  	"recordDate":"\/Date(1320259705710)\/"
-  },
-  {
-  	"expenseId":3,
-  	"date":"\/Date(1320259705710)\/",
-  	"place":"Toronto,CA",
-  	"type":3,
-  	"description":"Toyota rental",
-  	"amount":100,
-  	"currency":2,
-  	"recordDate":"\/Date(1320259705710)\/"
-  },
-  {
-  	"expenseId":4,
-  	"date":"\/Date(1320259705710)\/",
-  	"place":"Toronto,CA",
-  	"type":6,
-  	"description":"Breakfast at Macdonalds",
-  	"amount":10,
-  	"currency":2,
-  	"recordDate":"\/Date(1320259705710)\/"
-  },
-  {
-  	"expenseId":5,
-  	"date":"\/Date(1320259705710)\/",
-  	"place":"Toronto,CA",
-  	"type":6,
-  	"description":"Lunch at Hooters ",
-  	"amount":20,
-  	"currency":2,
-  	"recordDate":"\/Date(1320259705710)\/"
-  }
+include ("../controlers/expenseReport-controler.php");
+/*error_reporting(E_ALL);
+ini_set('display_errors', '1');*/
 
- ]
-}';
+$action = $_GET['action']?$_GET['action']:$_POST['action'];
+//var_dump(getExpenses(""));
+//echo getExpenses($_POST["ExpenseCustomId"]);
+
+if ($action =='list'){
+	//var_dump(getExpenses($_POST["ExpenseCustomId"]));
+	echo getExpenses($_POST["ExpenseCustomId"]);
+}
+
+else if ($action =='delete'){
+  echo deleteExpense($_POST['idExpenseReport']);
+}
+
+else if ($action =='create'){
+  //if (!isset($_POST["Billable"])){$_POST["Billable"]=0}
+  echo newExpense($_POST['ExpenseCustomId'], $_POST['Name'], $_POST['Billable'], $_POST['Department'], $_POST['Proyect'], $_POST['CreationDate'], $_POST['StartDate'], $_POST['EndDate'], $_POST['ReportDetail'], $_POST['CashAdvance'], $_POST['Refund'], $_POST['EmployeeId'], $_POST['SupervisorId'], $_POST['ExpenseStatusId']);
+}
+
+else if ($action =='update'){
+  echo modifyExpense($_POST['ExpenseCustomId'], $_POST['Name'], $_POST['Billable'], $_POST['Department'], $_POST['Proyect'], $_POST['CreationDate'], $_POST['StartDate'], $_POST['EndDate'], $_POST['ReportDetail'], $_POST['CashAdvance'], $_POST['Refund'], $_POST['EmployeeId'], $_POST['SupervisorId'], $_POST['ExpenseStatusId']);
+}
+
+else if ($action =='listIds'){
+	
+	$aResult = array();
+	$list = getExpenseIds();
+	if(empty($list)) {
+       $aResult['error'] = 'Empty Expenses Data';
+   	}
+   	else {
+       $aResult['result'] = $list;
+   	}
+
+    echo json_encode($aResult);
+} 
+
+
 
 ?>
