@@ -232,11 +232,22 @@ function getAllIds(){
     $.post( "/tables/listExpenses.php", { action: "listIds" } ,function( data ) {
         data=JSON.parse(data);
         if( ! data.error) {
-            //hace lo que tiene que hacer con los datos
-             console.log(data.result);
+             var a = data.result;
+             a.forEach(listHTMLIds);
+
+             console.log(a);
+             console.log(a[0]);
+             console.log("info de Data");
         }else{
             console.log(data.error);
         }
     });
 }
+
+function listHTMLIds(item){
+    HTMLSelect = document.getElementById("expId");
+    HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+item+"</option>";
+}
+
+
 getAllIds();

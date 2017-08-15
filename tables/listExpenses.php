@@ -35,7 +35,6 @@ else if ($action =='listIds'){
    	else {
        $aResult['result'] = $list;
    	}
-
     echo json_encode($aResult);
 } 
 

@@ -80,7 +80,7 @@ function getExpenseIds(){
 	while($r = $result->fetch_assoc()) {
 		    $rows[] = $r["ExpenseCustomId"];
 		}
-	return json_encode($rows);
+	return $rows;
 }
 
 //var_dump("prueba");

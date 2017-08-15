@@ -80,7 +80,9 @@
 				<div class="row">
 					<div class="small-2 columns" >
 						<label for="expId">Id</label>
-						<input type="text" name="expId" id="expId">
+						<!-- <input type="text" name="expId" id="expId"> -->
+						<select id="expId" class="chosen-select" >
+						</select>
 					</div>
 					<div class="small-2 columns">
 						<label for="expUser" >User</label>
