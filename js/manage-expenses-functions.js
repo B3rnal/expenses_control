@@ -224,30 +224,73 @@ function initExpenseTable(){
                 //User: $('#cityId').val()
             });
         });
-
-
 }
 
-function getAllIds(){
+function getAllExpIds(){
     $.post( "/tables/listExpenses.php", { action: "listIds" } ,function( data ) {
         data=JSON.parse(data);
+        console.log(data.result[0]);
         if( ! data.error) {
-             var a = data.result;
-             a.forEach(listHTMLIds);
-
-             console.log(a);
-             console.log(a[0]);
-             console.log("info de Data");
+             data.result.forEach(listExpHTMLIds);
         }else{
             console.log(data.error);
         }
     });
 }
 
-function listHTMLIds(item){
+function listExpHTMLIds(item){
     HTMLSelect = document.getElementById("expId");
     HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+item+"</option>";
 }
 
+function getAllUsersIds(){
+    $.post( "/tables/listUsers.php", { action: "listUsersJS" } ,function( data ) {
+/*        console.log(typeof(data));
+        data=JSON.parse(data);
+        console.log(typeof(data));*/
+        data=JSON.parse(data);
+        console.log(data.result[0].Value);
+        if( ! data.error) {
+             data.result.forEach(listUsrHTMLIds);
+/*             console.log(a);
+             console.log(a[0]);
+             console.log("info de Data^^");*/
+        }else{
+            console.log(data.error);
+        }
+    });
+}
 
-getAllIds();
+
+function listUsrHTMLIds(item){
+    HTMLSelect = document.getElementById("usrId");
+    HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item.Value + "\">"+ item.DisplayText +"</option>";
+}
+
+function getAllDepartments(){
+    $.post( "/tables/listExpenses.php", { action: "listDep" } ,function( data ) {
+/*        console.log(typeof(data));
+        data=JSON.parse(data);
+        console.log(typeof(data));*/
+        data=JSON.parse(data);
+        console.log(data.result[0].Value);
+        if( ! data.error) {
+             data.result.forEach(listDepHTMLIds);
+/*             console.log(a);
+             console.log(a[0]);
+             console.log("info de Data^^");*/
+        }else{
+            console.log(data.error);
+        }
+    });
+}
+
+
+function listDepHTMLIds(item){
+    HTMLSelect = document.getElementById("deptId");
+    HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+ item +"</option>";
+}
+
+getAllExpIds();
+getAllUsersIds();
+getAllDepartments();

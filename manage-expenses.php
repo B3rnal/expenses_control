@@ -82,19 +82,20 @@
 						<label for="expId">Id</label>
 						<!-- <input type="text" name="expId" id="expId"> -->
 						<select id="expId" class="chosen-select" >
+							<option value="">All</option>
 						</select>
 					</div>
 					<div class="small-2 columns">
 						<label for="expUser" >User</label>
-						<input type="text" name="expUser" id="expUser">
+						<select id="usrId" class="chosen-select" >
+							<option value="">All</option>
+						</select>
 					</div>
-					<!-- <div class="small-2 columns">
-						<label for="expProyect" >Proyect</label>
-						<input type="text" name="expProyect" id="expProyect">
-					</div> -->
 					<div class="small-2 columns">
 						<label for="expDpt" >Department</label>
-						<input type="text" name="expDpt" id="expDpt">
+						<select id="deptId" class="chosen-select" >
+							<option value="">All</option>
+						</select>
 					</div>
 					<div class="small-2 columns">
 						<label class="left">Status</label>

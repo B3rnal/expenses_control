@@ -13,13 +13,6 @@ function selectExpenses($ExpenseCustomId){
 	if($ExpenseCustomId!=""){
 		$sql.=" WHERE ExpenseReport.ExpenseCustomId='".$ExpenseCustomId."'";
 	}
-	//var_dump($sql);
-	/*$sql = "SELECT ExpenseReport.idExpenseReport, ExpenseReport.ExpenseCustomId, ExpenseReport.Name, ExpenseReport.Billable, ExpenseReport.Department, ExpenseReport.Proyect, ExpenseReport.CreationDate, ExpenseReport.StartDate, ExpenseReport.EndDate, ExpenseReport.ReportDetail, ExpenseReport.CashAdvance, ExpenseReport.Refund, a.Name AS 'User', b.Name AS 'Supervisor', ExpenseReport.ExpenseStatusId, c.Value
-			FROM ExpenseReport
-			INNER JOIN User AS a ON ExpenseReport.EmployeeId=a.EmployeeNumber
-			INNER JOIN User AS b ON ExpenseReport.SupervisorId=b.EmployeeNumber
-			INNER JOIN CurrencyValue AS c ON ExpenseReport.CreationDate=c.Date;";*/
-	//echo $sql;
 	$result = $conn->query($sql);
 	if ($result->num_rows == 0){
 		return false;
@@ -50,11 +43,6 @@ function selectExpenseByCustomId($expenseCustomId){
 			FROM ExpenseReport
 			INNER JOIN CurrencyValue AS c ON ExpenseReport.CreationDate=c.Date
 			WHERE ExpenseReport.ExpenseCustomId = '" . $expenseCustomId . "';";
-
-	// echo "<br>______________<br>";
-	// echo $sql;
-	// echo "<br>______________<br>";
-	//var_dump($sql);
 	$result = $conn->query($sql);
 	
 	if ($result->num_rows != 0){
@@ -70,9 +58,6 @@ function addExpense($expenseCustomId, $name, $billable, $department, $proyect, $
 	//var_dump($sql);
 	$result = $conn->query($sql);
 	return $result;
-	        //"INSERT INTO `ExpenseReport` (`ExpenseCustomId`, `Name`, `Billable`, `Department`, `Proyect`, `CreationDate`, `StartDate`, `EndDate`, `ReportDetail`, `CashAdvance`, `Refund`, `EmployeeId`, `SupervisorId`, `ExpenseStatusId`) VALUES ('23234234', '234234', '0', 'rwerwer', 'werwer', '2017-05-14', '2017-05-20', '2017-05-30', 'dfafsdf', '300', '100', '14', '318', '1');
-
-
 }
 
 
@@ -101,7 +86,14 @@ function getAllIds(){
 	return $result;
 }
 
+//SELECT DISTINCT Department FROM ExpRep_DB.ExpenseReport;
 
+function getAllDepartments(){
+	global $conn;
+	$sql = "SELECT DISTINCT Department FROM ExpenseReport;";
+	$result = $conn->query($sql);
+	return $result;
+}
+
+//var_dump(getAllDepartments());
 ?>
-
-

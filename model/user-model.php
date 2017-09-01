@@ -66,7 +66,7 @@ function deleteUserById($id){
 //Selecting  Users and Employee numbers 
 function listUsers(){
 	global $conn;
-	$sql = "SELECT EmployeeNumber as Value, Name as DisplayText FROM User";
+	$sql = "SELECT EmployeeNumber as Value, Name as DisplayText FROM User ORDER BY DisplayText ASC";
 	$result = $conn->query($sql);
 	if ($result->num_rows == 0){
 		return false;

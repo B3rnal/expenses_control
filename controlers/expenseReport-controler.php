@@ -69,13 +69,13 @@ function modifyExpense($expenseCustomId, $name, $billable, $department, $proyect
 
 //Delete Expense 
 function deleteExpense($id){
-	$result = deleteExpenseById($id);//funcition from Expense-model
+	$result = deleteExpenseById($id);//function from Expense-model
 	$jTableResult['Result'] = "OK";
 	return json_encode($jTableResult);
 }
 
 function getExpenseIds(){
-	$result = getAllIds();//funcition from Expense-model
+	$result = getAllIds();//function from Expense-model
 	$rows = array();
 	while($r = $result->fetch_assoc()) {
 		    $rows[] = $r["ExpenseCustomId"];
@@ -83,8 +83,18 @@ function getExpenseIds(){
 	return $rows;
 }
 
+function getDepartments(){
+	$result = getAllDepartments();//function from Expense-model
+	//echo $result;
+	$rows = array();
+	while($r = $result->fetch_assoc()) {
+		    $rows[] = $r["Department"];
+		}
+	return $rows;
+}
+
 //var_dump("prueba");
-//var_dump(getExpenses(""));
+//var_dump(getDepartments());
 
 //getExpenseIds();
 

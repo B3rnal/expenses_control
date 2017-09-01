@@ -30,13 +30,26 @@ else if ($action =='listIds'){
 	$aResult = array();
 	$list = getExpenseIds();
 	if(empty($list)) {
-       $aResult['error'] = 'Empty Expenses Data';
+       $aResult['error'] = 'Empty Data';
    	}
    	else {
        $aResult['result'] = $list;
    	}
     echo json_encode($aResult);
 } 
+
+else if ($action =='listDep'){
+	
+	$aResult = array();
+	$list = getDepartments();
+	if(empty($list)) {
+       $aResult['error'] = 'Empty Data';
+   	}
+   	else {
+       $aResult['result'] = $list;
+   	}
+    echo json_encode($aResult);
+}
 
 
 

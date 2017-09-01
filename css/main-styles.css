@@ -7,7 +7,7 @@
 }
 #mainHead .logo{
 	float: left;
-	padding-left: 4%
+	padding-left: 1%
 }
 
 #mainHead .logo h1{
@@ -26,7 +26,7 @@
 	float: right;
 	text-align: right;
 	font-size: 12px;
-	padding-right: 4%	
+	padding-right: 1%	
 }
 #mainHead .user-info h2{
 	font-size: 15px;

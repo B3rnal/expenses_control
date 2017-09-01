@@ -81,11 +81,14 @@ function deleteUser($id){
 
 }
 
-//List users
+//List users for User Jtable
 function listAllUsers(){
-	$result = listUsers();//funcition from user-model
+	error_reporting(E_ALL);
+ini_set('display_errors', 1);
+	$result = listUsers();//function from user-model
 	if ($result){ //cheking type of data.
 		$rows = array();
+		$rows[]=array("Value"=>"", "DisplayText"=>"");
 		while($r = $result->fetch_assoc()) {
 		    $rows[] = $r;
 		}
@@ -98,6 +101,25 @@ function listAllUsers(){
 	$jTableResult['Result'] = "ERROR";
 	$jTableResult['Message'] = "Emtpy Data";
 	return json_encode($jTableResult);
+
+}
+
+//List users for User JS selector
+function listAllUsersJS(){
+	$result = listUsers();//function from user-model
+	if ($result){ //cheking type of data.
+		$rows = array();
+		while($r = $result->fetch_assoc()) {
+		    $rows[] = $r;
+		}
+		$jTableResult = array();
+		$jTableResult = $rows;
+		return $jTableResult;
+	}
+	$jTableResult = array();
+	$jTableResult['Result'] = "ERROR";
+	$jTableResult['Message'] = "Emtpy Data";
+	return $jTableResult;
 
 }
 
