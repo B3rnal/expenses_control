@@ -55,8 +55,6 @@ function initExpenseTable(){
                     // width: '7%',
                     type: 'text',
                     edit: false,
-
-                    
                 },
 
                 Name: {
@@ -201,7 +199,7 @@ function initExpenseTable(){
                     //Show selected rows
                     $selectedRows.each(function () {
                         var record = $(this).data('record');
-                       //console.log(record.ExpenseCustomId);
+                       console.log(record.ExpenseCustomId);
                        currentExpenseNumber=record.ExpenseCustomId;
                        console.log(currentExpenseNumber);
                     });
@@ -212,20 +210,24 @@ function initExpenseTable(){
             }
 
         });
-
-        //Load all records when page is first shown
-    //$('#LoadRecordsButton').click();
-    //$('#expensesTableContainer').jtable('load');
+    //Load the table for the first time
     $('#expensesTableContainer').jtable('load');
+    //Load the table according tho the search filters
     $('#search').click(function (e) {
             e.preventDefault();
             $('#expensesTableContainer').jtable('load', {
-                ExpenseCustomId:$("#expId").val(),  
-                //User: $('#cityId').val()
+                ExpenseCustomId:$("#expId").val(),
+                EmployeeId:$("#usrId").val(),
+                Department:$("#deptId").val(),
+                ExpenseStatusId:$("#expStatus").val(),
+                BillableExpense:$("#billiable").val()
             });
         });
 }
 
+//Adding information to the filter drop down
+//-----------------------------------
+//Expenses Ids
 function getAllExpIds(){
     $.post( "/tables/listExpenses.php", { action: "listIds" } ,function( data ) {
         data=JSON.parse(data);
@@ -243,54 +245,41 @@ function listExpHTMLIds(item){
     HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+item+"</option>";
 }
 
+//Users Ids
 function getAllUsersIds(){
     $.post( "/tables/listUsers.php", { action: "listUsersJS" } ,function( data ) {
-/*        console.log(typeof(data));
-        data=JSON.parse(data);
-        console.log(typeof(data));*/
         data=JSON.parse(data);
         console.log(data.result[0].Value);
         if( ! data.error) {
              data.result.forEach(listUsrHTMLIds);
-/*             console.log(a);
-             console.log(a[0]);
-             console.log("info de Data^^");*/
         }else{
             console.log(data.error);
         }
     });
 }
-
-
 function listUsrHTMLIds(item){
     HTMLSelect = document.getElementById("usrId");
     HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item.Value + "\">"+ item.DisplayText +"</option>";
 }
 
+//Departments 
 function getAllDepartments(){
     $.post( "/tables/listExpenses.php", { action: "listDep" } ,function( data ) {
-/*        console.log(typeof(data));
-        data=JSON.parse(data);
-        console.log(typeof(data));*/
         data=JSON.parse(data);
         console.log(data.result[0].Value);
         if( ! data.error) {
              data.result.forEach(listDepHTMLIds);
-/*             console.log(a);
-             console.log(a[0]);
-             console.log("info de Data^^");*/
+
         }else{
             console.log(data.error);
         }
     });
 }
-
-
 function listDepHTMLIds(item){
     HTMLSelect = document.getElementById("deptId");
     HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+ item +"</option>";
 }
-
 getAllExpIds();
 getAllUsersIds();
 getAllDepartments();
+//-------------------------------------

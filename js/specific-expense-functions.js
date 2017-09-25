@@ -83,3 +83,25 @@ function initExpenseTable(){
         });
     $('#invoiceTableContainer').jtable('load');
 }
+
+//Adding information to the filter drop down
+//-----------------------------------
+//Expenses Ids
+function getAllExpIds(){
+    $.post( "/tables/listExpenses.php", { action: "listIds" } ,function( data ) {
+        data=JSON.parse(data);
+        console.log(data.result[0]);
+        if( ! data.error) {
+             data.result.forEach(listExpHTMLIds);
+        }else{
+            console.log(data.error);
+        }
+    });
+}
+
+function listExpHTMLIds(item){
+    HTMLSelect = document.getElementById("expId");
+    HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+item+"</option>";
+}
+getAllExpIds();
+

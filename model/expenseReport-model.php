@@ -5,14 +5,55 @@ $conn = Db::getConnection();
 
 
 // Select all Expenses
-function selectExpenses($ExpenseCustomId){
+function selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable){//All the parameters of the filter
 	global $conn;
+	$firstFilter=true;//Flag to indicate the start of the "WHERE" query, it will add "AND" to the following filters in the query  
 	$sql = "SELECT ExpenseReport.idExpenseReport, ExpenseReport.ExpenseCustomId, ExpenseReport.Name, ExpenseReport.Billable, ExpenseReport.Department, ExpenseReport.Proyect, ExpenseReport.CreationDate, ExpenseReport.StartDate, ExpenseReport.EndDate, ExpenseReport.ReportDetail, ExpenseReport.CashAdvance, ExpenseReport.Refund, ExpenseReport.EmployeeId, ExpenseReport.SupervisorId, ExpenseReport.ExpenseStatusId, c.Value
 			FROM ExpenseReport
 			INNER JOIN CurrencyValue AS c ON ExpenseReport.CreationDate=c.Date";
-	if($ExpenseCustomId!=""){
-		$sql.=" WHERE ExpenseReport.ExpenseCustomId='".$ExpenseCustomId."'";
+	//Considering all each one of the filters
+	//----------------------------------------
+	if($expenseCustomId!=""){
+		if($firstFilter){
+			$sql.=" WHERE ";
+			$firstFilter=false;
+		}else
+			$sql.=" AND ";
+		$sql.="ExpenseReport.ExpenseCustomId='".$expenseCustomId."'";
 	}
+	if($employeeId!=""){
+		if($firstFilter){
+			$sql.=" WHERE ";
+			$firstFilter=false;
+		}else
+			$sql.=" AND ";
+		$sql.="ExpenseReport.EmployeeId='".$employeeId."'";
+	}
+	if($department!=""){
+		if($firstFilter){
+			$sql.=" WHERE ";
+			$firstFilter=false;
+		}else
+			$sql.=" AND ";
+		$sql.="ExpenseReport.Department='".$department."'";
+	}
+	if($status!=""){
+		if($firstFilter){
+			$sql.=" WHERE ";
+			$firstFilter=false;
+		}else
+			$sql.=" AND ";
+		$sql.="ExpenseReport.ExpenseStatusId='".$status."'";
+	}if($billable!=""){
+		if($firstFilter){
+			$sql.=" WHERE ";
+			$firstFilter=false;
+		}else
+			$sql.=" AND ";
+		$sql.="ExpenseReport.Billable='".$billable."'";
+	}
+	//----------------------------------------------
+	//var_dump($sql);
 	$result = $conn->query($sql);
 	if ($result->num_rows == 0){
 		return false;
@@ -95,5 +136,6 @@ function getAllDepartments(){
 	return $result;
 }
 
-//var_dump(getAllDepartments());
+//var_dump(selectExpenses());
+//function selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable)
 ?>

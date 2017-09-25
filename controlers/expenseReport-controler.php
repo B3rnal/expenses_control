@@ -7,8 +7,8 @@ include ("../model/expenseReport-model.php");
 // }
 
 // Select all users 
-function getExpenses($ExpenseCustomId){
-	$result = selectExpenses($ExpenseCustomId);//funcition from user-model
+function getExpenses($expenseCustomId,$employeeId,$department,$status,$billable){
+	$result = selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable);//funcition from user-model
 	if ($result){ //cheking type of data.
 		$rows = array();
 		while($r = $result->fetch_assoc()) {
@@ -94,9 +94,9 @@ function getDepartments(){
 }
 
 //var_dump("prueba");
-//var_dump(getDepartments());
+//var_dump(getExpenses("","","","",""));
 
-//getExpenseIds();
+//var_dump(getExpenseIds());
 
 // while($row = $result->fetch_assoc()) {
 // echo "<br>- id: " . $row["idUser"]. " - EmpNum: " . $row["EmployeeNumber"] . " - Name: " . $row["Name"]. " - Email " . $row["Email"]. "<br>";

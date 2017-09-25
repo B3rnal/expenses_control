@@ -31,32 +31,13 @@
 </head>
 
 <body>
-	
-	<header id="mainHead" class="row">
-		<div class="logo ">
-			 <img src="../img/hangar_logo.png" alt="Hangar Logo">
-			 <h1>Manage Expenses</h1> 
-		</div>
-		<div class="user-info ">
-			<h2>Bernal Araya, Admin User</h2>
-		</div>
-	</header>
-	<!-- menu -->
-	<div id="navSection" class="row">
-		<ul class="menu dropdown medium-12" data-dropdown-menu>
-		  <li id="home"><a href="index.php">Home</a></li>
-		  <li id="expenses" >
-		  	<a>Expenses</a>
-			<ul class="menu">
-				<li class="active" ><a href="manage-expenses.php">Manage Expenses</a></li>
-				<li class="unactive"><a class="unactive" href="manage-invoices.php">External Invoices</a></li>
-			</ul>
-		  </li>
-		  <li   class="active"  id="users" ><a href="#">Users</a></li>
-		  <li id="client-proyect" ><a href="client-proyect.php">Clients & Proyects</a></li>
-		  <li id="reports" ><a href="reports.php">Reports</a></li>
-		</ul>
-	</div>
+	<?php
+	//header
+	include "sections/header.php";
+	//menu 
+	$currentOption="users";
+	include "sections/menu.php"; 
+	?>
 	<!-- /menu -->
 	
 	<!-- page-content -->
