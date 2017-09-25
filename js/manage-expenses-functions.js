@@ -189,8 +189,9 @@ function initExpenseTable(){
                 data.form.validationEngine('hide');
                 data.form.validationEngine('detach');
             },
+            //Check Id of the selected row
             selectionChanged: function () {
-                message("columna seleccionada");
+                //message("columna seleccionada");
                 $( ".ExpenseSelected" ).prop( "disabled", false );
                 //Get all selected rows
                 var $selectedRows = $('#expensesTableContainer').jtable('selectedRows');
@@ -199,7 +200,6 @@ function initExpenseTable(){
                     //Show selected rows
                     $selectedRows.each(function () {
                         var record = $(this).data('record');
-                       console.log(record.ExpenseCustomId);
                        currentExpenseNumber=record.ExpenseCustomId;
                        console.log(currentExpenseNumber);
                     });
@@ -223,7 +223,15 @@ function initExpenseTable(){
                 BillableExpense:$("#billiable").val()
             });
         });
+    $('#CheckExpense').click(function (e) {
+            e.preventDefault();
+            var url="specific-expense.php?id="+currentExpenseNumber;
+            message(url);
+            window.location=url;
+        });
 }
+
+
 
 //Adding information to the filter drop down
 //-----------------------------------

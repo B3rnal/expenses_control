@@ -4,6 +4,7 @@ $(document).ready(function(){
 	loadHomeDatePickers();	
     loadExpensesTable();	    
 });
+var currentId;
 var currentExpenseTable;
 function message(string){
     console.log(string);
@@ -16,23 +17,23 @@ function loadExpensesTable(){
         message('Entrando a loadExpenses');
         initExpenseTable();
 }
+function getCurrentId(id){
+    currentId=id;
+    console.log("this is the current id" + id);
+}
 
-function initExpenseTable(){
-    message('If del init');
+function initExpenseTable(name,id){
     if(currentExpenseTable){
-        $('#invoiceTableContainer').jtable('destroy');
-        message('Dentro del I');
+        $('#expensesTableContainer').jtable('destroy');
     }
-    message('entrando al currentExpenses');
-    currentExpenseTable=$('#invoiceTableContainer').jtable({
-
-            title: '    ',
+    currentExpenseTable=$('#expensesTableContainer').jtable({
+            title: 'Expense Report : '+name,
             paging: false, //Enable paging
             pageSize: 10, //Set page size (default: 10)
             sorting: true, //Enable sorting
             defaultSorting: 'Name ASC', //Set default sorting
             actions: {
-                listAction: '/tables/listInvoice.php',
+                listAction: '/tables/listExpenseLines.php',
                 deleteAction: '/tables/deleteExpenses.php',
                 updateAction: '/tables/updateExpenses.php',
                 createAction: '/tables/createExpenses.php'
@@ -45,43 +46,53 @@ function initExpenseTable(){
                     list: false
                 },
 
-                invCustomId: {
-                    title: 'Invoice Id',
-                    // width: '7%',
-                    type: 'textarea',
-                    
+                date: {
+                    title: 'Date',
+                    width: '7%',
+                    type: 'date',
+                    displayFormat: 'yy-mm-dd'
                 },
 
-                expId: {
-                    title: 'Epense Id',
+                place: {
+                    title: 'Place/Location',
                     type: 'textarea',
                     list: true,
-                    // width: '13%'
+                    width: '13%'
                 },
 
-                client: {
-                    title: 'Client',
-                    type: 'textarea',
-                    list: true,
-                    // width: '13%'
-                },
-                proyect:{
-                    title: 'Proyect',
-                    type: 'textarea',
-                    list: true,
-                    // width: '13%'
+                type:{
+                    width: '15%',
+                    title: 'Type',
+                    options: { '1': 'Transportation', '2': 'Lodging, Hotel', '3': 'Auto Rental & Gas', '4': 'Parking', '5': 'Business Meals', '6': 'Personal Meals', '7': 'Internet', '8': 'Mobile', '9': 'Telephone & Fax', '10': 'Enterneiment', '11': 'Supplies', '12': 'Other'  }
                 },
 
-                detail:{
-                    title: 'Detail',
+                description: {
+                    title: 'Description',
                     type: 'textarea',
                     list: true,
-                    // width: '13%'
+                    width: '30%',
                 },
 
+                amount:{
+                    title: 'Amount',
+                    width: '10%'
+                },
+
+                currency:{
+                    title: 'Currency',
+                    options: { '1': 'US Dollar', '2': 'CA Dollar', '3': 'Colones' }
+                },
+
+                recordDate: {
+                    title: 'Record date',
+                    width: '30%',
+                    type: 'date',
+                    create: false,
+                    edit: false
+                }
             }
         });
-    $('#invoiceTableContainer').jtable('load');
+    $('#expensesTableContainer').jtable('load');
 }
 
 //Adding information to the filter drop down
@@ -90,7 +101,7 @@ function initExpenseTable(){
 function getAllExpIds(){
     $.post( "/tables/listExpenses.php", { action: "listIds" } ,function( data ) {
         data=JSON.parse(data);
-        console.log(data.result[0]);
+        //console.log(data.result[0]);
         if( ! data.error) {
              data.result.forEach(listExpHTMLIds);
         }else{

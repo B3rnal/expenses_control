@@ -36,6 +36,7 @@
 </head>
 
 <body>
+
 	<?php
 	//header
 	include "sections/header.php"; 
@@ -69,19 +70,34 @@
 				</div>
 			</form>
 		</div>
-		<!-- /expenses-list -->
-		<!-- table -->
-		<div id="tableContainer" class="columns small-12">
-			<div id="tableMenu">
-				<a id="submit" href="">Submit</a>
-				<a id="recall" href="" style="display: none;"> Recall </a>
-				<a id="cancel" href="">  | Cancel</a>
-				<div id="expenseStatus" class="table-status">
-					Status <span>Open</span>
-				</div>
+		<!-- page-content -->
+		<div id="content" class="row">
+			<!-- expenses-list -->
+			<div class="columns small-12 medium-4">
+				<label class="left">My Expense Reports
+				  <select id="currentExpenseReport">
+				    <option value="1">NY - set 2 2016</option>
+				    <option value="2">Toronto - ene 20 2017</option>
+				  </select>
+				</label>
+				<a id="loadExpenseData" class="button">Update</a>
 			</div>
-			<div id="expensesTableContainer"></div>
+			<!-- /expenses-list -->
+			<!-- table -->
+			<div id="tableContainer" class="columns small-12">
+				<div id="tableMenu">
+					<a id="submit" href="">Submit</a>
+					<a id="recall" href="" style="display: none;"> Recall </a>
+					<a id="cancel" href="">  | Cancel</a>
+					<div id="expenseStatus" class="table-status">
+						Status <span>Open</span>
+					</div>
+				</div>
+				<div id="expensesTableContainer"></div>
 
+
+			</div>
+			<!-- /table -->
 
 		</div>
 	</div>
@@ -91,5 +107,12 @@
 	</footer>
 
 </body>
-
+<?php
+	$_GET['id']?$id=$_GET['id']:$id='false';
+	//echo $id;
+	echo '<script type="text/javascript">',
+	'getCurrentId('.$id.');',
+	'</script>';
+	//getCurrentId($id);
+?>
 </html>

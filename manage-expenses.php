@@ -98,7 +98,7 @@
 						<input class="button" type="submit" value="Search" id="search">
 					</div>
 					<div class="small-1 columns">
-						<input class="button" type="submit" value="Clear" id="search">
+						<input class="button" type="submit" value="Clear" id="clear">
 					</div>
 				</div>
 				<div class="row">

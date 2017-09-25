@@ -37,8 +37,6 @@
 	$currentOption="home";
 	include "sections/menu.php"; 
 	?>
-	<!-- /menu -->
-	
 	<!-- page-content -->
 	<div id="content" class="row">
 		<!-- expenses-list -->
