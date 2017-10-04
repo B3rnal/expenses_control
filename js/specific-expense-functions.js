@@ -5,6 +5,8 @@ $(document).ready(function(){
     loadExpensesTable();	    
 });
 var currentId;
+var expenseLines;
+var expenseInfo;
 var currentExpenseTable;
 function message(string){
     console.log(string);
@@ -17,10 +19,16 @@ function loadExpensesTable(){
         message('Entrando a loadExpenses');
         initExpenseTable();
 }
+
 function getCurrentId(id){
+    if(id){
+        //expenseInfo=metodo para jalar la info del controlador de lineas de expenses
+    }
     currentId=id;
-    console.log("this is the current id" + id);
+    //console.log("this is the current id" + id);
 }
+
+function getExpenseLines()
 
 function initExpenseTable(name,id){
     if(currentExpenseTable){
@@ -33,7 +41,7 @@ function initExpenseTable(name,id){
             sorting: true, //Enable sorting
             defaultSorting: 'Name ASC', //Set default sorting
             actions: {
-                listAction: '/tables/listExpenseLines.php',
+                listAction: '/tables/expenseLinesTable.php',
                 deleteAction: '/tables/deleteExpenses.php',
                 updateAction: '/tables/updateExpenses.php',
                 createAction: '/tables/createExpenses.php'

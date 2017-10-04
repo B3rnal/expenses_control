@@ -5,7 +5,6 @@
 	<title>Expense Report System</title>
 
 	 <!-- CSS -->
-
 	<link href="../css/jquery-ui.min.css" rel="stylesheet"  type="text/css" >
 	<!-- Foundation -->
 	 <link href="../foundation/css/foundation.min.css" rel="stylesheet"  type="text/css" >
@@ -14,7 +13,7 @@
 	<link href="../jtable/themes/metro/blue/jtable.min.css" rel="stylesheet" type="text/css" >
 	<!-- Custom -->
 	<link rel="stylesheet" type="text/css" href="../css/main-styles.css" >
-	<link rel="stylesheet" type="text/css" href="../css/manage-expenses-styles.css" >
+	<link rel="stylesheet" type="text/css" href="../css/myExpenses-styles.css" >
 
 	<!-- JS -->
 	<!-- Jquey -->
@@ -27,68 +26,46 @@
 	<script src="../jtable/jquery.jtable.min.js" type="text/javascript"></script>
 	<!-- Custom -->
 	<script type="text/javascript" src="../js/main-functions.js"></script>
-	<script type="text/javascript" src="../js/manage-expenses-functions.js"></script>
+	<script type="text/javascript" src="../js/myExpenses-functions.js"></script>
 </head>
 
 <body>
 	<?php
 	//header
 	include "sections/header.php";
-	//menu 
-	$currentOption="reports";
+	//menu
+	$currentOption="home";
 	include "sections/menu.php"; 
 	?>
-	<!-- /menu -->
-	
 	<!-- page-content -->
 	<div id="content" class="row">
-		<!-- search filter -->
-		<div class="columns small-12">
-			<h1>Expenses Managment</h1>
-			Search Expense Report by:
-			<form class="filter-section small-12 columns">
-				
-				<div class="small-2 columns" >
-					<label for="expId">Id</label>
-					<input type="text" name="expId">
-				</div>
-				<div class="small-2 columns">
-					<label for="expUser" >User</label>
-					<input type="text" name="expUser">
-				</div>
-				<div class="small-2 columns">
-					<label for="expProyect" >Proyect</label>
-					<input type="text" name="expProyect">
-				</div>
-				<div class="small-2 columns">
-					<label for="expDpt" >Department</label>
-					<input type="text" name="expDpt">
-				</div>
-				<div class="small-2 columns">
-					<label class="left">Status
-					  <select id="expStatus">
-					    <option value="1">Open</option>
-					    <option value="2">Waiting Approval</option>
-					    <option value="3">Approved</option>
-						<option value="4">Closed</option>
-					  </select>
-					</label>
-				</div>
-				<div class="small-1 columns">
-					<label for="billiable">Billiable</label> 
-					<input type="radio" name="expBill" id="billiable" value="billiable">
-				</div>
-				<div class="small-1 columns">
-					<input class="button" type="submit" value="Search">
-				</div>
-			</form>
+		<!-- expenses-list -->
+		<div class="columns small-12 medium-4">
+			<label class="left">My Expense Reports
+			  <select id="currentExpenseReport">
+			    <option value="1">NY - set 2 2016</option>
+			    <option value="2">Toronto - ene 20 2017</option>
+			  </select>
+			</label>
+			<a id="loadExpenseData" class="button">Update</a>
 		</div>
 		<!-- /expenses-list -->
 		<!-- table -->
 		<div id="tableContainer" class="columns small-12">
+			<div id="tableMenu">
+				<a id="submit" href="">Submit</a>
+				<a id="recall" href="" style="display: none;"> Recall </a>
+				<a id="cancel" href="">  | Cancel</a>
+				<div id="expenseStatus" class="table-status">
+					Status <span>Open</span>
+				</div>
+			</div>
 			<div id="expensesTableContainer"></div>
+
+
 		</div>
 		<!-- /table -->
+
 	</div>
 	<!-- /page-content -->
 	<footer>
