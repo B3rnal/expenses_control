@@ -1,5 +1,5 @@
 <?php
-include ("../model/expenseReport-model.php");
+include ("../model/expenseLine-model.php");
 
 // function debug($msg) {
 //        $msg = str_replace('"', '\\"', $msg); // Escaping double quotes 
@@ -7,8 +7,8 @@ include ("../model/expenseReport-model.php");
 // }
 
 // Select all users 
-function getExpenses($expenseCustomId,$employeeId,$department,$status,$billable){
-	$result = selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable);//funcition from user-model
+function getAllExpenseLines($expenseCustomId){
+	$result = selectExpenseById($expenseCustomId);//funcition from expenseLine-model
 	if ($result){ //cheking type of data.
 		$rows = array();
 		while($r = $result->fetch_assoc()) {
@@ -21,7 +21,7 @@ function getExpenses($expenseCustomId,$employeeId,$department,$status,$billable)
 	}
 	$jTableResult = array();
 	$jTableResult['Result'] = "ERROR";
-	$jTableResult['Message'] = "Emtpy Data";
+	$jTableResult['Message'] = "Please select a Expense Report";
 	return json_encode($jTableResult);
 }
 

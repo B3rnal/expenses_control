@@ -136,13 +136,15 @@ function initExpenseTable(){
 
                CashAdvance:{
                     title: 'Cash Advance (USD)',
-                    list: true
+                    list: true,
+                    defaultValue: 0
                     // width: '10%'
                 },
 
                 Refund:{
                     title: 'Refund',
-                    list: false
+                    list: false,
+                    defaultValue: 0
                     // width: '10%'
                 },
 

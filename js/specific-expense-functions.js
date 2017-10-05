@@ -1,4 +1,4 @@
-
+7
 $(document).ready(function(){
     $(document).foundation();
 	loadHomeDatePickers();	
@@ -12,11 +12,20 @@ function message(string){
     console.log(string);
 }
 
+
+
+
+
+//TENGO QUE HACER LOS METODOS DESDE EL JS USANDO EL DEL HOME Y LLAMANDO A LAS LINEAS QUE YA EXISTEN DE CADA REPORTE
+
+
+
+
 // Index.php
 // load Expenses Table
 function loadExpensesTable(){
         var currentReport=$("#currentExpenseReport").val();
-        message('Entrando a loadExpenses');
+       // message('Entrando a loadExpenses');
         initExpenseTable();
 }
 

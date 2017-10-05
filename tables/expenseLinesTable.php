@@ -9,7 +9,7 @@ $action = $_GET['action']?$_GET['action']:$_POST['action'];
 
 if ($action =='list'){
 	//var_dump(getExpenses($_POST["ExpenseCustomId"]));
-	echo getExpenses($_POST["ExpenseCustomId"],$_POST["EmployeeId"],$_POST["Department"],$_POST["ExpenseStatusId"],$_POST["BillableExpense"]);
+	echo getAllExpenseLines($_POST["ExpenseCustomId"]);
 }
 
 else if ($action =='delete'){

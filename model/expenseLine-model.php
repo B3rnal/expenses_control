@@ -4,54 +4,13 @@ $conn = Db::getConnection();
 
 
 
-// Select all Expenses
-function selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable){//All the parameters of the filter
+//Select all the lines of one specific Expense Report
+function selectExpenseLines($expenseCustomId){
 	global $conn;
-	$firstFilter=true;//Flag to indicate the start of the "WHERE" query, it will add "AND" to the following filters in the query  
-	$sql = "SELECT ExpenseReport.idExpenseReport, ExpenseReport.ExpenseCustomId, ExpenseReport.Name, ExpenseReport.Billable, ExpenseReport.Department, ExpenseReport.Proyect, ExpenseReport.CreationDate, ExpenseReport.StartDate, ExpenseReport.EndDate, ExpenseReport.ReportDetail, ExpenseReport.CashAdvance, ExpenseReport.Refund, ExpenseReport.EmployeeId, ExpenseReport.SupervisorId, ExpenseReport.ExpenseStatusId, c.Value
-			FROM ExpenseReport
-			INNER JOIN CurrencyValue AS c ON ExpenseReport.CreationDate=c.Date";
-	//Considering all each one of the filters
-	//----------------------------------------
-	if($expenseCustomId!=""){
-		if($firstFilter){
-			$sql.=" WHERE ";
-			$firstFilter=false;
-		}else
-			$sql.=" AND ";
-		$sql.="ExpenseReport.ExpenseCustomId='".$expenseCustomId."'";
-	}
-	if($employeeId!=""){
-		if($firstFilter){
-			$sql.=" WHERE ";
-			$firstFilter=false;
-		}else
-			$sql.=" AND ";
-		$sql.="ExpenseReport.EmployeeId='".$employeeId."'";
-	}
-	if($department!=""){
-		if($firstFilter){
-			$sql.=" WHERE ";
-			$firstFilter=false;
-		}else
-			$sql.=" AND ";
-		$sql.="ExpenseReport.Department='".$department."'";
-	}
-	if($status!=""){
-		if($firstFilter){
-			$sql.=" WHERE ";
-			$firstFilter=false;
-		}else
-			$sql.=" AND ";
-		$sql.="ExpenseReport.ExpenseStatusId='".$status."'";
-	}if($billable!=""){
-		if($firstFilter){
-			$sql.=" WHERE ";
-			$firstFilter=false;
-		}else
-			$sql.=" AND ";
-		$sql.="ExpenseReport.Billable='".$billable."'";
-	}
+	$sql = "SELECT ExpenseLine.*, e.ExpenseCustomId 
+			FROM ExpenseLine 
+			INNER JOIN ExpenseReport AS e ON ExpenseLine.ExpenseReportId=e.idExpenseReport
+			WHERE ExpenseCustomId='".$expenseCustomId."';";	
 	//----------------------------------------------
 	//var_dump($sql);
 	$result = $conn->query($sql);
@@ -136,6 +95,6 @@ function getAllDepartments(){
 	return $result;
 }
 
-//var_dump(selectExpenses());
+//var_dump(selectExpenseLines(123));
 //function selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable)
 ?>
