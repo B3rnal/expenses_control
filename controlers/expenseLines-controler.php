@@ -6,9 +6,9 @@ include ("../model/expenseLine-model.php");
 //         echo "<script>console.log(\"$msg\")</script>";
 // }
 
-// Select all users 
+// Select all lines from specific Expense
 function getAllExpenseLines($expenseCustomId){
-	$result = selectExpenseById($expenseCustomId);//funcition from expenseLine-model
+	$result = selectExpenseLines($expenseCustomId);//funcition from expenseLine-model
 	if ($result){ //cheking type of data.
 		$rows = array();
 		while($r = $result->fetch_assoc()) {
@@ -21,15 +21,25 @@ function getAllExpenseLines($expenseCustomId){
 	}
 	$jTableResult = array();
 	$jTableResult['Result'] = "ERROR";
-	$jTableResult['Message'] = "Please select a Expense Report";
+	$jTableResult['Message'] = "Empty Table";
+	return json_encode($jTableResult);
+}
+
+//Add Expense Line
+function newExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $currency, $billable){
+	$jTableResult = array();
+	$data = addExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $currency, $billable);//funcition from expenseLine-model
+	$jTableResult['Result'] = "OK";
+	$jTableResult['Record'] = $data;
 	return json_encode($jTableResult);
 }
 
 
 
+//Custom^^^^------------------------------------------------------------------------------------
 // Select specific Expense by Id
 function getSpecificExpense($expenseId){
-	$result = selectExpenseById($expenseId);//funcition from Expenses Report model
+	$result = selectExpenseById($expenseId);//function from Expenses Report model
 	if ($result) { //cheking if exist
 		$data = $result->fetch_assoc();
 		return $data;
@@ -39,24 +49,6 @@ function getSpecificExpense($expenseId){
 
 
 
-//Add Expense 
-function newExpense($expenseCustomId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status){
-	//var_dump("entrando a newExpense");
-	$result = selectExpenseByCustomId($expenseCustomId);
-	//var_dump($result);
-	$jTableResult = array();
-	if (!$result){//if there is no result
-		$result = addExpense($expenseCustomId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status);//funcition from Expense-model
-		$data = selectExpenseByCustomId($expenseCustomId);
-		//$newUser data = $newUser->fetch_assoc();
-		$jTableResult['Result'] = "OK";
-		$jTableResult['Record'] = $data;
-		return json_encode($jTableResult);
-	}
-	$jTableResult['Result'] = "Error";
-	$jTableResult['Message'] = "The Id is already created";
-	return json_encode($jTableResult);
-}
 
 
 //Update Expense
@@ -96,7 +88,7 @@ function getDepartments(){
 //var_dump("prueba");
 //var_dump(getExpenses("","","","",""));
 
-//var_dump(getExpenseIds());
+//var_dump(getAllExpenseLines(345));
 
 // while($row = $result->fetch_assoc()) {
 // echo "<br>- id: " . $row["idUser"]. " - EmpNum: " . $row["EmployeeNumber"] . " - Name: " . $row["Name"]. " - Email " . $row["Email"]. "<br>";

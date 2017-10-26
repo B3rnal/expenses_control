@@ -4,6 +4,7 @@ include ("../controlers/expenseReport-controler.php");
 ini_set('display_errors', '1');*/
 
 $action = $_GET['action']?$_GET['action']:$_POST['action'];
+$expenseId = $_GET['expId']?$_GET['expId']:$_POST['expId'];
 //var_dump(getExpenses(""));
 //echo getExpenses($_POST["ExpenseCustomId"]);
 
@@ -48,6 +49,20 @@ else if ($action =='listDep'){
    	else {
        $aResult['result'] = $list;
    	}
+    echo json_encode($aResult);
+}
+
+else if ($action =='expenseInfo'){
+  
+  $aResult = array();
+  //echo $action;
+  $list = getSpecificExpense($expenseId);
+  if(empty($list)) {
+       $aResult['error'] = 'Empty Data';
+    }
+    else {
+       $aResult = $list;
+    }
     echo json_encode($aResult);
 }
 

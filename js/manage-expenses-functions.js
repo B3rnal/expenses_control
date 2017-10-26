@@ -14,8 +14,8 @@ function message(string){
 // Index.php
 // load Expenses Table
 function loadExpensesTable(){
-        var currentReport=$("#currentExpenseReport").val();
-        message('Entrando a loadExpenses');
+       // var currentReport=$("#currentExpenseReport").val();
+        // message('Entrando a loadExpenses');
         initExpenseTable();
 }
 
@@ -23,9 +23,10 @@ function initExpenseTable(){
     message('If del init');
     if(currentExpenseTable){
         $('#expensesTableContainer').jtable('destroy');
-        message('Dentro del I');
+        //message('Dentro del I');
     }
-    message('entrando al currentExpenses');     currentExpenseTable=$('#expensesTableContainer').jtable({
+    //message('entrando al currentExpenses');
+    currentExpenseTable=$('#expensesTableContainer').jtable({
 
             title: '    ',
             paging: false, //Enable paging
@@ -227,7 +228,7 @@ function initExpenseTable(){
         });
     $('#CheckExpense').click(function (e) {
             e.preventDefault();
-            var url="specific-expense.php?id="+currentExpenseNumber;
+            var url="specific-expense.php?action=list&id="+currentExpenseNumber;
             message(url);
             window.location=url;
         });
@@ -241,7 +242,7 @@ function initExpenseTable(){
 function getAllExpIds(){
     $.post( "/tables/listExpenses.php", { action: "listIds" } ,function( data ) {
         data=JSON.parse(data);
-        console.log(data.result[0]);
+        //console.log(data.result[0]);
         if( ! data.error) {
              data.result.forEach(listExpHTMLIds);
         }else{
@@ -259,7 +260,7 @@ function listExpHTMLIds(item){
 function getAllUsersIds(){
     $.post( "/tables/listUsers.php", { action: "listUsersJS" } ,function( data ) {
         data=JSON.parse(data);
-        console.log(data.result[0].Value);
+        //console.log(data.result[0].Value);
         if( ! data.error) {
              data.result.forEach(listUsrHTMLIds);
         }else{
@@ -276,7 +277,7 @@ function listUsrHTMLIds(item){
 function getAllDepartments(){
     $.post( "/tables/listExpenses.php", { action: "listDep" } ,function( data ) {
         data=JSON.parse(data);
-        console.log(data.result[0].Value);
+        //console.log(data.result[0].Value);
         if( ! data.error) {
              data.result.forEach(listDepHTMLIds);
 

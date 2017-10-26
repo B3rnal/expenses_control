@@ -29,10 +29,13 @@ function getExpenses($expenseCustomId,$employeeId,$department,$status,$billable)
 
 // Select specific Expense by Id
 function getSpecificExpense($expenseId){
-	$result = selectExpenseById($expenseId);//funcition from Expenses Report model
+	$result = selectExpenseByCustomId($expenseId);//function from Expenses Report model
+	
 	if ($result) { //cheking if exist
-		$data = $result->fetch_assoc();
-		return $data;
+		//var_dump($result);
+		/*$data = $result->fetch_assoc();
+		var_dum( $data);*/
+		return $result;
 	}
 	return false;	
 }
@@ -94,7 +97,7 @@ function getDepartments(){
 }
 
 //var_dump("prueba");
-//var_dump(getExpenses("","","","",""));
+//var_dump(getSpecificExpense(123));
 
 //var_dump(getExpenseIds());
 

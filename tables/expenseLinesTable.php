@@ -1,18 +1,23 @@
 <?php
-include ("../controlers/expenseReport-controler.php");
-/*error_reporting(E_ALL);
-ini_set('display_errors', '1');*/
-
+include ("../controlers/expenseLines-controler.php");
 $action = $_GET['action']?$_GET['action']:$_POST['action'];
-//var_dump(getExpenses(""));
-//echo getExpenses($_POST["ExpenseCustomId"]);
+$id = $_GET['id']?$_GET['id']:$_POST['id'];
 
-if ($action =='list'){
-	//var_dump(getExpenses($_POST["ExpenseCustomId"]));
-	echo getAllExpenseLines($_POST["ExpenseCustomId"]);
+switch ($action) {
+  case 'list':
+    echo getAllExpenseLines($id);
+    break;
+  case 'create':
+  echo newExpenseLine($id, $_POST['ExpenseTypeid'], $_POST['Date'], $_POST['Detail'], $_POST['Place'], $_POST['Amount'], $_POST['Currency'], $_POST['Billable']);
+    break;
+  
+  default:
+    # code...
+    break;
 }
 
-else if ($action =='delete'){
+
+/*else if ($action =='delete'){
   echo deleteExpense($_POST['idExpenseReport']);
 }
 
@@ -26,31 +31,29 @@ else if ($action =='update'){
 }
 
 else if ($action =='listIds'){
-	
-	$aResult = array();
-	$list = getExpenseIds();
-	if(empty($list)) {
+  
+  $aResult = array();
+  $list = getExpenseIds();
+  if(empty($list)) {
        $aResult['error'] = 'Empty Data';
-   	}
-   	else {
+    }
+    else {
        $aResult['result'] = $list;
-   	}
+    }
     echo json_encode($aResult);
 } 
 
 else if ($action =='listDep'){
-	
-	$aResult = array();
-	$list = getDepartments();
-	if(empty($list)) {
+  
+  $aResult = array();
+  $list = getDepartments();
+  if(empty($list)) {
        $aResult['error'] = 'Empty Data';
-   	}
-   	else {
+    }
+    else {
        $aResult['result'] = $list;
-   	}
+    }
     echo json_encode($aResult);
 }
-
-
-
+*/
 ?>

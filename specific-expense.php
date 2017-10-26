@@ -32,7 +32,7 @@
 	<!-- Custom -->
 	<script type="text/javascript" src="../js/main-functions.js"></script>
 	<script type="text/javascript" src="../js/specific-expense-functions.js"></script>
-	<script type="text/javascript" src="../js/index-functions.js"></script>
+	<!-- <script type="text/javascript" src="../js/index-functions.js"></script> -->
 </head>
 
 <body>
@@ -54,7 +54,7 @@
 				<div class="row">
 					<div class="small-2 columns" >
 						<label for="expId">Id</label>
-						<select id="expId" class="chosen-select" >
+						<select id="expId" name="id" class="chosen-select" >
 							<option value=""></option>
 						</select>
 					</div>
@@ -64,7 +64,7 @@
 					<div class="small-1 columns">
 						<input class="button" type="submit" value="Clear" id="clear">
 					</div>
-					<div class="large-2 columns">
+					<div class="small-2 columns">
 						<input class="button ExpenseSelected"  type="submit" id="CreateInvoice" value="Create External Invoice">
 					</div>
 				</div>
@@ -72,27 +72,8 @@
 		</div>
 		<!-- page-content -->
 		<div id="content" class="row">
-			<!-- expenses-list -->
-			<div class="columns small-12 medium-4">
-				<label class="left">My Expense Reports
-				  <select id="currentExpenseReport">
-				    <option value="1">NY - set 2 2016</option>
-				    <option value="2">Toronto - ene 20 2017</option>
-				  </select>
-				</label>
-				<a id="loadExpenseData" class="button">Update</a>
-			</div>
-			<!-- /expenses-list -->
 			<!-- table -->
 			<div id="tableContainer" class="columns small-12">
-				<div id="tableMenu">
-					<a id="submit" href="">Submit</a>
-					<a id="recall" href="" style="display: none;"> Recall </a>
-					<a id="cancel" href="">  | Cancel</a>
-					<div id="expenseStatus" class="table-status">
-						Status <span>Open</span>
-					</div>
-				</div>
 				<div id="expensesTableContainer"></div>
 
 
@@ -108,6 +89,7 @@
 
 </body>
 <?php
+	//$timezone = date_default_timezone_get();
 	$_GET['id']?$id=$_GET['id']:$id='false';
 	//echo $id;
 	echo '<script type="text/javascript">',

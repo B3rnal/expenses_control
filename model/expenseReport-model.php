@@ -84,6 +84,7 @@ function selectExpenseByCustomId($expenseCustomId){
 			FROM ExpenseReport
 			INNER JOIN CurrencyValue AS c ON ExpenseReport.CreationDate=c.Date
 			WHERE ExpenseReport.ExpenseCustomId = '" . $expenseCustomId . "';";
+	//echo $sql;
 	$result = $conn->query($sql);
 	
 	if ($result->num_rows != 0){
@@ -136,6 +137,6 @@ function getAllDepartments(){
 	return $result;
 }
 
-//var_dump(selectExpenses("","","","",""));
+//var_dump(selectExpenseByCustomId(123));
 //function selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable)
 ?>
