@@ -4,10 +4,10 @@ $conn = Db::getConnection();
 
 
 
-function returnDate(){
+function returnSeverDate(){
 	date_default_timezone_set('America/Costa_Rica');
 	return date('m/d/Y - h:i:s a', time());
-};
+}
 
 //Select all the lines of one specific Expense Report
 function selectExpenseLines($expenseCustomId){
@@ -26,33 +26,44 @@ function selectExpenseLines($expenseCustomId){
 
 function selectSpecificLine($id){
 	global $conn;
+	//var_dump("ingresando a la consulta del ultimo ID:".$id);
 	$sql = "SELECT ExpenseLine.*, e.ExpenseCustomId 
 			FROM ExpenseLine 
 			INNER JOIN ExpenseReport AS e ON ExpenseLine.ExpenseReportId=e.idExpenseReport
 			WHERE idExpenseLine='".$id."';";	
-	//var_dump($sql);
+	//var_dump("<br>".$sql."<br>");
 	$result = $conn->query($sql);
-	if ($result->num_rows == 0){
-		return false;
+	if ($result->num_rows != 0){
+		return $result->fetch_assoc();
 	}
-	return $result;
+	return false;
 }
 
 // Add Expense
 function addExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $currency, $billable){
 	global $conn;
 	$last_id;
-	$sql="";
-	//$sql = "INSERT INTO `ExpenseLine` (`ExpenseReportId`, `ExpenseTypeid`, `Date`, `Detail`, `Place`, `Amount`, `Currency`, `Billable`, `ModificationDate`) VALUES ( '" . $expenseId . "', '" . $typeId . "', '" . $date . "', '" . $detail . "', '" .$place . "', '" .$amount . "', '" .$currency . "', '" .$billable . "', '" .returnDate(). "');";
-	//var_dump($sql);
+/*	$sql="";
+	$expenseId=3;
+	$typeId=1;
+	$date="207-10-08";
+	$detail="Uber";
+	$place= "toronto";
+	$amount="10";
+	$currency="1";
+	$billable="1";*/
+	$sql = "INSERT INTO `ExpenseLine`(`ExpenseReportId`, `ExpenseTypeid`, `Date`, `Detail`, `Place`, `Amount`, `Currency`, `Billable`, `ModificationLog`) VALUES ( '" . $expenseId . "', '" . $typeId . "', '" . $date . "', '" . $detail . "', '" .$place . "', '" .$amount . "', '" .$currency . "', '" .$billable . "', '" .returnSeverDate(). "');";
+
+	//var_dump($sql . "<br>" . "<br>");
 	if ($conn->query($sql) === TRUE) {
 	    $last_id = $conn->insert_id;
 	} else {
 	    $conn->error;
 	}
-	echo $last_id . "<br>";
+	//var_dump($last_id . "<br>");
 	$result=selectSpecificLine($last_id);
 
+	//var_dump(json_encode($result));
 	return $result;
 }
 //Custom^^^^------------------------------------------------------------------------------------
@@ -141,6 +152,6 @@ function addExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $c
 	return $result;
 }
 */
-var_dump(addExpenseLine(234));
+//var_dump(addExpenseLine(3, 1, "2017-10-08", "uber", "canada", 10, 1, 1));
 //function selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable)
 ?>

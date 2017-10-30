@@ -8,7 +8,7 @@ switch ($action) {
     echo getAllExpenseLines($id);
     break;
   case 'create':
-  echo newExpenseLine($id, $_POST['ExpenseTypeid'], $_POST['Date'], $_POST['Detail'], $_POST['Place'], $_POST['Amount'], $_POST['Currency'], $_POST['Billable']);
+    echo newExpenseLine($id, $_POST['ExpenseTypeid'], $_POST['Date'], $_POST['Detail'], $_POST['Place'], $_POST['Amount'], $_POST['Currency'], $_POST['Billable']);
     break;
   
   default:

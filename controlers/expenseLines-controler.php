@@ -1,11 +1,6 @@
 <?php
 include ("../model/expenseLine-model.php");
 
-// function debug($msg) {
-//        $msg = str_replace('"', '\\"', $msg); // Escaping double quotes 
-//         echo "<script>console.log(\"$msg\")</script>";
-// }
-
 // Select all lines from specific Expense
 function getAllExpenseLines($expenseCustomId){
 	$result = selectExpenseLines($expenseCustomId);//funcition from expenseLine-model
@@ -28,16 +23,16 @@ function getAllExpenseLines($expenseCustomId){
 //Add Expense Line
 function newExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $currency, $billable){
 	$jTableResult = array();
-	$data = addExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $currency, $billable);//funcition from expenseLine-model
+	$result = addExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $currency, $billable);//funcition from expenseLine-model
 	$jTableResult['Result'] = "OK";
-	$jTableResult['Record'] = $data;
+	$jTableResult['Record'] = $result;
 	return json_encode($jTableResult);
 }
 
 
 
 //Custom^^^^------------------------------------------------------------------------------------
-// Select specific Expense by Id
+/*// Select specific Expense by Id
 function getSpecificExpense($expenseId){
 	$result = selectExpenseById($expenseId);//function from Expenses Report model
 	if ($result) { //cheking if exist
@@ -84,7 +79,7 @@ function getDepartments(){
 		}
 	return $rows;
 }
-
+*/
 //var_dump("prueba");
 //var_dump(getExpenses("","","","",""));
 

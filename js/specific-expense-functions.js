@@ -67,7 +67,7 @@ function initExpenseTable(id,name,Customid){
                 listAction: '/tables/expenseLinesTable.php?action=list&id='+Customid,
                 deleteAction: '/tables/deleteExpenses.php',
                 updateAction: '/tables/updateExpenses.php',//Añadir log de fecha y user
-                createAction: '/tables/createExpenses.php'
+                createAction: '/tables/expenseLinesTable.php?action=create&id='+id,
             },
             fields: {
                 IdExpenseLine: {
@@ -118,11 +118,11 @@ function initExpenseTable(id,name,Customid){
                 Billable:{
                     title: 'Billable',
                     options: { '0': 'No', '1': 'Yes'},
-                    defaultValue: 0
+                    defaultValue: 1
                 },
-                FilePath:{
+                /*FilePath:{
                     list: false
-                },
+                },*/
             }
         });
     $('#expensesTableContainer').jtable('load');
