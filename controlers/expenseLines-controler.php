@@ -23,13 +23,26 @@ function getAllExpenseLines($expenseCustomId){
 //Add Expense Line
 function newExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $currency, $billable){
 	$jTableResult = array();
-	$result = addExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $currency, $billable);//funcition from expenseLine-model
+	$result = addExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $currency, $billable);//funcition from ExpenseLine-model
 	$jTableResult['Result'] = "OK";
 	$jTableResult['Record'] = $result;
 	return json_encode($jTableResult);
 }
 
+//Delete Expense 
+function deleteLine($id){
+	$result = deleteLineById($id);//function from ExpenseLine-model
+	$jTableResult['Result'] = "OK";
+	return json_encode($jTableResult);
+}
 
+//Update Expense
+function modifyExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $currency, $billable, $user){
+	$result = updateExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $currency, $billable, $user);//funcition from ExpenseLine-model
+	$jTableResult['Result'] = "OK";
+	return json_encode($jTableResult);
+
+}
 
 //Custom^^^^------------------------------------------------------------------------------------
 /*// Select specific Expense by Id

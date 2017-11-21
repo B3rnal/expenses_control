@@ -11,6 +11,7 @@ $(document).ready(function(){
         window.location=url;
     });
 });
+var LogedUser = "318";
 var currentId;
 var expenseLines;
 var expenseInfo;
@@ -51,7 +52,6 @@ function getExpenseInfo(id){
 }
 
 function initExpenseTable(id,name,Customid){
-//function initExpenseTable(){
 
     if(currentExpenseTable){
         $('#expensesTableContainer').jtable('destroy');
@@ -65,8 +65,8 @@ function initExpenseTable(id,name,Customid){
             defaultSorting: 'Name ASC', //Set default sorting
             actions: {
                 listAction: '/tables/expenseLinesTable.php?action=list&id='+Customid,
-                deleteAction: '/tables/deleteExpenses.php',
-                updateAction: '/tables/updateExpenses.php',//Añadir log de fecha y user
+                deleteAction: '/tables/expenseLinesTable.php?action=delete',
+                updateAction: '/tables/expenseLinesTable.php?action=update&user='+"318",//Añadir log de fecha y user
                 createAction: '/tables/expenseLinesTable.php?action=create&id='+id,
             },
             fields: {

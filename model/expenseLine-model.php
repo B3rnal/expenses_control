@@ -39,22 +39,11 @@ function selectSpecificLine($id){
 	return false;
 }
 
-// Add Expense
+// Add Line
 function addExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $currency, $billable){
 	global $conn;
 	$last_id;
-/*	$sql="";
-	$expenseId=3;
-	$typeId=1;
-	$date="207-10-08";
-	$detail="Uber";
-	$place= "toronto";
-	$amount="10";
-	$currency="1";
-	$billable="1";*/
 	$sql = "INSERT INTO `ExpenseLine`(`ExpenseReportId`, `ExpenseTypeid`, `Date`, `Detail`, `Place`, `Amount`, `Currency`, `Billable`, `ModificationLog`) VALUES ( '" . $expenseId . "', '" . $typeId . "', '" . $date . "', '" . $detail . "', '" .$place . "', '" .$amount . "', '" .$currency . "', '" .$billable . "', '" .returnSeverDate(). "');";
-
-	//var_dump($sql . "<br>" . "<br>");
 	if ($conn->query($sql) === TRUE) {
 	    $last_id = $conn->insert_id;
 	} else {
@@ -66,6 +55,32 @@ function addExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $c
 	//var_dump(json_encode($result));
 	return $result;
 }
+
+
+//Delete Line
+function deleteLineById($id){
+	global $conn;
+	$sql = "DELETE FROM ExpenseLine where idExpenseLine = \"" . $id . "\"";
+	$result = $conn->query($sql);
+	return $result;
+}
+
+// Update Expense 
+function updateExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $currency, $billable, $user){
+	global $conn;
+	$sql = "UPDATE `ExpenseLine` SET `ExpenseTypeid` = \"" . $typeId . "\" ,
+	 `Date` = \"" . $date . "\" , 
+	 `Detail` = \"" . $detail . "\" , 
+	 `Place` = \"" . $place . "\" , 
+	 `Amount` = \"" . $amount . "\" , 
+	 `Currency` = \"" . $currency . "\" , 
+	 `Billable` = \"" . $billable . "\" , 
+	 `ModificationLog` = \"" .returnSeverDate()." by ".$user."\" 
+	 WHERE `idExpenseLine`=  \"" . $expenseId . "\"";
+	$result = $conn->query($sql);
+	return $result;
+}
+
 //Custom^^^^------------------------------------------------------------------------------------
 // Select specific Expense by Id
 /*function selectExpenseById($expenseId){
@@ -111,13 +126,6 @@ function updateExpense($idExpenseReport, $expenseCustomId, $name, $billable, $de
 
 }
 
-//Delete User 
-function deleteExpenseById($id){
-	global $conn;
-	$sql = "DELETE FROM ExpenseReport WHERE `idExpenseReport`=  \"" . $id . "\"";
-	$result = $conn->query($sql);
-	return $result;
-}
 
 function getAllIds(){
 	global $conn;

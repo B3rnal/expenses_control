@@ -14,7 +14,7 @@ if ($action =='list'){
 }
 
 else if ($action =='delete'){
-  echo deleteExpense($_POST['idExpenseReport']);
+  echo deleteLine($_POST['idExpenseReport']);
 }
 
 else if ($action =='create'){
