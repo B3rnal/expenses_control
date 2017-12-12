@@ -33,6 +33,7 @@
 	<script type="text/javascript" src="../js/main-functions.js"></script>
 	<script type="text/javascript" src="../js/specific-expense-functions.js"></script>
 	<!-- <script type="text/javascript" src="../js/index-functions.js"></script> -->
+
 </head>
 
 <body>
@@ -54,7 +55,7 @@
 				<div class="row">
 					<div class="small-2 columns" >
 						<label for="expId">Id</label>
-						<select id="expId" name="id" class="chosen-select" >
+						<select id="expIdList" name="id" class="chosen-select_" >
 							<option value=""></option>
 						</select>
 					</div>
@@ -75,10 +76,13 @@
 			<!-- table -->
 			<div id="tableContainer" class="columns small-12">
 				<div id="expensesTableContainer"></div>
-
-
 			</div>
 			<!-- /table -->
+			<!-- expense description -->
+			<div class="expense-details" >
+				
+			</div>
+			<!-- /expense description -->
 
 		</div>
 	</div>
@@ -89,11 +93,10 @@
 
 </body>
 <?php
-	//$timezone = date_default_timezone_get();
 	$_GET['id']?$id=$_GET['id']:$id='false';
 	//echo $id;
 	echo '<script type="text/javascript">',
-	'getCurrentId('.$id.');',
+	'getCurrentExpenseInfo('.$id.');',
 	'</script>';
 	//getCurrentId($id);
 ?>

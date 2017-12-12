@@ -60,19 +60,19 @@
 					<div class="small-2 columns" >
 						<label for="expId">Id</label>
 						<!-- <input type="text" name="expId" id="expId"> -->
-						<select id="expId" class="chosen-select" >
+						<select id="expId" class="chosen-selec" >
 							<option value="">All</option>
 						</select>
 					</div>
 					<div class="small-2 columns">
 						<label for="expUser" >User</label>
-						<select id="usrId" class="chosen-select" >
+						<select id="usrId" class="chosen-selec" >
 							<option value="">All</option>
 						</select>
 					</div>
 					<div class="small-2 columns">
 						<label for="expDpt" >Department</label>
-						<select id="deptId" class="chosen-select" >
+						<select id="deptId" class="chosen-selec" >
 							<option value="">All</option>
 						</select>
 					</div>
@@ -115,14 +115,14 @@
 				</div>
 			</form>
 		</div>
-		<!-- /expenses-list -->
+		<!-- /Search Filter -->
 		<!-- table -->
 		<div id="tableContainer" class="columns small-12">
 			<div id="expensesTableContainer"></div>
 		</div>
 		<!-- /table -->
 	</div>
-	<!-- /page-content -->
+	<!-- /page-footer -->
 	<footer>
 		
 	</footer>

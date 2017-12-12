@@ -13,11 +13,12 @@ switch ($action) {
     break;
 
   case 'delete':
-    echo deleteLine($_POST['IdExpenseLine']);
+    echo deleteLine($_POST['idExpenseLine']);
     break;
 
   case 'update':
-    echo modifyExpenseLine($id, $_POST['ExpenseTypeid'], $_POST['Date'], $_POST['Detail'], $_POST['Place'], $_POST['Amount'], $_POST['Currency'], $_POST['Billable'],$user);
+    //echo $_POST['idExpenseLine'];
+    echo modifyExpenseLine($_POST['idExpenseLine'], $_POST['ExpenseTypeid'], $_POST['Date'], $_POST['Detail'], $_POST['Place'], $_POST['Amount'], $_POST['Currency'], $_POST['Billable'],$user);
     break;
   
   default:

@@ -44,6 +44,11 @@ function modifyExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount,
 
 }
 
+function calculate($id){
+	$result= getTypeTotal($id);
+	return json_encode($result);
+}
+
 //Custom^^^^------------------------------------------------------------------------------------
 /*// Select specific Expense by Id
 function getSpecificExpense($expenseId){
@@ -101,4 +106,6 @@ function getDepartments(){
 // while($row = $result->fetch_assoc()) {
 // echo "<br>- id: " . $row["idUser"]. " - EmpNum: " . $row["EmployeeNumber"] . " - Name: " . $row["Name"]. " - Email " . $row["Email"]. "<br>";
 //echo getExpenses();
+
+//echo calculate(123);
 ?>	

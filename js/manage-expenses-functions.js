@@ -136,7 +136,7 @@ function initExpenseTable(){
                 },
 
                CashAdvance:{
-                    title: 'Cash Advance (USD)',
+                    title: 'Cash Advance',
                     list: true,
                     defaultValue: 0
                     // width: '10%'
@@ -145,14 +145,15 @@ function initExpenseTable(){
                 Refund:{
                     title: 'Refund',
                     list: false,
-                    defaultValue: 0
-                    // width: '10%'
+                    defaultValue: 0,
+                    
                 },
 
                 ExpenseStatusId:{
                     title: 'Status',
                     options: { '1': 'Open', '2': 'Waiting Approval', '3': 'Approved' , '4': 'Processed', '5': 'Closed'},
                     list: true,
+                    width: '5%'
                 },
 
                 Value:{

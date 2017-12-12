@@ -1,7 +1,8 @@
 
 $(document).ready(function(){
     $(document).foundation();
-	loadHomeDatePickers();	
+	loadHomeDatePickers();
+   
     //loadExpensesTable();	    
 
     $('.filter-section').submit(function(e){
@@ -10,6 +11,7 @@ $(document).ready(function(){
         var url="specific-expense.php?action=list&"+params;
         window.location=url;
     });
+    getAllExpIds();
 });
 var LogedUser = "318";
 var currentId;
@@ -25,12 +27,15 @@ function loadExpensesTable(){
     initExpenseTable();
 }
 
-function getCurrentId(id){
+function getCurrentExpenseInfo(id){
     if(id){
         currentId=id;
         //console.log("this is the current id: " + id);
-         getExpenseInfo(currentId);//metodo para jalar la info del controlador de lineas de expenses
-         //loadExpensesTable();
+        getExpenseInfo(currentId);//metodo para jalar la info del controlador de lineas de expenses
+        console.log("here");
+        console.log(expenseInfo);
+        //initExpenseTable(expenseInfo.idExpenseReport,expenseInfo.Name,id);
+        //loadExpensesTable();
     }
     else{
     }
@@ -41,11 +46,12 @@ function getExpenseInfo(id){
     $.post( "/tables/listExpenses.php", { action: "expenseInfo", expId: id} ,function( data ) {
         expenseInfo=JSON.parse(data);
         if( !expenseInfo.error) {
+            //return;
+            //return expenseInfo;
              //console.log(expenseInfo.Name);
              initExpenseTable(expenseInfo.idExpenseReport,expenseInfo.Name,id);
-
         }else{
-            //console.log(data.error);
+            console.log(data.error);
         }
     });
 
@@ -66,11 +72,11 @@ function initExpenseTable(id,name,Customid){
             actions: {
                 listAction: '/tables/expenseLinesTable.php?action=list&id='+Customid,
                 deleteAction: '/tables/expenseLinesTable.php?action=delete',
-                updateAction: '/tables/expenseLinesTable.php?action=update&user='+"318",//Añadir log de fecha y user
+                updateAction: '/tables/expenseLinesTable.php?action=update&user=318',//Añadir log de fecha y user
                 createAction: '/tables/expenseLinesTable.php?action=create&id='+id,
             },
             fields: {
-                IdExpenseLine: {
+                idExpenseLine: {
                     key: true,
                     create: false,
                     edit: false,
@@ -136,21 +142,33 @@ function initExpenseTable(id,name,Customid){
 //-----------------------------------
 //Expenses Ids
 function getAllExpIds(){
-   // console.log("Entrando a la funcion de llamada de IDs")
     $.post( "/tables/listExpenses.php", { action: "listIds"} ,function( data ) {
         data=JSON.parse(data);
         //console.log(data);
         if( ! data.error) {
+            //console.log("inside if")
              data.result.forEach(listExpHTMLIds);
         }else{
-            //console.log(data.error);
+            console.log(data.error);
         }
     });
 }
 
 function listExpHTMLIds(item){
-    HTMLSelect = document.getElementById("expId");
+    console.log(item);
+    HTMLSelect = document.getElementById("expIdList");
     HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+item+"</option>";
+    //console.log(HTMLSelect.innerHTML);
 }
-getAllExpIds();
 
+function calculateExpense(id,cashAdvance){
+
+
+}
+function calculateLines(expId){
+    $.post( "/tables/expenseLinesTable.php", { action: "list", id:expId } ,function( data ) {
+        data=JSON.parse(data);
+        console.log("here");
+        console.log(data);
+    });
+}

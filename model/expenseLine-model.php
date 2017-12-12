@@ -77,9 +77,51 @@ function updateExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount,
 	 `Billable` = \"" . $billable . "\" , 
 	 `ModificationLog` = \"" .returnSeverDate()." by ".$user."\" 
 	 WHERE `idExpenseLine`=  \"" . $expenseId . "\"";
+	 //echo $sql;
 	$result = $conn->query($sql);
 	return $result;
 }
+
+//Total from all lines
+function getTypeTotal($id){
+	global $conn;
+	$sql="SELECT ExpenseTypeId , e.ExpenseName as Type, sum(Amount) as Total
+		FROM ExpRep_DB.ExpenseLine
+		Inner Join ExpenseType AS e ON ExpenseLine.ExpenseTypeid=e.idExpenseType
+		Where ExpenseReportId = ". $id .
+		" group by ExpenseTypeId";
+	//var_dump($sql);
+	$result = $conn->query($sql);
+	return $result;
+}
+
+//Get Billable Total
+function getBillableTypeTotal($id){
+	global $conn;
+	$sql="SELECT ExpenseTypeId , e.ExpenseName as Type, sum(Amount) as Total
+		FROM ExpRep_DB.ExpenseLine
+		Inner Join ExpenseType AS e ON ExpenseLine.ExpenseTypeid=e.idExpenseType
+		Where ExpenseReportId = ". $id . "AND Billable = true
+		group by ExpenseTypeId";
+	//var_dump($sql);
+	$result = $conn->query($sql);
+	return $result;
+}
+
+//Get Non Billable Total
+function getNonBillableTypeTotal($id){
+	global $conn;
+	$sql="SELECT ExpenseTypeId , e.ExpenseName as Type, sum(Amount) as Total
+		FROM ExpRep_DB.ExpenseLine
+		Inner Join ExpenseType AS e ON ExpenseLine.ExpenseTypeid=e.idExpenseType
+		Where ExpenseReportId = ". $id . "WHERE Billable = false
+		group by ExpenseTypeId";
+	//var_dump($sql);
+	$result = $conn->query($sql);
+	return $result;
+}
+
+
 
 //Custom^^^^------------------------------------------------------------------------------------
 // Select specific Expense by Id
@@ -162,4 +204,6 @@ function addExpenseLine($expenseId, $typeId, $date, $detail, $place, $amount, $c
 */
 //var_dump(addExpenseLine(3, 1, "2017-10-08", "uber", "canada", 10, 1, 1));
 //function selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable)
+
+//var_dump(getTypeTotal(2));
 ?>
