@@ -121,6 +121,7 @@ function deleteExpenseById($id){
 	return $result;
 }
 
+//List all Custom Ids
 function getAllIds(){
 	global $conn;
 	$sql = "SELECT ExpenseCustomId FROM ExpenseReport;";
@@ -128,14 +129,16 @@ function getAllIds(){
 	return $result;
 }
 
-//SELECT DISTINCT Department FROM ExpRep_DB.ExpenseReport;
-
+//List Departments 
 function getAllDepartments(){
 	global $conn;
 	$sql = "SELECT DISTINCT Department FROM ExpenseReport;";
 	$result = $conn->query($sql);
 	return $result;
 }
+
+//Is Billable
+function isBillable(){}
 
 //var_dump(selectExpenseByCustomId(123));
 //function selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable)

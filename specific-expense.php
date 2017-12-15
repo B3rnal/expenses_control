@@ -79,7 +79,8 @@
 			</div>
 			<!-- /table -->
 			<!-- expense description -->
-			<div class="expense-details" >
+			<div id="expenseDetails" >
+
 				
 			</div>
 			<!-- /expense description -->
@@ -96,7 +97,7 @@
 	$_GET['id']?$id=$_GET['id']:$id='false';
 	//echo $id;
 	echo '<script type="text/javascript">',
-	'getCurrentExpenseInfo('.$id.');',
+	'initCurrentExpenseInfo('.$id.');',
 	'</script>';
 	//getCurrentId($id);
 ?>

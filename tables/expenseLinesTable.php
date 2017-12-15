@@ -20,7 +20,21 @@ switch ($action) {
     //echo $_POST['idExpenseLine'];
     echo modifyExpenseLine($_POST['idExpenseLine'], $_POST['ExpenseTypeid'], $_POST['Date'], $_POST['Detail'], $_POST['Place'], $_POST['Amount'], $_POST['Currency'], $_POST['Billable'],$user);
     break;
+
+  case 'calculateAll':
+    //echo $_POST['idExpenseLine'];
+    echo calculateAll($id);
+    break;  
   
+  case 'calculateBillable':
+    //echo $_POST['idExpenseLine'];
+    echo calculateBillable($id,1);
+    break;
+
+  case 'calculateNonBillable':
+    //echo $_POST['idExpenseLine'];
+    echo calculateBillable($id,0);
+    break;  
   default:
     # code...
     break;

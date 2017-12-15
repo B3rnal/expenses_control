@@ -2,9 +2,6 @@
 $(document).ready(function(){
     $(document).foundation();
 	loadHomeDatePickers();
-   
-    //loadExpensesTable();	    
-
     $('.filter-section').submit(function(e){
         e.preventDefault();
         var params=$(this).serialize();
@@ -13,48 +10,38 @@ $(document).ready(function(){
     });
     getAllExpIds();
 });
-var LogedUser = "318";
-var currentId;
-var expenseLines;
-var expenseInfo;
-var currentExpenseTable;
-function message(string){
-    console.log(string);
-}
 
-function loadExpensesTable(){
-   //console.log("iniciando expense");
-    initExpenseTable();
-}
+//Global var
+var LogedUser = "318";//SOLO PARA PRUEBAS
+var currentId,
+    expenseLines,
+    g_expenseInfo,
+    currentExpenseTable,
+    billableLines, 
+    billableTotal, 
+    nonBillableLines,
+    nonBillableTotal, 
+    refund;
 
-function getCurrentExpenseInfo(id){
+
+
+//Functions
+
+function initCurrentExpenseInfo(id){
+
     if(id){
         currentId=id;
-        //console.log("this is the current id: " + id);
-        getExpenseInfo(currentId);//metodo para jalar la info del controlador de lineas de expenses
-        console.log("here");
-        console.log(expenseInfo);
-        //initExpenseTable(expenseInfo.idExpenseReport,expenseInfo.Name,id);
-        //loadExpensesTable();
+        $.post( "/tables/listExpenses.php", { action: "expenseInfo", expId: currentId} ,function( data ) {
+                g_expenseInfo=JSON.parse(data);
+                //Table Init
+                initExpenseTable(g_expenseInfo.idExpenseReport,g_expenseInfo.Name,currentId);
+                //Calcule Lines
+                calculateExpense(g_expenseInfo.idExpenseReport,g_expenseInfo.Billable,g_expenseInfo.CashAdvance);
+                console.log(billableLines);
+    console.log(nonBillableLines);
+
+            });
     }
-    else{
-    }
-
-}
-
-function getExpenseInfo(id){
-    $.post( "/tables/listExpenses.php", { action: "expenseInfo", expId: id} ,function( data ) {
-        expenseInfo=JSON.parse(data);
-        if( !expenseInfo.error) {
-            //return;
-            //return expenseInfo;
-             //console.log(expenseInfo.Name);
-             initExpenseTable(expenseInfo.idExpenseReport,expenseInfo.Name,id);
-        }else{
-            console.log(data.error);
-        }
-    });
-
 }
 
 function initExpenseTable(id,name,Customid){
@@ -135,16 +122,12 @@ function initExpenseTable(id,name,Customid){
 }
 
 
-
-
-
 //Adding information to the filter drop down
 //-----------------------------------
 //Expenses Ids
 function getAllExpIds(){
     $.post( "/tables/listExpenses.php", { action: "listIds"} ,function( data ) {
         data=JSON.parse(data);
-        //console.log(data);
         if( ! data.error) {
             //console.log("inside if")
              data.result.forEach(listExpHTMLIds);
@@ -155,16 +138,56 @@ function getAllExpIds(){
 }
 
 function listExpHTMLIds(item){
-    console.log(item);
+    //console.log(item);
     HTMLSelect = document.getElementById("expIdList");
     HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+item+"</option>";
     //console.log(HTMLSelect.innerHTML);
 }
+//-----------------------------------
 
-function calculateExpense(id,cashAdvance){
+//Calculate Expense Lines
+//-----------------------------------
 
-
+function setBillableLines(data){
+    //console.log(data);
+    billableLines=data;
 }
+
+function setNonBillableLines(data){
+    //console.log(data);
+    nonBillableLines=data;
+}
+
+function calculateExpense(expId,billable,cashAdvance){
+    if (billable) {
+        $.ajax({
+            type: "post",
+            url: "/tables/expenseLinesTable.php",
+            data: { action: "calculateBillable", id:expId },
+            success:  function( data ) {
+                data=JSON.parse(data);
+                setBillableLines(data);
+            },
+            async:   false
+
+        });
+        $.ajax({
+            type: "post",
+            url: "/tables/expenseLinesTable.php",
+            data: { action: "calculateNonBillable", id:expId },
+            success:  function( data ) {
+                data=JSON.parse(data);
+                setNonBillableLines(data);
+            },
+            async:   false
+
+        });
+        
+    }
+}
+
+
+
 function calculateLines(expId){
     $.post( "/tables/expenseLinesTable.php", { action: "list", id:expId } ,function( data ) {
         data=JSON.parse(data);
@@ -172,3 +195,4 @@ function calculateLines(expId){
         console.log(data);
     });
 }
+
