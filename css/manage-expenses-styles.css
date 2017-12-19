@@ -43,3 +43,29 @@
 .filter-section #CheckExpense{
 	width: 100%;
 }
+
+#tableContainer{
+	
+	margin-bottom: 3%;
+}
+
+#expenseDetails{
+	width: 80%;
+	margin: 0 auto;
+}
+
+#expenseDetails .billable-header,  #expenseDetails .non-billable-header{
+	text-align: left;
+}
+
+#expenseDetails .cash-advance,  #expenseDetails .cash-remaining{
+	color: blue;
+}
+
+#expenseDetails .refund-total{
+	color: green;
+}
+
+#expenseDetails .billable-total, #expenseDetails .non-billable-total{
+	color: tomato;
+}

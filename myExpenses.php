@@ -64,7 +64,6 @@
 						<input class="button" type="submit" value="Clear" id="clear">
 					</div>
 					<div class="small-2 columns">
-						<input class="button ExpenseSelected"  type="submit" id="CreateInvoice" value="Create External Invoice">
 					</div>
 				</div>
 			</form>
@@ -89,10 +88,9 @@
 					Status <span>Open</span>
 				</div>
 			</div>
-			<div id="tableContainer" class="columns small-12">
-				<div id="expensesTableContainer"></div>
-			</div>
+			<div id="expensesTableContainer"></div>
 			<div id="expenseDetails" >
+				
 				<table id="billableChart"></table> 
 				<table id="nonBillableChart"></table> 
 			</div>
