@@ -12,9 +12,12 @@
 	 <link href="../foundation/css/datepicker.css" rel="stylesheet"  type="text/css" >
 	<!-- JTABLE -->
 	<link href="../jtable/themes/metro/blue/jtable.min.css" rel="stylesheet" type="text/css" >
+	<!-- Chosen css -->
+	<link rel="stylesheet" href="../js/chosen/chosen.css">
 	<!-- Custom -->
 	<link rel="stylesheet" type="text/css" href="../css/main-styles.css" >
 	<link rel="stylesheet" type="text/css" href="../css/myExpenses-styles.css" >
+	<link rel="stylesheet" type="text/css" href="../css/manage-expenses-styles.css" >
 
 	<!-- JS -->
 	<!-- Jquey -->
@@ -25,6 +28,8 @@
 	<script type="text/javascript" src="../foundation/js/datepicker.js"></script>
 	<!-- JTABLE -->
 	<script src="../jtable/jquery.jtable.min.js" type="text/javascript"></script>
+	<!-- Chosen js -->
+	<script src="../js/chosen/chosen.jquery.js" type="text/javascript"></script>
 	<!-- Custom -->
 	<script type="text/javascript" src="../js/main-functions.js"></script>
 	<script type="text/javascript" src="../js/myExpenses-functions.js"></script>
@@ -41,7 +46,30 @@
 	<!-- page-content -->
 	<div id="content" class="row">
 		<!-- expenses-list -->
-		<div class="columns small-12 medium-4">
+		<div class="columns small-12">
+			<h1>My Expense Manager</h1>
+			Search Expense:
+			<form class="filter-section small-12 columns">
+				<div class="row">
+					<div class="small-2 columns" >
+						<label for="expId">Id</label>
+						<select id="expIdList" name="id" class="chosen-select" >
+							<option value=""></option> 
+						</select>
+					</div>
+					<div class="small-1 columns">
+						<input class="button" type="submit" value="Search" id="search">
+					</div>
+					<div class="small-1 columns">
+						<input class="button" type="submit" value="Clear" id="clear">
+					</div>
+					<div class="small-2 columns">
+						<input class="button ExpenseSelected"  type="submit" id="CreateInvoice" value="Create External Invoice">
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- <div class="columns small-12 medium-4">
 			<label class="left">My Expense Reports
 			  <select id="currentExpenseReport">
 			    <option value="1">NY - set 2 2016</option>
@@ -49,7 +77,7 @@
 			  </select>
 			</label>
 			<a id="loadExpenseData" class="button">Update</a>
-		</div>
+		</div> -->
 		<!-- /expenses-list -->
 		<!-- table -->
 		<div id="tableContainer" class="columns small-12">
@@ -61,7 +89,13 @@
 					Status <span>Open</span>
 				</div>
 			</div>
-			<div id="expensesTableContainer"></div>
+			<div id="tableContainer" class="columns small-12">
+				<div id="expensesTableContainer"></div>
+			</div>
+			<div id="expenseDetails" >
+				<table id="billableChart"></table> 
+				<table id="nonBillableChart"></table> 
+			</div>
 
 
 		</div>
@@ -74,5 +108,16 @@
 	</footer>
 
 </body>
+<?php
+	$id=isset($_GET['id'])?$_GET['id']:'false';
+	//echo $id;
+	echo '<script type="text/javascript">',
+	'initCurrentExpenseInfo('.$id.');',
+	'</script>';
+	echo '<script type="text/javascript">',
+	'getUserId('.$_SESSION["current_user"]["EmployeeNumber"].	');',
+	'</script>';
+	//getCurrentId($id);
+?>
 
 </html>

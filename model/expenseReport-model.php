@@ -125,7 +125,9 @@ function deleteExpenseById($id){
 function getAllIds(){
 	global $conn;
 	$sql = "SELECT ExpenseCustomId FROM ExpenseReport;";
+	//var_dump($sql);		
 	$result = $conn->query($sql);
+	//var_dump($result);
 	return $result;
 }
 
@@ -140,11 +142,14 @@ function getAllDepartments(){
 //List all Custom Ids by user
 function getAllIdsByUser($userId){
 	global $conn;
-
-	$sql = "SELECT * FROM ExpenseReport WHERE EmployeeId=".$userId;
-	//var_dump($sql);
+	$sql = "SELECT * FROM ExpenseReport WHERE EmployeeId='".$userId."'";
+	//$sql = "SELECT ExpenseCustomId FROM ExpenseReport;";	//var_dump($sql);
 	$result = $conn->query($sql);
-	return $result;
+	while($r = $result->fetch_assoc()) {
+		$rows[] = $r;
+	}
+	//var_dump($rows);
+	return $rows;
 }
 
 //var_dump(getAllIdsByUser(318));

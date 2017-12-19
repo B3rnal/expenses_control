@@ -98,11 +98,7 @@ function getDepartments(){
 
 function getExpenseIdsByUsers($userId){
 	$result = getAllIdsByUser($userId);//function from Expense-model
-	$rows = array();
-	while($r = $result->fetch_assoc()) {
-		    $rows[] = $r;
-		}
-	return $rows;
+	return $result;
 }
 
 //var_dump("prueba");
