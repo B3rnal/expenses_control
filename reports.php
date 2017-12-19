@@ -1,3 +1,4 @@
+<?php include "sections/session.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,35 +32,17 @@
 </head>
 
 <body>
-	
-	<header id="mainHead" class="row">
-		<div class="logo ">
-			 <img src="../img/hangar_logo.png" alt="Hangar Logo">
-			 <h1>Manage Expenses</h1> 
-		</div>
-		<div class="user-info ">
-			<h2>Bernal Araya, Admin User</h2>
-		</div>
-	</header>
-	<!-- menu -->
-	<div id="navSection" class="row">
-		<ul class="menu dropdown medium-12" data-dropdown-menu>
-		  <li id="home"><a href="index.php">Home</a></li>
-		  <li id="expenses" >
-		  	<a>Expenses</a>
-			<ul class="menu">
-				<li ><a href="">Manage Expenses</a></li>
-				<li class="unactive"><a class="unactive" href="manage-invoices.php">External Invoices</a></li>
-			</ul>
-		  </li>
-		  <li id="users" ><a href="users.php">Usuers</a></li>
-		  <li id="client-proyect" ><a href="client-proyect.php">Clients & Proyects</a></li>
-		  <li class="active" id="reports" ><a href="#">Reports</a></li>
-		</ul>
-	</div>
+	<?php
+	//header
+	include "sections/header.php";
+	//menu 
+	$currentOption="reports";
+	include "sections/menu.php"; 
+	?>
 	<!-- /menu -->
 	
 	<!-- page-content -->
+	<?php if($_SESSION["current_user"]["UserTypeId"]==1){ ?>
 	<div id="content" class="row">
 		<!-- search filter -->
 		<div class="columns small-12">

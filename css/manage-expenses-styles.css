@@ -8,9 +8,11 @@
 	font-size: 15px;
 }
 #content input , #content select {
-	height: auto;
 	font-size: 15px;
-	padding:0;
+	margin-top: 3px;
+	height: 25px;
+	border-radius: 5px;
+	padding: 0px 5px;
 }
 
 #content select {
@@ -19,6 +21,7 @@
 	font-size: 13px;
 	-moz-appearance: unset;
 	padding-right: 23px;
+	margin-top: 8px;
 }
 
 #content .filter-section{
@@ -27,4 +30,16 @@
 #content .button{
 	padding: 2px 16px;
     margin-top: 22px;
+}
+#expensesTableContainer .handle-expense{
+	background: url('/img/gear_1.png');
+	background-position:center;
+	background-repeat:no-repeat;
+	width: 100%;
+	background-size: 21px;
+	height: 28px;
+}
+
+.filter-section #CheckExpense{
+	width: 100%;
 }

@@ -1,99 +1,63 @@
+<?php 
+/*ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);*/
+session_start();
+//unset($_SESSION["current_user"]);
+//check session
+	if(isset($_SESSION["current_user"])){
+		header("Location: ".$_SERVER["REQUEST_SCHEME"]."://".$_SERVER ["HTTP_HOST"]."/myExpenses.php");
+		die();
+	}
+//end check session
+
+if(!empty($_POST)){
+	include ("controlers/user-controler.php");
+	include ("model/user-model.php");
+
+	$id=$_POST["user_id"];
+	$pass=$_POST["user_pass"];
+	$is_valid=logInVal($id,$pass);
+	//var_dump($user_info);
+	//die();
+	//$is_valid=($id=="bernala" && $pass=="password")?true:false; // aqui verifica en base de datos y devuelve los detalles de usuario
+	if($is_valid){
+		$_SESSION["current_user"]=$is_valid;//set actual user data here
+		//$_SESSION["current_user"]=array("id"=>14,"name"=>"Bernal","is_admin"=>true,"email"=>"asdasdasd@123.com");//set actual user data here
+		header("Location: ".$_SERVER["REQUEST_SCHEME"]."://".$_SERVER ["HTTP_HOST"]."/myExpenses.php");
+		die();
+	}else{
+		unset($_SESSION["current_user"]);
+	}
+}else{
+	//$is_valid=true;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Expense Report System</title>
-
-	 <!-- CSS -->
-
-	<link href="../css/jquery-ui.min.css" rel="stylesheet"  type="text/css" >
-	<!-- Foundation -->
-	 <link href="../foundation/css/foundation.min.css" rel="stylesheet"  type="text/css" >
-	 <link href="../foundation/css/datepicker.css" rel="stylesheet"  type="text/css" >
-	<!-- JTABLE -->
-	<link href="../jtable/themes/metro/blue/jtable.min.css" rel="stylesheet" type="text/css" >
 	<!-- Custom -->
-	<link rel="stylesheet" type="text/css" href="../css/main-styles.css" >
-	<link rel="stylesheet" type="text/css" href="../css/index-styles.css" >
-
-	<!-- JS -->
-	<!-- Jquey -->
-	<script type="text/javascript" src="../js/jquery-3.2.0.js"></script>
-	<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
-	<!-- Foundation -->
-	<script type="text/javascript" src="../foundation/js/vendor/foundation.min.js"></script>
-	<script type="text/javascript" src="../foundation/js/datepicker.js"></script>
-	<!-- JTABLE -->
-	<script src="../jtable/jquery.jtable.min.js" type="text/javascript"></script>
-	<!-- Custom -->
-	<script type="text/javascript" src="../js/main-functions.js"></script>
-	<script type="text/javascript" src="../js/index-functions.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/main-styles.css" >
+	<link rel="stylesheet" type="text/css" href="/css/login.css" >
+	
 </head>
 
 <body>
-	
-	<header id="mainHead" class="row">
-		<div class="logo ">
-			 <img src="../img/hangar_logo.png" alt="Hangar Logo">
-			 <h1>Expense Report System</h1> 
+	<div id="login-div" class="Aligner">
+		<div class="Aligner-item">
+			<h1>Login</h1>
+			<form method="Post">
+				<?php if(!$is_valid){
+					echo "<p>Error, please check your user and password</p>";
+				}?>
+				<input type="text" name="user_id" required>
+				<input type="password" name="user_pass" required>
+				<button type="submit" >Login</button>
+			</form>
+			
 		</div>
-		<div class="user-info ">
-			<h2>Bernal Araya, Admin User</h2>
-		</div>
-	</header>
-	<!-- menu -->
-	<div id="navSection" class="row">
-		<ul class="menu dropdown medium-12" data-dropdown-menu>
-		  <li id="home" class="active"><a href="#">Home</a></li>
-		  <li id="expenses" >
-		  	<a>Expenses</a>
-			<ul class="menu">
-				<li><a href="manage-expenses.php">Manage Expenses</a></li>
-				<li><a href="manage-invoices.php">External Invoices</a></li>
-			</ul>
-		  </li>
-		  <li id="users" ><a href="users.php">Usuers</a></li>
-		  <li id="client-proyect" ><a href="client-proyect.php">Clients & Proyects</a></li>
-		  <li id="reports" ><a href="reports.php">Reports</a></li>
-		</ul>
 	</div>
-	<!-- /menu -->
-	
-	<!-- page-content -->
-	<div id="content" class="row">
-		<!-- expenses-list -->
-		<div class="columns small-12 medium-4">
-			<label class="left">Pending Expense Reports
-			  <select id="currentExpenseReport">
-			    <option value="1">NY - set 2 2016</option>
-			    <option value="2">Toronto - ene 20 2017</option>
-			  </select>
-			</label>
-			<a id="loadExpenseData" class="button">Update</a>
-		</div>
-		<!-- /expenses-list -->
-		<!-- table -->
-		<div id="tableContainer" class="columns small-12">
-			<div id="tableMenu">
-				<a id="submit" href="">Submit</a>
-				<a id="recall" href="" style="display: none;"> Recall </a>
-				<a id="cancel" href="">  | Cancel</a>
-				<div id="expenseStatus" class="table-status">
-					Status <span>Open</span>
-				</div>
-			</div>
-			<div id="expensesTableContainer"></div>
-
-
-		</div>
-		<!-- /table -->
-
-	</div>
-	<!-- /page-content -->
-	<footer>
-		
-	</footer>
-
 </body>
 
 </html>

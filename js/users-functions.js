@@ -32,49 +32,48 @@ function initExpenseTable(){
             sorting: true, //Enable sorting
             defaultSorting: 'Name ASC', //Set default sorting
             actions: {
-                listAction: '/tables/listUsers.php',
-                deleteAction: '/tables/deleteExpenses.php',
-                updateAction: '/tables/updateExpenses.php',
-                createAction: '/tables/createExpenses.php'
+                listAction: '/tables/listUsers.php?action=list',
+                deleteAction: '/tables/listUsers.php?action=delete',
+                updateAction: '/tables/listUsers.php?action=update',
+                createAction: '/tables/listUsers.php?action=create'
             },
             fields: {
-                expenseId: {
+                idUser: {
                     key: true,
                     create: false,
                     edit: false,
                     list: false
                 },
 
-                Id: {
+                EmployeeNumber: {
                     title: 'Id',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
 
-                name: {
+                Name: {
                     title: 'Name',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
-                department: {
+                Department: {
                     title: 'Department',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
-                email:{
-                    title: 'eMail',
+                Email:{
+                    title: 'EMail',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
 
-                type:{
-                    title: 'type',
-                    type: 'textarea',
-                    list: true,
+                UserTypeId:{
+                    title: 'Permission',
+                    options: { '1': 'Basic','2': 'Administrator'}
                     // width: '13%'
                 }
 

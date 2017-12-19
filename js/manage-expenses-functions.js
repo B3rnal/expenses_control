@@ -1,11 +1,12 @@
-
-
 $(document).ready(function(){
     $(document).foundation();
     loadHomeDatePickers();  
-    loadExpensesTable();        
+    loadExpensesTable();
+    
+            
 });
 var currentExpenseTable;
+var currentExpenseNumber;
 function message(string){
     console.log(string);
 }
@@ -13,8 +14,8 @@ function message(string){
 // Index.php
 // load Expenses Table
 function loadExpensesTable(){
-        var currentReport=$("#currentExpenseReport").val();
-        message('Entrando a loadExpenses');
+       // var currentReport=$("#currentExpenseReport").val();
+        // message('Entrando a loadExpenses');
         initExpenseTable();
 }
 
@@ -22,9 +23,9 @@ function initExpenseTable(){
     message('If del init');
     if(currentExpenseTable){
         $('#expensesTableContainer').jtable('destroy');
-        message('Dentro del I');
+        //message('Dentro del I');
     }
-    message('entrando al currentExpenses');
+    //message('entrando al currentExpenses');
     currentExpenseTable=$('#expensesTableContainer').jtable({
 
             title: '    ',
@@ -32,86 +33,268 @@ function initExpenseTable(){
             pageSize: 10, //Set page size (default: 10)
             sorting: true, //Enable sorting
             defaultSorting: 'Name ASC', //Set default sorting
+            selecting: true, //Enable selecting
+            //multiselect: true, //Allow multiple selecting
+            //selectingCheckboxes: true, //Show checkboxes on first column
+            //9selectOnRowClick: true,
             actions: {
-                listAction: '/tables/listManageExp.php',
-                deleteAction: '/tables/deleteExpenses.php',
-                updateAction: '/tables/updateExpenses.php',
-                createAction: '/tables/createExpenses.php'
+                listAction: '/tables/listExpenses.php?action=list',
+                deleteAction: '/tables/listExpenses.php?action=delete',
+                updateAction: '/tables/listExpenses.php?action=update',
+                createAction: '/tables/listExpenses.php?action=create'
             },
             fields: {
-                expenseId: {
+                idExpenseReport: {
                     key: true,
                     create: false,
                     edit: false,
                     list: false
                 },
 
-                expCustomId: {
-                    title: 'Expense Id',
+                ExpenseCustomId: {
+                    title: 'Id',
                     // width: '7%',
-                    type: 'textarea',
-                    
+                    type: 'text',
+                    edit: false,
                 },
 
-                userName: {
-                    title: 'User Name',
+                Name: {
+                    title: 'Expense Name',
                     type: 'textarea',
                     list: true,
                     // width: '13%'
                 },
 
-                suppervisorName: {
-                    title: 'Suppervisor',
+                Billable:{
+                    title: 'Billable',
+                    type: 'radiobutton',
+                    options: { '0': 'No', '1': 'Yes' },
+                    defaultValue: '0',
+                },
+
+                Department: {
+                    title: 'Department',
+                    type: 'textarea',
+                    list: true,
+                    // width: '13%'
+                },
+
+                EmployeeId: {
+                    title: 'User',
+                    //type: 'textarea',
+                    options: '/tables/listUsers.php?action=listUsers',
+                    list: true,
+                    inputClass:"chosen-select",
+                    // width: '13%'
+                },
+
+                SupervisorId: {
+                    title: 'Supervisor',
+                    options: '/tables/listUsers.php?action=listUsers',
+                    list: true,
+                    inputClass:"chosen-select",
+                    // width: '13%'
+                },
+
+
+                Proyect:{
+                    title: 'Proyect',
                     type: 'textarea',
                     list: false,
                     // width: '13%'
                 },
 
-
-                proyect:{
-                    title: 'Proyect',
-                    type: 'textarea',
-                    list: true,
-                    // width: '13%'
-                },
-
-                bill:{
-                    title: 'Billable',
-                    options: { '0': 'No', '1': 'Yes'}
-                },
-
-                detail:{
+                ReportDetail:{
                     title: 'Detail',
                     type: 'textarea',
-                    list: true,
+                    list: false,
                     // width: '13%'
                 },
 
-                initDate: {
-                    title: 'Start Date',
-                    // width: '7%',
-                    type: 'date',
-                    displayFormat: 'yy-mm-dd'
-                },
-                endDate: {
-                    title: ' End Date',
-                    // width: '7%',
+                CreationDate:{
+                    title: 'Creation Date',
                     type: 'date',
                     displayFormat: 'yy-mm-dd',
                     list: false,
+                    // width: '13%'
                 },
 
-               cashAdvance:{
+                StartDate:{
+                    title: 'StartDate',
+                    type: 'date',
+                    displayFormat: 'yy-mm-dd',
+                    list: false,
+                    // width: '13%'
+                },
+
+                EndDate:{
+                    title: 'End Date',
+                    type: 'date',
+                    displayFormat: 'yy-mm-dd',
+                    list: false,
+                    // width: '13%'
+                },
+
+               CashAdvance:{
                     title: 'Cash Advance',
+                    list: true,
+                    defaultValue: 0
                     // width: '10%'
                 },
 
-                status:{
+                Refund:{
+                    title: 'Refund',
+                    list: false,
+                    defaultValue: 0,
+                    
+                },
+
+                ExpenseStatusId:{
                     title: 'Status',
-                    options: { '1': 'Open', '2': 'Waiting Approval', '3': 'Approved' , '4': 'Closed'},
+                    options: { '1': 'Open', '2': 'Waiting Approval', '3': 'Approved' , '4': 'Processed', '5': 'Closed'},
                     list: true,
+                    width: '5%'
+                },
+
+                Value:{
+                    title: 'USD Value',
+                    list: false,
+                    edit:false,
+                    create:false,
+                },
+                /*TestColumn: {
+                    title: 'Test',
+                    dependsOn: 'ExpenseCustomId',
+                    display: function (data) {
+                        //return '<button onclick="myFunction()">Click me</button>'; //here you can call JavaScript function using  onclick
+                        //return '<input class="' + $ExpenseCustomId + '" type="button">';
+
+
+                    },
+                    width: '3%',
+                }*/
+            },
+            //Initialize validation logic when a form is created
+            formCreated: function (event, data) {
+                data.form.find('input[name="ExpenseCustomId"]').addClass('validate[required]');
+                /*data.form.find('input[name="EmailAddress"]').addClass('validate[required,custom[email]]');
+                data.form.find('input[name="Password"]').addClass('validate[required]');
+                data.form.find('input[name="BirthDate"]').addClass('validate[required,custom[date]]');
+                data.form.find('input[name="Education"]').addClass('validate[required]');*/
+                data.form.validationEngine();
+                data.form.find('.chosen-select').chosen({}); 
+            },
+            //Validate form when it is being submitted
+            formSubmitting: function (event, data) {
+                return data.form.validationEngine('validate');
+            },
+            //Dispose validation logic when form is closed
+            formClosed: function (event, data) {
+                data.form.validationEngine('hide');
+                data.form.validationEngine('detach');
+            },
+            //Check Id of the selected row
+            selectionChanged: function () {
+                //message("columna seleccionada");
+                $( ".ExpenseSelected" ).prop( "disabled", false );
+                //Get all selected rows
+                var $selectedRows = $('#expensesTableContainer').jtable('selectedRows');
+                $('#SelectedRowList').empty();
+                if ($selectedRows.length > 0) {
+                    //Show selected rows
+                    $selectedRows.each(function () {
+                        var record = $(this).data('record');
+                       currentExpenseNumber=record.ExpenseCustomId;
+                       console.log(currentExpenseNumber);
+                    });
+                } else {
+                    //No rows selected
+                    console.log('No row selected! Select rows to see here...');
                 }
             }
+
         });
+    //Load the table for the first time
     $('#expensesTableContainer').jtable('load');
+    //Load the table according tho the search filters
+    $('#search').click(function (e) {
+            e.preventDefault();
+            $('#expensesTableContainer').jtable('load', {
+                ExpenseCustomId:$("#expId").val(),
+                EmployeeId:$("#usrId").val(),
+                Department:$("#deptId").val(),
+                ExpenseStatusId:$("#expStatus").val(),
+                BillableExpense:$("#billiable").val()
+            });
+        });
+    $('#CheckExpense').click(function (e) {
+            e.preventDefault();
+            var url="specific-expense.php?action=list&id="+currentExpenseNumber;
+            message(url);
+            window.location=url;
+        });
 }
+
+
+
+//Adding information to the filter drop down
+//-----------------------------------
+//Expenses Ids
+function getAllExpIds(){
+    $.post( "/tables/listExpenses.php", { action: "listIds" } ,function( data ) {
+        data=JSON.parse(data);
+        //console.log(data.result[0]);
+        if( ! data.error) {
+             data.result.forEach(listExpHTMLIds);
+        }else{
+            console.log(data.error);
+        }
+    });
+}
+
+function listExpHTMLIds(item){
+    HTMLSelect = document.getElementById("expId");
+    HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+item+"</option>";
+    $('#expIdList').trigger("chosen:updated");
+}
+
+//Users Ids
+function getAllUsersIds(){
+    $.post( "/tables/listUsers.php", { action: "listUsersJS" } ,function( data ) {
+        data=JSON.parse(data);
+        //console.log(data.result[0].Value);
+        if( ! data.error) {
+             data.result.forEach(listUsrHTMLIds);
+        }else{
+            console.log(data.error);
+        }
+    });
+}
+function listUsrHTMLIds(item){
+    HTMLSelect = document.getElementById("usrId");
+    HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item.Value + "\">"+ item.DisplayText +"</option>";
+    $('#expIdList').trigger("chosen:updated");
+}
+
+//Departments 
+function getAllDepartments(){
+    $.post( "/tables/listExpenses.php", { action: "listDep" } ,function( data ) {
+        data=JSON.parse(data);
+        //console.log(data.result[0].Value);
+        if( ! data.error) {
+             data.result.forEach(listDepHTMLIds);
+
+        }else{
+            console.log(data.error);
+        }
+    });
+}
+function listDepHTMLIds(item){
+    HTMLSelect = document.getElementById("deptId");
+    HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+ item +"</option>";
+    $('#expIdList').trigger("chosen:updated");
+}
+getAllExpIds();
+getAllUsersIds();
+getAllDepartments();
+//-------------------------------------
