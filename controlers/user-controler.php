@@ -123,8 +123,16 @@ function listAllUsersJS(){
 
 }
 
-//echo listAllUsers();
 
+function logInVal($name,$pass){
+	$result = validateUser($name,$pass);//funcition from user-model
+	if ($result){ //cheking type of data.
+		$r = $result->fetch_assoc();
+		return $r;
+	}
+	return false;
+}
+//echo listAllUsers();
 
 // while($row = $result->fetch_assoc()) {
 // echo "<br>- id: " . $row["idUser"]. " - EmpNum: " . $row["EmployeeNumber"] . " - Name: " . $row["Name"]. " - Email " . $row["Email"]. "<br>";

@@ -1,3 +1,4 @@
+<?php include "sections/session.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,6 +51,7 @@
 	include "sections/menu.php"; 
 	?>
 	<!-- page-content -->
+	<?php if($_SESSION["current_user"]["UserTypeId"]==1){ ?>
 	<div id="content" class="row">
 		<!-- search filter -->
 		<div class="columns small-12">
@@ -60,19 +62,19 @@
 					<div class="small-2 columns" >
 						<label for="expId">Id</label>
 						<!-- <input type="text" name="expId" id="expId"> -->
-						<select id="expId" class="chosen-selec" >
+						<select id="expId" class="chosen-select" >
 							<option value="">All</option>
 						</select>
 					</div>
 					<div class="small-2 columns">
 						<label for="expUser" >User</label>
-						<select id="usrId" class="chosen-selec" >
+						<select id="usrId" class="chosen-select" >
 							<option value="">All</option>
 						</select>
 					</div>
 					<div class="small-2 columns">
 						<label for="expDpt" >Department</label>
-						<select id="deptId" class="chosen-selec" >
+						<select id="deptId" class="chosen-select" >
 							<option value="">All</option>
 						</select>
 					</div>
@@ -91,7 +93,7 @@
 						<select id="billiable" >
 							<option value="">All</option>
 						    <option value="1">Yes</option>
-						    <option value="2">No</option>
+						    <option value="0">No</option>
 						</select>
 					</div>
 					<div class="small-1 columns">
@@ -121,7 +123,12 @@
 			<div id="expensesTableContainer"></div>
 		</div>
 		<!-- /table -->
+
 	</div>
+	<?php }else{
+		header("Location: ".$_SERVER["REQUEST_SCHEME"]."://".$_SERVER ["HTTP_HOST"]."/myExpenses.php");
+		die();
+	}?>
 	<!-- /page-footer -->
 	<footer>
 		

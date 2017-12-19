@@ -255,6 +255,7 @@ function getAllExpIds(){
 function listExpHTMLIds(item){
     HTMLSelect = document.getElementById("expId");
     HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+item+"</option>";
+    $('#expIdList').trigger("chosen:updated");
 }
 
 //Users Ids
@@ -272,6 +273,7 @@ function getAllUsersIds(){
 function listUsrHTMLIds(item){
     HTMLSelect = document.getElementById("usrId");
     HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item.Value + "\">"+ item.DisplayText +"</option>";
+    $('#expIdList').trigger("chosen:updated");
 }
 
 //Departments 
@@ -290,6 +292,7 @@ function getAllDepartments(){
 function listDepHTMLIds(item){
     HTMLSelect = document.getElementById("deptId");
     HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+ item +"</option>";
+    $('#expIdList').trigger("chosen:updated");
 }
 getAllExpIds();
 getAllUsersIds();

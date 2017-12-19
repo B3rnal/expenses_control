@@ -33,6 +33,26 @@
 	margin: 17px 0;	
 }
 
+#mainHead .user-info .detail{
+	float: left;
+}
+#mainHead .logout{
+	float: right;
+    font-size: 15px;
+    margin: 16px 1px 16px 10px;
+    border-left: 1px solid;
+    padding-left: 8px;	
+}
+#mainHead .logout a{
+    color: #fff;	
+}
+
+#mainHead .logout a:hover { 
+    //background-color: #fff;
+    color: red;
+}
+
+
 	
 /*Navigation*/
 #navSection {

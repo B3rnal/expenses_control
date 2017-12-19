@@ -74,6 +74,20 @@ function listUsers(){
 	return $result;
 }
 
+//Login  verification
+function validateUser($name,$pass){
+	global $conn;
+	$sql = "SELECT * FROM User where Name = '" . $name . "' AND Password = '" .$pass . "'";
+	//var_dump($sql);
+	$result = $conn->query($sql);
+	if ($result->num_rows != 0){
+		return $result;
+	}
+	return false;
+}
+
+//var_dump( validateUser("Bernal", "password"));
+
 ?>
 
 

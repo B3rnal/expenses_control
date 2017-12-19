@@ -137,9 +137,16 @@ function getAllDepartments(){
 	return $result;
 }
 
-//Is Billable
-function isBillable(){}
+//List all Custom Ids by user
+function getAllIdsByUser($userId){
+	global $conn;
 
-//var_dump(selectExpenseByCustomId(123));
+	$sql = "SELECT * FROM ExpenseReport WHERE EmployeeId=".$userId;
+	//var_dump($sql);
+	$result = $conn->query($sql);
+	return $result;
+}
+
+//var_dump(getAllIdsByUser(318));
 //function selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable)
 ?>

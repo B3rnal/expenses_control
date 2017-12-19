@@ -1,3 +1,4 @@
+<?php include "sections/session.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +42,7 @@
 	<!-- /menu -->
 	
 	<!-- page-content -->
+	<?php if($_SESSION["current_user"]["UserTypeId"]==1){ ?>
 	<div id="content" class="row">
 		<!-- search filter -->
 		<div class="columns small-12">

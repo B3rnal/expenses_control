@@ -1,6 +1,5 @@
 
 $(document).ready(function(){
-    $(document).foundation();
 	loadHomeDatePickers();
     $('.filter-section').submit(function(e){
         e.preventDefault();
@@ -37,9 +36,6 @@ function initCurrentExpenseInfo(id){
                 initExpenseTable(g_expenseInfo.idExpenseReport,g_expenseInfo.Name,currentId);
                 //Calcule Lines
                 calculateExpense(g_expenseInfo.idExpenseReport,g_expenseInfo.Billable,g_expenseInfo.CashAdvance);
-                console.log(billableLines);
-    console.log(nonBillableLines);
-
             });
     }
 }
@@ -141,7 +137,8 @@ function listExpHTMLIds(item){
     //console.log(item);
     HTMLSelect = document.getElementById("expIdList");
     HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+item+"</option>";
-    //console.log(HTMLSelect.innerHTML);
+    $('#expIdList').trigger("chosen:updated");
+
 }
 //-----------------------------------
 
@@ -149,50 +146,87 @@ function listExpHTMLIds(item){
 //-----------------------------------
 
 function setBillableLines(data){
-    //console.log(data);
+    console.log(data);
     billableLines=data;
 }
 
 function setNonBillableLines(data){
-    //console.log(data);
+    console.log(data);
     nonBillableLines=data;
 }
 
 function calculateExpense(expId,billable,cashAdvance){
-    if (billable) {
-        $.ajax({
-            type: "post",
-            url: "/tables/expenseLinesTable.php",
-            data: { action: "calculateBillable", id:expId },
-            success:  function( data ) {
-                data=JSON.parse(data);
-                setBillableLines(data);
-            },
-            async:   false
+    var billableHTML, nonBillableHTML;
+    nonBillableTotal=0;
+    billableTotal= 0;
+    //cashAdvance=0;
+    $.ajax({
+        type: "post",
+        url: "/tables/expenseLinesTable.php",
+        data: { action: "calculateBillable", id:expId },
+        success:  function( data ) {
+            data=JSON.parse(data);
+            setBillableLines(data);
+        },
+        async:   false
 
-        });
-        $.ajax({
-            type: "post",
-            url: "/tables/expenseLinesTable.php",
-            data: { action: "calculateNonBillable", id:expId },
-            success:  function( data ) {
-                data=JSON.parse(data);
-                setNonBillableLines(data);
-            },
-            async:   false
-
-        });
-        
-    }
-}
-
-
-
-function calculateLines(expId){
-    $.post( "/tables/expenseLinesTable.php", { action: "list", id:expId } ,function( data ) {
-        data=JSON.parse(data);
-        console.log("here");
-        console.log(data);
     });
+    $.ajax({
+        type: "post",
+        url: "/tables/expenseLinesTable.php",
+        data: { action: "calculateNonBillable", id:expId },
+        success:  function( data ) {
+            data=JSON.parse(data);
+            setNonBillableLines(data);
+        },
+        async:   false
+
+    });
+    if (billableLines) {
+        billableHTML = "<tr class=\"billable-header\"><th>Billable Lines</th><th>Total</th></tr>";
+        billableHTML += "<tr class=\"cash-advance\"><td>Cash Advance Total</td><td>$" + cashAdvance + "</td></tr>";
+        for(var i = 0, len = billableLines.length; i < len; i++){
+            //console.log(billableLines[i].Type);
+            billableHTML += "<tr class=\"billable-lines\"><td>" + billableLines[i].Type  + "</td><td>$" + billableLines[i].Total + "</td></tr>";
+            billableTotal += Number(billableLines[i].Total);
+        }
+        billableHTML += "<tr class=\"billable-total\"><td>Billable Total</td><td>$" + billableTotal + "</td></tr>";
+        refund = Number(cashAdvance) - (billableTotal);
+        if (refund >= 0) {
+             billableHTML += "<tr class=\"cash-remaining\"><td>Cash Advance Remaining</td><td>$" + refund + "</td></tr>";
+
+        }
+        else{
+             billableHTML += "<tr class=\"refund-total\"><td>Refund Total</td><td>$" + refund * -1 + "</td></tr>";
+        }
+        //console.log(billableHTML);
+        billableToHTML(billableHTML);
+    }
+
+    if (nonBillableLines) {
+        nonBillableHTML = "<tr class=\"non-billable-header\"><th>Non Billable Lines</th><th>Total</th></tr>";
+        for(var i = 0, len = nonBillableLines.length; i < len; i++){
+            //console.log(billableLines[i].Type);
+            nonBillableHTML += "<tr class=\"non-billable-lines\"><td>" + nonBillableLines[i].Type  + "</td><td>$" + nonBillableLines[i].Total + "</td></tr>";
+            nonBillableTotal += Number(nonBillableLines[i].Total);
+            console.log(nonBillableLines[i].Total);
+            //console.log(nonBillableTotal);
+        }
+        nonBillableHTML += "<tr class=\"non-billable-total\"><td>Non Billable Total</td><td>$" + nonBillableTotal + "</td></tr>";
+        nonBillableToHTML(nonBillableHTML);
+    }
+
+
 }
 
+function billableToHTML(string){
+    HTMLSelect = document.getElementById("billableChart");
+    HTMLSelect.innerHTML = string;
+
+}
+
+function nonBillableToHTML(string){
+    HTMLSelect = document.getElementById("nonBillableChart");
+    HTMLSelect.innerHTML = string;
+
+}

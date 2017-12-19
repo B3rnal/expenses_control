@@ -5,6 +5,8 @@ ini_set('display_errors', '1');*/
 
 $action = $_GET['action']?$_GET['action']:$_POST['action'];
 $expenseId = $_GET['expId']?$_GET['expId']:$_POST['expId'];
+$userId = $_GET['userId']?$_GET['userId']:$_POST['userId'];
+
 //var_dump(getExpenses(""));
 //echo getExpenses($_POST["ExpenseCustomId"]);
 
@@ -62,6 +64,19 @@ else if ($action =='expenseInfo'){
     }
     else {
        $aResult = $list;
+    }
+    echo json_encode($aResult);
+}
+
+else if ($action =='listIdsByUser'){
+  
+  $aResult = array();
+  $list = getAllIdsByUser($userId);
+  if(empty($list)) {
+       $aResult['error'] = 'Empty Data';
+    }
+    else {
+       $aResult['result'] = $list;
     }
     echo json_encode($aResult);
 }
