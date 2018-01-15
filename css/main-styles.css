@@ -7,30 +7,51 @@
 }
 #mainHead .logo{
 	float: left;
-	padding-left: 4%
+	padding-left: 1%
 }
 
 #mainHead .logo h1{
-	font-size: 14px;
+	font-size: 17px;
 	text-align: left;
-	margin: 0 0 10px 0;
+	margin: 15px 0px 10px 10px;
+	float: right;
 }
 
 #mainHead .logo img{
-	margin-top: 6px;
-	height: 40px;
+	margin-top: 13px;
+	height: 32px;
 }
 
 #mainHead .user-info{
 	float: right;
 	text-align: right;
 	font-size: 12px;
-	padding-right: 4%	
+	padding-right: 1%	
 }
 #mainHead .user-info h2{
 	font-size: 15px;
-	margin:20px 0;	
+	margin: 17px 0;	
 }
+
+#mainHead .user-info .detail{
+	float: left;
+}
+#mainHead .logout{
+	float: right;
+    font-size: 15px;
+    margin: 16px 1px 16px 10px;
+    border-left: 1px solid;
+    padding-left: 8px;	
+}
+#mainHead .logout a{
+    color: #fff;	
+}
+
+#mainHead .logout a:hover { 
+    //background-color: #fff;
+    color: red;
+}
+
 
 	
 /*Navigation*/

@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $(document).foundation();
-	loadHomeDatePickers();	    
+	loadHomeDatePickers();	
+    $(".chosen-select").chosen({});    
 });
 
 function message(string){
@@ -20,3 +21,4 @@ function loadHomeDatePickers(){
     });
 
 }
+
