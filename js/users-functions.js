@@ -73,7 +73,7 @@ function initExpenseTable(){
 
                 UserTypeId:{
                     title: 'Permission',
-                    options: { '1': 'Basic','2': 'Administrator'}
+                    options: { '2': 'Basic','1': 'Administrator'}
                     // width: '13%'
                 }
 

@@ -183,7 +183,7 @@ function calculateExpense(expId,billable,cashAdvance){
 
     });
     if (billableLines) {
-        billableHTML = "<tr class=\"billable-header\"><th>Billable Lines</th><th>Total</th></tr>";
+        billableHTML = "<tr class=\"billable-header\"><th>Billable Lines Info</th><th>Total</th></tr>";
         billableHTML += "<tr class=\"cash-advance\"><td>Cash Advance Total</td><td>$" + cashAdvance + "</td></tr>";
         for(var i = 0, len = billableLines.length; i < len; i++){
             //console.log(billableLines[i].Type);
@@ -204,7 +204,7 @@ function calculateExpense(expId,billable,cashAdvance){
     }
 
     if (nonBillableLines) {
-        nonBillableHTML = "<tr class=\"non-billable-header\"><th>Non Billable Lines</th><th>Total</th></tr>";
+        nonBillableHTML = "<tr class=\"non-billable-header\"><th>Non Billable Lines Info</th><th>Total</th></tr>";
         for(var i = 0, len = nonBillableLines.length; i < len; i++){
             //console.log(billableLines[i].Type);
             nonBillableHTML += "<tr class=\"non-billable-lines\"><td>" + nonBillableLines[i].Type  + "</td><td>$" + nonBillableLines[i].Total + "</td></tr>";
