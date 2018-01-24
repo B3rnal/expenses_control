@@ -73,15 +73,19 @@ function getServiceCurrencyExchange($date,$typeFrom){
 	$data= array(
 		'tcIndicador' => $type, 
 		'tcFechaInicio' => $date,
-		'tcFechaFinal'=>$date,
-		'tcNombre'=>'n',
-		'tnSubNiveles'=>'n',
+		'tcFechaFinal' => $date,
+		'tcNombre' =>'n',
+		'tnSubNiveles' =>'n',
 	);
 	$result=httpPost($url,$data);
 	var_dump($result);
+	$xml = simplexml_load_string($result);
+	var_dump("<br><br>");
+	$string = $xml[0];
+	print_r($string[10]);
 
 }
 
-var_dump(getCurrencyExchange(3,10,"2018-01-20"));
+var_dump(getCurrencyExchange(3,10,"2018-01-05"));
 
 ?>
