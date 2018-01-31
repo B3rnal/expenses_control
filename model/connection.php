@@ -1,4 +1,5 @@
 <?php
+if (!class_exists('Db')){
   class Db {
 
     private static $instance = NULL;
@@ -19,4 +20,5 @@
     }
 
   }
+}
 ?>

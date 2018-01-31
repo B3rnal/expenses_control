@@ -20,7 +20,6 @@ function loadExpensesTable(){
 }
 
 function initExpenseTable(){
-    message('If del init');
     if(currentExpenseTable){
         $('#expensesTableContainer').jtable('destroy');
         //message('Dentro del I');

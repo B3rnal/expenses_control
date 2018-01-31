@@ -110,6 +110,7 @@ function getBillableTypeTotal($id, $billable){
 		Inner Join ExpenseType AS e ON ExpenseLine.ExpenseTypeid=e.idExpenseType
 		Where ExpenseReportId = ". $id . " AND Billable = ". $billable ."
 		 group by ExpenseTypeId";
+		var_dump($sql);
 	//var_dump($sql);
 	$result = $conn->query($sql);
 	if ($result){ //cheking type of data.

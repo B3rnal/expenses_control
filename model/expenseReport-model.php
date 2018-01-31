@@ -52,6 +52,7 @@ function selectExpenses($expenseCustomId,$employeeId,$department,$status,$billab
 			$sql.=" AND ";
 		$sql.="ExpenseReport.Billable='".$billable."'";
 	}
+
 	//----------------------------------------------
 	//var_dump($sql);
 	$result = $conn->query($sql);

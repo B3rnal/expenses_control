@@ -1,5 +1,6 @@
 <?php
 include ("../model/expenseLine-model.php");
+include ("currencyValue-controler.php");
 
 // Select all lines from specific Expense
 function getAllExpenseLines($expenseCustomId){
@@ -7,6 +8,18 @@ function getAllExpenseLines($expenseCustomId){
 	if ($result){ //cheking type of data.
 		$rows = array();
 		while($r = $result->fetch_assoc()) {
+			$exchangeValue=getSpecificValue($r["Date"],$r["Currency"]);
+			if ($exchangeValue){ 
+				$rowsExchange = array();
+				while($re = $exchangeValue->fetch_assoc()) {
+				    $rowsExchange = $re;
+				}
+				$dateValue = $rowsExchange['Value'];
+			}else{
+				$dateValue =1;
+			}
+			$r["AmountUS"]=getCurrencyExchange($r["Currency"],$r["Amount"],$r["Date"]);
+			$r["CurrencyChange"]=$dateValue;
 		    $rows[] = $r;
 		}
 		$jTableResult = array();

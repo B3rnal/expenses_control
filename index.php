@@ -30,7 +30,7 @@ if(!empty($_POST)){
 		unset($_SESSION["current_user"]);
 	}
 }else{
-	//$is_valid=true;
+	$is_valid=true;
 }
 
 ?>
