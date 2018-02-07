@@ -20,7 +20,9 @@ var currentId,
     billableTotal, 
     nonBillableLines,
     nonBillableTotal, 
-    refund;
+    refund,
+    cashAdvance,
+    expenseBillable
 
 
 
@@ -35,7 +37,8 @@ function initCurrentExpenseInfo(id){
                 //Table Init
                 initExpenseTable(g_expenseInfo.idExpenseReport,g_expenseInfo.Name,currentId);
                 //Calcule Lines
-                calculateExpense(g_expenseInfo.idExpenseReport,g_expenseInfo.Billable,g_expenseInfo.CashAdvance);
+                cashAdvance=g_expenseInfo.CashAdvance;
+                expenseBillable=g_expenseInfo.Billable;
             });
     }
 }
@@ -45,6 +48,8 @@ function initExpenseTable(id,name,Customid){
     if(currentExpenseTable){
         $('#expensesTableContainer').jtable('destroy');
     }
+    
+
     currentExpenseTable=$('#expensesTableContainer').jtable({
             title: 'Expense Report : '+name,
             //title: 'Expense Report : NAME NAME NAME',
@@ -68,7 +73,7 @@ function initExpenseTable(id,name,Customid){
 
                 Date: {
                     title: 'Date',
-                    width: '7%',
+                    width: '10%',   
                     type: 'date',
                     displayFormat: 'yy-mm-dd'
                 },
@@ -90,7 +95,7 @@ function initExpenseTable(id,name,Customid){
                     title: 'Description',
                     type: 'textarea',
                     list: true,
-                    width: '30%',
+                    width: '10%',
                 },
 
                 Amount:{
@@ -104,6 +109,22 @@ function initExpenseTable(id,name,Customid){
                     defaultValue: 1
                 },
 
+                CurrencyChange:{
+                    title: 'Exchange',
+                    width: '10%',
+                    edit: false,
+                    create: false,
+                },
+
+                AmountUS:{
+                    title: 'Amount (USD)',
+                    width: '12%',
+                    edit: false,
+                    create: false,
+                },
+
+                
+
                 Billable:{
                     title: 'Billable',
                     options: { '0': 'No', '1': 'Yes'},
@@ -114,7 +135,32 @@ function initExpenseTable(id,name,Customid){
                 },*/
             }
         });
-    $('#expensesTableContainer').jtable('load');
+
+    $('#expensesTableContainer').jtable('load', undefined, function(){
+        var $rows = $('#expensesTableContainer').find('.jtable-data-row');
+        var billable=Array();
+        var nonBillable=Array();
+
+        $.each($rows,function(){
+            var record = $(this).data('record');
+            if(record.Billable==0){
+                if(nonBillable[record.ExpenseTypeid]){
+                    nonBillable[record.ExpenseTypeid]=nonBillable[record.ExpenseTypeid]+record.AmountUS;
+                }else{
+                    nonBillable[record.ExpenseTypeid]=record.AmountUS;
+                }
+            }else{
+                if(billable[record.ExpenseTypeid]){
+                    billable[record.ExpenseTypeid]=billable[record.ExpenseTypeid]+record.AmountUS;
+                }else{
+                    billable[record.ExpenseTypeid]=record.AmountUS;
+                }
+            }
+            
+        });
+        calculateExpense(currentId,expenseBillable,cashAdvance,billable,nonBillable);
+
+    });
 }
 
 
@@ -146,21 +192,38 @@ function listExpHTMLIds(item){
 //-----------------------------------
 
 function setBillableLines(data){
-    console.log(data);
     billableLines=data;
 }
 
 function setNonBillableLines(data){
-    console.log(data);
     nonBillableLines=data;
 }
 
-function calculateExpense(expId,billable,cashAdvance){
+function lineTypeToString(typeId){
+    var currentType="";
+    switch(typeId) { 
+        case 1: currentType='Transportation'; break; 
+        case 2: currentType='Lodging, Hotel'; break; 
+        case 3: currentType='Auto Rental & Gas'; break; 
+        case 4: currentType='Parking'; break; 
+        case 5: currentType='Business Meals'; break; 
+        case 6: currentType='Personal Meals'; break; 
+        case 7: currentType='Internet'; break; 
+        case 8: currentType='Mobile'; break; 
+        case 9: currentType='Telephone & Fax'; break;  
+        case 10: currentType='Enterneiment'; break; 
+        case 11: currentType='Supplies'; break; 
+        case 12: currentType='Other'; break; 
+    }
+    return currentType;
+}
+
+function calculateExpense(expId,billable,cashAdvance,billableLines,nonBillableLines){
     var billableHTML, nonBillableHTML;
     nonBillableTotal=0;
     billableTotal= 0;
     //cashAdvance=0;
-    $.ajax({
+    /*$.ajax({
         type: "post",
         url: "/tables/expenseLinesTable.php",
         data: { action: "calculateBillable", id:expId },
@@ -181,15 +244,16 @@ function calculateExpense(expId,billable,cashAdvance){
         },
         async:   false
 
-    });
+    });*/
+   
     if (billableLines) {
-        billableHTML = "<tr class=\"billable-header\"><th>Billable Lines Info</th><th>Total</th></tr>";
+        billableHTML = "<tr class=\"billable-header\"><th>Billable Lines</th><th>Total</th></tr>";
         billableHTML += "<tr class=\"cash-advance\"><td>Cash Advance Total</td><td>$" + cashAdvance + "</td></tr>";
-        for(var i = 0, len = billableLines.length; i < len; i++){
-            //console.log(billableLines[i].Type);
-            billableHTML += "<tr class=\"billable-lines\"><td>" + billableLines[i].Type  + "</td><td>$" + billableLines[i].Total + "</td></tr>";
-            billableTotal += Number(billableLines[i].Total);
-        }
+        billableLines.forEach(function (value, i) {
+            billableHTML += "<tr class=\"billable-lines\"><td>" + lineTypeToString(i)  + "</td><td>$" + value + "</td></tr>";
+            billableTotal += Number(value);
+        });
+
         billableHTML += "<tr class=\"billable-total\"><td>Billable Total</td><td>$" + billableTotal + "</td></tr>";
         refund = Number(cashAdvance) - (billableTotal);
         if (refund >= 0) {
@@ -204,14 +268,11 @@ function calculateExpense(expId,billable,cashAdvance){
     }
 
     if (nonBillableLines) {
-        nonBillableHTML = "<tr class=\"non-billable-header\"><th>Non Billable Lines Info</th><th>Total</th></tr>";
-        for(var i = 0, len = nonBillableLines.length; i < len; i++){
-            //console.log(billableLines[i].Type);
-            nonBillableHTML += "<tr class=\"non-billable-lines\"><td>" + nonBillableLines[i].Type  + "</td><td>$" + nonBillableLines[i].Total + "</td></tr>";
-            nonBillableTotal += Number(nonBillableLines[i].Total);
-            console.log(nonBillableLines[i].Total);
-            //console.log(nonBillableTotal);
-        }
+        nonBillableHTML = "<tr class=\"non-billable-header\"><th>Non Billable Lines</th><th>Total</th></tr>";
+        nonBillableLines.forEach(function (value, i) {
+            nonBillableHTML += "<tr class=\"billable-lines\"><td>" + lineTypeToString(i)  + "</td><td>$" + value + "</td></tr>";
+            nonBillableTotal += Number(value);
+        });
         nonBillableHTML += "<tr class=\"non-billable-total\"><td>Non Billable Total</td><td>$" + nonBillableTotal + "</td></tr>";
         nonBillableToHTML(nonBillableHTML);
     }

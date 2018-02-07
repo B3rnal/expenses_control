@@ -70,7 +70,8 @@ while($r = $result->fetch_assoc()) {
 		<!-- search filter -->
 		<div class="columns small-12">
 			<h1>Specific Expense Manager</h1>
-			Search Expense:
+			<a href="/manage-expenses.php">Go Back to All Expenses List</a>
+			<!--Search Expense:
 			<form class="filter-section small-12 columns">
 				<div class="row">
 					<div class="small-2 columns" >
@@ -89,7 +90,7 @@ while($r = $result->fetch_assoc()) {
 						<input class="button ExpenseSelected"  type="submit" id="CreateInvoice" value="Create External Invoice">
 					</div>
 				</div>
-			</form>
+			</form>-->
 		</div>
 		<!-- page-content -->
 		<div id="content" class="row">

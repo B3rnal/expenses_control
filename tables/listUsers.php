@@ -3,6 +3,7 @@ include ("../controlers/user-controler.php");
 
 $action = $_GET['action']?$_GET['action']:$_POST['action'];
 
+
 if($action == 'list'){
 	echo getUsers();
 }

@@ -63,8 +63,8 @@ function newExpense($expenseCustomId, $name, $billable, $department, $proyect, $
 
 
 //Update Expense
-function modifyExpense($expenseCustomId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status){
-	$result = updateExpense($expenseCustomId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status);//funcition from Expense-model
+function modifyExpense($expenseId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status){
+	$result = updateExpense($expenseId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status);//funcition from Expense-model
 	$jTableResult['Result'] = "OK";
 	return json_encode($jTableResult);
 
