@@ -46,7 +46,9 @@ if(!empty($_POST)){
 <body>
 	<div id="login-div" class="Aligner">
 		<div class="Aligner-item">
-			<h1>Login</h1>
+			<img src="../img/the-hangar-small.png" alt="Hangar Logo">			
+			<h1>Expense Report Manager</h1>
+			<h2>Login</h2>
 			<form method="Post">
 				<?php if(!$is_valid){
 					echo "<p>Error, please check your user and password</p>";

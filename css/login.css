@@ -6,10 +6,30 @@
 
 .Aligner-item {
   max-width: 50%;
+  font-family: Arial;
 }
 
+.Aligner-item h2{
+  padding-left: 140px; 	
+}
+
+.Aligner-item img {
+    border: aliceblue solid 4px;
+    width: 80px;
+    margin-left: 125px;
+}
 
 .Aligner span{
 	width: 5%;
 	
+}
+
+body {
+	background-color: #000;
+    color: #FFF;
+}
+
+#login-div{
+	
+	margin-top: 100px;
 }

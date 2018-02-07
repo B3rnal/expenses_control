@@ -89,11 +89,12 @@
 				</div>
 			</div>
 			<div id="expensesTableContainer"></div>
+			<!-- expense description -->
 			<div id="expenseDetails" >
-				
 				<table id="billableChart"></table> 
 				<table id="nonBillableChart"></table> 
 			</div>
+			<!-- /expense description -->
 
 
 		</div>

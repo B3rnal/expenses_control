@@ -16,7 +16,7 @@ function getAllExpenseLines($expenseCustomId){
 				}
 				$dateValue = $rowsExchange['Value'];
 			}else{
-				$dateValue =1;
+				$dateValue = "";
 			}
 			$r["AmountUS"]=getCurrencyExchange($r["Currency"],$r["Amount"],$r["Date"]);
 			$r["CurrencyChange"]=$dateValue;

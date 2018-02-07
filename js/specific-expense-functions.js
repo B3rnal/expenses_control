@@ -73,7 +73,7 @@ function initExpenseTable(id,name,Customid){
 
                 Date: {
                     title: 'Date',
-                    width: '7%',
+                    width: '10%',   
                     type: 'date',
                     displayFormat: 'yy-mm-dd'
                 },
@@ -95,7 +95,7 @@ function initExpenseTable(id,name,Customid){
                     title: 'Description',
                     type: 'textarea',
                     list: true,
-                    width: '20%',
+                    width: '10%',
                 },
 
                 Amount:{
@@ -111,12 +111,16 @@ function initExpenseTable(id,name,Customid){
 
                 CurrencyChange:{
                     title: 'Exchange',
-                    width: '10%'
+                    width: '10%',
+                    edit: false,
+                    create: false,
                 },
 
                 AmountUS:{
                     title: 'Amount (USD)',
-                    width: '10%'
+                    width: '12%',
+                    edit: false,
+                    create: false,
                 },
 
                 
@@ -243,7 +247,7 @@ function calculateExpense(expId,billable,cashAdvance,billableLines,nonBillableLi
     });*/
    
     if (billableLines) {
-        billableHTML = "<tr class=\"billable-header\"><th>Billable Lines Info</th><th>Total</th></tr>";
+        billableHTML = "<tr class=\"billable-header\"><th>Billable Lines</th><th>Total</th></tr>";
         billableHTML += "<tr class=\"cash-advance\"><td>Cash Advance Total</td><td>$" + cashAdvance + "</td></tr>";
         billableLines.forEach(function (value, i) {
             billableHTML += "<tr class=\"billable-lines\"><td>" + lineTypeToString(i)  + "</td><td>$" + value + "</td></tr>";
@@ -264,7 +268,7 @@ function calculateExpense(expId,billable,cashAdvance,billableLines,nonBillableLi
     }
 
     if (nonBillableLines) {
-        nonBillableHTML = "<tr class=\"non-billable-header\"><th>Non Billable Lines Info</th><th>Total</th></tr>";
+        nonBillableHTML = "<tr class=\"non-billable-header\"><th>Non Billable Lines</th><th>Total</th></tr>";
         nonBillableLines.forEach(function (value, i) {
             nonBillableHTML += "<tr class=\"billable-lines\"><td>" + lineTypeToString(i)  + "</td><td>$" + value + "</td></tr>";
             nonBillableTotal += Number(value);
