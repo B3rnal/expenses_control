@@ -93,6 +93,7 @@
 			<div id="expenseDetails" >
 				<table id="billableChart"></table> 
 				<table id="nonBillableChart"></table> 
+				<table id="globalBillableChart"></table> 
 			</div>
 			<!-- /expense description -->
 

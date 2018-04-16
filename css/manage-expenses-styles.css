@@ -66,6 +66,36 @@
 	color: green;
 }
 
+
+#expenseDetails .refund-total, #expenseDetails .cash-remaining{ 
+	color: green;
+}
 #expenseDetails .billable-total, #expenseDetails .non-billable-total{
 	color: tomato;
 }
+
+#expenseDetails .billable-header .info,  
+#expenseDetails .non-billable-header .info, 
+#expenseDetails .cash-advance .info,  
+#expenseDetails .cash-remaining .info,
+#expenseDetails .refund-total .info{
+	width:80%;
+}
+
+#billableChart, #nonBillableChart{
+
+	/*border-top: solid 1px #c4c4c4;*/
+}
+
+#billableChart{
+margin-bottom: 0px;
+}
+
+#globalBillableChart{
+	/*border-bottom: 1px solid;
+	border-top: solid 1px ;*/
+}
+
+#expenseDetails table td:nth-child(2),
+#expenseDetails table th:nth-child(2) {
+    text-align: right;

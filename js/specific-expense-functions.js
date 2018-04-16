@@ -7,7 +7,7 @@ $(document).ready(function(){
         var url="specific-expense.php?action=list&"+params;
         window.location=url;
     });
-    getAllExpIds();
+    //getAllExpIds();
 });
 
 //Global var
@@ -143,20 +143,34 @@ function initExpenseTable(id,name,Customid){
 
         $.each($rows,function(){
             var record = $(this).data('record');
-            if(record.Billable==0){
-                if(nonBillable[record.ExpenseTypeid]){
-                    nonBillable[record.ExpenseTypeid]=nonBillable[record.ExpenseTypeid]+record.AmountUS;
+
+            if(record.Billable==0){//If the line is billable
+                if(!nonBillable[record.ExpenseTypeid]){
+                    nonBillable[record.ExpenseTypeid]=Array();
+                }
+                if(record.ExpenseTypeid==5||record.ExpenseTypeid==6){
+                    if(!nonBillable[record.ExpenseTypeid][record.Date]){
+                        nonBillable[record.ExpenseTypeid][record.Date]=0;
+                    }
+                    nonBillable[record.ExpenseTypeid][record.Date]=nonBillable[record.ExpenseTypeid][record.Date]+record.AmountUS;
                 }else{
-                    nonBillable[record.ExpenseTypeid]=record.AmountUS;
+                    nonBillable[record.ExpenseTypeid]["no-date"]=nonBillable[record.ExpenseTypeid]+record.AmountUS;
                 }
             }else{
-                if(billable[record.ExpenseTypeid]){
-                    billable[record.ExpenseTypeid]=billable[record.ExpenseTypeid]+record.AmountUS;
+                if(!billable[record.ExpenseTypeid]){
+                    billable[record.ExpenseTypeid]=Array();
+                }
+                if(record.ExpenseTypeid==5||record.ExpenseTypeid==6){
+                    if(!billable[record.ExpenseTypeid][record.Date]){
+                        billable[record.ExpenseTypeid][record.Date]=0;
+                    }
+                    billable[record.ExpenseTypeid][record.Date]=billable[record.ExpenseTypeid][record.Date]+record.AmountUS;
                 }else{
-                    billable[record.ExpenseTypeid]=record.AmountUS;
+                    billable[record.ExpenseTypeid]["no-date"]=billable[record.ExpenseTypeid]+record.AmountUS;
                 }
             }
             
+
         });
         calculateExpense(currentId,expenseBillable,cashAdvance,billable,nonBillable);
 
@@ -167,6 +181,7 @@ function initExpenseTable(id,name,Customid){
 //Adding information to the filter drop down
 //-----------------------------------
 //Expenses Ids
+/*s
 function getAllExpIds(){
     $.post( "/tables/listExpenses.php", { action: "listIds"} ,function( data ) {
         data=JSON.parse(data);
@@ -185,7 +200,7 @@ function listExpHTMLIds(item){
     HTMLSelect.innerHTML = HTMLSelect.innerHTML + "<option value=\""+ item + "\">"+item+"</option>";
     $('#expIdList').trigger("chosen:updated");
 
-}
+}*/
 //-----------------------------------
 
 //Calculate Expense Lines
@@ -222,6 +237,7 @@ function calculateExpense(expId,billable,cashAdvance,billableLines,nonBillableLi
     var billableHTML, nonBillableHTML;
     nonBillableTotal=0;
     billableTotal= 0;
+    amount=0;
     //cashAdvance=0;
     /*$.ajax({
         type: "post",
@@ -245,37 +261,60 @@ function calculateExpense(expId,billable,cashAdvance,billableLines,nonBillableLi
         async:   false
 
     });*/
+    
    
     if (billableLines) {
-        billableHTML = "<tr class=\"billable-header\"><th>Billable Lines</th><th>Total</th></tr>";
-        billableHTML += "<tr class=\"cash-advance\"><td>Cash Advance Total</td><td>$" + cashAdvance + "</td></tr>";
+        billableHTML = "<tr class=\"billable-header\"><th class=\"info\">Billable Lines</th><th>Total</th></tr>";
+        billableHTML += "<tr class=\"cash-advance\"><td>Cash Advance Total</td><td>$" + Number(cashAdvance).toFixed(2) + "</td></tr>";
         billableLines.forEach(function (value, i) {
-            billableHTML += "<tr class=\"billable-lines\"><td>" + lineTypeToString(i)  + "</td><td>$" + value + "</td></tr>";
-            billableTotal += Number(value);
+            if (i != 5 && i != 6) {//If it is not a Personal os Busines meal
+                amount=Number(value["no-date"]); //add an empty date to the billable line
+                billableHTML += "<tr class=\"billable-lines\"><td>" + lineTypeToString(i)  + "</td><td>$" + amount.toFixed(2) + "</td></tr>";
+                billableTotal += Number(amount);//Amount total
+            }else{//If it´s an Personal or Busines meal
+                for (var j = 0; j < Object.keys(billableLines[i]).length; j++) {//Looking into each day of personal meals 
+                    var date=Object.keys(billableLines[i])[j];
+                    amount=Number(billableLines[i][date]);
+                    billableHTML += "<tr class=\"billable-lines\"><td>" + lineTypeToString(i)  + " " + date + "</td><td>$" + amount.toFixed(2) + "</td></tr>";
+                    billableTotal += Number(amount.toFixed(2)); //Adding to the amount total
+                }
+            }
         });
 
-        billableHTML += "<tr class=\"billable-total\"><td>Billable Total</td><td>$" + billableTotal + "</td></tr>";
-        refund = Number(cashAdvance) - (billableTotal);
-        if (refund >= 0) {
-             billableHTML += "<tr class=\"cash-remaining\"><td>Cash Advance Remaining</td><td>$" + refund + "</td></tr>";
-
-        }
-        else{
-             billableHTML += "<tr class=\"refund-total\"><td>Refund Total</td><td>$" + refund * -1 + "</td></tr>";
-        }
-        //console.log(billableHTML);
+        billableHTML += "<tr class=\"billable-total\"><td>Billable Total</td><td>$" + billableTotal.toFixed(2) + "</td></tr>";        
         billableToHTML(billableHTML);
     }
 
     if (nonBillableLines) {
-        nonBillableHTML = "<tr class=\"non-billable-header\"><th>Non Billable Lines</th><th>Total</th></tr>";
+        nonBillableHTML = "<tr class=\"non-billable-header\"><th class=\"info\">Non Billable Lines</th><th>Total</th></tr>";
         nonBillableLines.forEach(function (value, i) {
-            nonBillableHTML += "<tr class=\"billable-lines\"><td>" + lineTypeToString(i)  + "</td><td>$" + value + "</td></tr>";
-            nonBillableTotal += Number(value);
+            if (i != 5 && i != 6) {//If it is not a Personal os Busines meal
+                console.log(value,i);
+                amount=Number(value["no-date"]); //add an empty date to the non billable line
+                nonBillableHTML += "<tr class=\"non-billable-lines\"><td>" + lineTypeToString(i)  + "</td><td>$" + amount.toFixed(2) + "</td></tr>";
+                nonBillableTotal += Number(amount);//Amount total
+            }else{//If it´s an Personal or Busines meal
+                for (var j = 0; j < Object.keys(nonBillableLines[i]).length; j++) {//Looking into each day of personal meals 
+                    var date=Object.keys(nonBillableLines[i])[j];
+                    amount=Number(nonBillableLines[i][date]);
+                    nonBillableHTML += "<tr class=\"non-billable-lines\"><td>" + lineTypeToString(i)  + " " + date + "</td><td>$" + amount.toFixed(2) + "</td></tr>";
+                    nonBillableTotal += Number(amount.toFixed(2)); //Adding to the amount total
+                }
+            }
         });
-        nonBillableHTML += "<tr class=\"non-billable-total\"><td>Non Billable Total</td><td>$" + nonBillableTotal + "</td></tr>";
+        nonBillableHTML += "<tr class=\"non-billable-total\"><td>Non Billable Total</td><td>$" + Number(nonBillableTotal).toFixed(2) + "</td></tr>";
         nonBillableToHTML(nonBillableHTML);
     }
+    refund = Number(cashAdvance) - (billableTotal+nonBillableTotal);
+    if (refund >= 0) {
+         globalBillableHTML = "<tr class=\"cash-remaining\"><td class=\"info\">Cash Advance Remaining</td><td>$" + refund + "</td></tr>";
+
+    }
+    else{
+         globalBillableHTML  = "<tr class=\"refund-total\"><td class=\"info\">Refund Total</td><td>$" + refund * -1 + "</td></tr>";
+    }
+   //console.log(globalBillableHTML);
+    globalBillableToHTML(globalBillableHTML);
 
 
 }
@@ -291,3 +330,10 @@ function nonBillableToHTML(string){
     HTMLSelect.innerHTML = string;
 
 }
+
+function globalBillableToHTML(string){
+    HTMLSelect = document.getElementById("globalBillableChart");
+    HTMLSelect.innerHTML = string;
+
+}
+
