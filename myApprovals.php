@@ -32,7 +32,7 @@
 	<script src="../js/chosen/chosen.jquery.js" type="text/javascript"></script>
 	<!-- Custom -->
 	<script type="text/javascript" src="../js/main-functions.js"></script>
-	<script type="text/javascript" src="../js/myExpenses-functions.js"></script>
+	<script type="text/javascript" src="../js/myApprovals-functions.js"></script>
 </head>
 
 <body>
@@ -40,21 +40,21 @@
 	//header
 	include "sections/header.php";
 	//menu
-	$currentOption="home";
-	include "sections/menu.php"; 
+	$currentOption="approvals";
+	include "sections/menu.php";
 	?>
 	<!-- page-content -->
 	<div id="content" class="row">
 		<!-- expenses-list -->
 		<div class="columns small-12">
-			<h1>My Expense Manager</h1>
+			<h1>Approval Queue</h1>
 			Select Expense:
 			<form class="filter-section small-12 columns">
 				<div class="row">
 					<div class="small-2 columns" >
 						<label for="expId">Id</label>
 						<select id="expIdList" name="id" class="chosen-select" >
-							<option value=""></option> 
+							<option value=""></option>
 						</select>
 					</div>
 					<div class="small-1 columns">
@@ -82,9 +82,9 @@
 			<div id="expensesTableContainer"></div>
 			<!-- expense description -->
 			<div id="expenseDetails" >
-				<table id="billableChart"></table> 
-				<table id="nonBillableChart"></table> 
-				<table id="globalBillableChart"></table> 
+				<table id="billableChart"></table>
+				<table id="nonBillableChart"></table>
+				<table id="globalBillableChart"></table>
 			</div>
 			<!-- /expense description -->
 
@@ -95,7 +95,7 @@
 	</div>
 	<!-- /page-content -->
 	<footer>
-		
+
 	</footer>
 
 </body>

@@ -29,7 +29,7 @@ else if ($action =='update'){
 }
 
 else if ($action =='listIds'){
-	
+
 	$aResult = array();
 	$list = getExpenseIds();
 	if(empty($list)) {
@@ -39,10 +39,10 @@ else if ($action =='listIds'){
        $aResult['result'] = $list;
    	}
     echo json_encode($aResult);
-} 
+}
 
 else if ($action =='listDep'){
-	
+
 	$aResult = array();
 	$list = getDepartments();
 	if(empty($list)) {
@@ -55,7 +55,7 @@ else if ($action =='listDep'){
 }
 
 else if ($action =='expenseInfo'){
-  
+
   $aResult = array();
   //echo $action;
   $list = getSpecificExpense($expenseId);
@@ -69,9 +69,9 @@ else if ($action =='expenseInfo'){
 }
 
 else if ($action =='listIdsByUser'){
-  
+
   $aResult = array();
-  $list = getAllIdsByUser($userId);
+  $list = getExpenseIdsByUsers($userId);
   if(empty($list)) {
        $aResult['error'] = 'Empty Data';
     }
@@ -80,6 +80,58 @@ else if ($action =='listIdsByUser'){
     }
     echo json_encode($aResult);
 }
+else if ($action =='listIdsBySupervisor'){
+
+  $aResult = array();
+  $list = getExpenseIdsBySuppervisor($userId);
+  if(empty($list)) {
+       $aResult['error'] = 'Empty Data';
+    }
+    else {
+       $aResult['result'] = $list;
+    }
+    echo json_encode($aResult);
+}
+
+
+
+// switch ($action) {
+// 	case 'list':
+// 		echo getExpenses($_POST["ExpenseCustomId"],$_POST["EmployeeId"],$_POST["Department"],$_POST["ExpenseStatusId"],$_POST["BillableExpense"]);
+// 		break;
+//
+// 		case 'list':
+// 			echo getExpenses($_POST["ExpenseCustomId"],$_POST["EmployeeId"],$_POST["Department"],$_POST["ExpenseStatusId"],$_POST["BillableExpense"]);
+// 			break;
+// 		case 'delete':
+// 			echo echo deleteLine($_POST['idExpenseReport']);
+// 			break;
+// 		case 'list':
+// 			echo getExpenses($_POST["ExpenseCustomId"],$_POST["EmployeeId"],$_POST["Department"],$_POST["ExpenseStatusId"],$_POST["BillableExpense"]);
+// 			break;
+// 		case 'list':
+// 			echo getExpenses($_POST["ExpenseCustomId"],$_POST["EmployeeId"],$_POST["Department"],$_POST["ExpenseStatusId"],$_POST["BillableExpense"]);
+// 			break;
+// 		case 'list':
+// 			echo getExpenses($_POST["ExpenseCustomId"],$_POST["EmployeeId"],$_POST["Department"],$_POST["ExpenseStatusId"],$_POST["BillableExpense"]);
+// 			break;
+// 		case 'list':
+// 			echo getExpenses($_POST["ExpenseCustomId"],$_POST["EmployeeId"],$_POST["Department"],$_POST["ExpenseStatusId"],$_POST["BillableExpense"]);
+// 			break;
+// 		case 'list':
+// 			echo getExpenses($_POST["ExpenseCustomId"],$_POST["EmployeeId"],$_POST["Department"],$_POST["ExpenseStatusId"],$_POST["BillableExpense"]);
+// 			break;
+// 		case 'list':
+// 			echo getExpenses($_POST["ExpenseCustomId"],$_POST["EmployeeId"],$_POST["Department"],$_POST["ExpenseStatusId"],$_POST["BillableExpense"]);
+// 			break;
+// 		case 'list':
+// 			echo getExpenses($_POST["ExpenseCustomId"],$_POST["EmployeeId"],$_POST["Department"],$_POST["ExpenseStatusId"],$_POST["BillableExpense"]);
+// 			break;
+// 		case 'list':
+// 			echo getExpenses($_POST["ExpenseCustomId"],$_POST["EmployeeId"],$_POST["Department"],$_POST["ExpenseStatusId"],$_POST["BillableExpense"]);
+// 			break;
+//
+// }
 
 
 

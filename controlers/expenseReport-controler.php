@@ -2,11 +2,11 @@
 include ("../model/expenseReport-model.php");
 
 // function debug($msg) {
-//        $msg = str_replace('"', '\\"', $msg); // Escaping double quotes 
+//        $msg = str_replace('"', '\\"', $msg); // Escaping double quotes
 //         echo "<script>console.log(\"$msg\")</script>";
 // }
 
-// Select all users 
+// Select all users
 function getExpenses($expenseCustomId,$employeeId,$department,$status,$billable){
 	$result = selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable);//funcition from user-model
 	if ($result){ //cheking type of data.
@@ -30,19 +30,19 @@ function getExpenses($expenseCustomId,$employeeId,$department,$status,$billable)
 // Select specific Expense by Id
 function getSpecificExpense($expenseId){
 	$result = selectExpenseByCustomId($expenseId);//function from Expenses Report model
-	
+
 	if ($result) { //cheking if exist
 		//var_dump($result);
 		/*$data = $result->fetch_assoc();
 		var_dum( $data);*/
 		return $result;
 	}
-	return false;	
+	return false;
 }
 
 
 
-//Add Expense 
+//Add Expense
 function newExpense($expenseCustomId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status){
 	//var_dump("entrando a newExpense");
 	$result = selectExpenseByCustomId($expenseCustomId);
@@ -70,7 +70,7 @@ function modifyExpense($expenseId, $name, $billable, $department, $proyect, $cre
 
 }
 
-//Delete Expense 
+//Delete Expense
 function deleteExpense($id){
 	$result = deleteExpenseById($id);//function from Expense-model
 	$jTableResult['Result'] = "OK";
@@ -101,12 +101,17 @@ function getExpenseIdsByUsers($userId){
 	return $result;
 }
 
+function getExpenseIdsBySuppervisor($supId){
+	$result = getAllIdsBySupervisor($supId);//function from Expense-model
+	return $result;
+}
+
 //var_dump("prueba");
-//var_dump(getSpecificExpense(123));
+//var_dump(getExpenseIdsBySuppervisor(318));
 
 //var_dump(getExpenseIds());
 
 // while($row = $result->fetch_assoc()) {
 // echo "<br>- id: " . $row["idUser"]. " - EmpNum: " . $row["EmployeeNumber"] . " - Name: " . $row["Name"]. " - Email " . $row["Email"]. "<br>";
 //echo getExpenses();
-?>	
+?>

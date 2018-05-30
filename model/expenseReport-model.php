@@ -7,7 +7,7 @@ $conn = Db::getConnection();
 // Select all Expenses
 function selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable){//All the parameters of the filter
 	global $conn;
-	$firstFilter=true;//Flag to indicate the start of the "WHERE" query, then it will add "AND" to the following filters in the query  
+	$firstFilter=true;//Flag to indicate the start of the "WHERE" query, then it will add "AND" to the following filters in the query
 	$sql = "SELECT DISTINCT ExpenseReport.idExpenseReport, ExpenseReport.ExpenseCustomId, ExpenseReport.Name, ExpenseReport.Billable, ExpenseReport.Department, ExpenseReport.Proyect, ExpenseReport.CreationDate, ExpenseReport.StartDate, ExpenseReport.EndDate, ExpenseReport.ReportDetail, ExpenseReport.CashAdvance, ExpenseReport.Refund, ExpenseReport.EmployeeId, ExpenseReport.SupervisorId, ExpenseReport.ExpenseStatusId
 			FROM ExpenseReport";
 	//Considering all each one of the filters
@@ -86,7 +86,7 @@ function selectExpenseByCustomId($expenseCustomId){
 			WHERE ExpenseReport.ExpenseCustomId = '" . $expenseCustomId . "';";
 	//echo $sql;
 	$result = $conn->query($sql);
-	
+
 	if ($result->num_rows != 0){
 		return $result->fetch_assoc();
 	}
@@ -104,7 +104,7 @@ function addExpense($expenseCustomId, $name, $billable, $department, $proyect, $
 
 
 
-// Update Expense 
+// Update Expense
 function updateExpense($expenseId, $name, $billable, $department, $proyect, $creationDate, $startDate, $endDate, $detail, $cashAdvance, $refund, $employeeId, $supervisorId, $status){
 	global $conn;
 	$sql = "UPDATE `ExpenseReport` SET `Name` = \"" . $name . "\" , `Billable` = \"" . $billable . "\" , `Department` = \"" . $department . "\" , `Proyect` = \"" . $proyect . "\" , `CreationDate` = \"" . $creationDate . "\" , `StartDate` = \"" . $startDate . "\" , `EndDate` = \"" . $endDate . "\" , `ReportDetail` = \"" . $detail . "\" , `CashAdvance` = \"" . $cashAdvance . "\" , `Refund` = \"" . $refund . "\" , `EmployeeId` = \"" . $employeeId . "\" , `SupervisorId` = \"" . $supervisorId . "\" , `ExpenseStatusId` = \"" . $status . "\" WHERE `idExpenseReport`=  \"" . $expenseId . "\"";
@@ -114,7 +114,7 @@ function updateExpense($expenseId, $name, $billable, $department, $proyect, $cre
 
 }
 
-//Delete User 
+//Delete User
 function deleteExpenseById($id){
 	global $conn;
 	$sql = "DELETE FROM ExpenseReport WHERE `idExpenseReport`=  \"" . $id . "\"";
@@ -126,13 +126,13 @@ function deleteExpenseById($id){
 function getAllIds(){
 	global $conn;
 	$sql = "SELECT ExpenseCustomId FROM ExpenseReport;";
-	//var_dump($sql);		
+	//var_dump($sql);
 	$result = $conn->query($sql);
 	//var_dump($result);
 	return $result;
 }
 
-//List Departments 
+//List Departments
 function getAllDepartments(){
 	global $conn;
 	$sql = "SELECT DISTINCT Department FROM ExpenseReport;";
@@ -153,6 +153,19 @@ function getAllIdsByUser($userId){
 	return $rows;
 }
 
-//var_dump(getAllIdsByUser(318));
+//List all Custom Ids by user
+function getAllIdsBySupervisor($supervisorId){
+	global $conn;
+	$sql = "SELECT * FROM ExpenseReport WHERE ExpenseStatusId= 2 AND SupervisorId='".$supervisorId."'";// When the status is "waiting for approval (2)";
+	//var_dump($sql);
+	$result = $conn->query($sql);
+	while($r = $result->fetch_assoc()) {
+		$rows[] = $r;
+	}
+	//var_dump($rows);
+	return $rows;
+}
+
+//var_dump(getAllIdsBySupervisor(318));
 //function selectExpenses($expenseCustomId,$employeeId,$department,$status,$billable)
 ?>
