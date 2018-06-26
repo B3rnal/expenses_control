@@ -114,7 +114,7 @@ function updateExpense($expenseId, $name, $billable, $department, $proyect, $cre
 
 }
 
-//Delete User
+//Delete Expense
 function deleteExpenseById($id){
 	global $conn;
 	$sql = "DELETE FROM ExpenseReport WHERE `idExpenseReport`=  \"" . $id . "\"";
@@ -153,7 +153,7 @@ function getAllIdsByUser($userId){
 	return $rows;
 }
 
-//List all Custom Ids by user
+//Send to Approbation
 function getAllIdsBySupervisor($supervisorId){
 	global $conn;
 	$sql = "SELECT * FROM ExpenseReport WHERE ExpenseStatusId= 2 AND SupervisorId='".$supervisorId."'";// When the status is "waiting for approval (2)";

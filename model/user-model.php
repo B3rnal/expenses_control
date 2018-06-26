@@ -55,7 +55,7 @@ function updateUser($id, $employeeNumber, $name, $email, $department, $type){
 
 }
 
-//Delete User 
+//Delete User
 function deleteUserById($id){
 	global $conn;
 	$sql = "DELETE FROM User WHERE `idUser`=  \"" . $id . "\"";
@@ -63,7 +63,7 @@ function deleteUserById($id){
 	return $result;
 }
 
-//Selecting  Users and Employee numbers 
+//Selecting  Users and Employee numbers
 function listUsers(){
 	global $conn;
 	$sql = "SELECT EmployeeNumber as Value, Name as DisplayText FROM User ORDER BY DisplayText ASC";
@@ -75,9 +75,9 @@ function listUsers(){
 }
 
 //Login  verification
-function validateUser($name,$pass){
+function validateUser($email,$pass){
 	global $conn;
-	$sql = "SELECT * FROM User where Name = '" . $name . "' AND Password = '" .$pass . "'";
+	$sql = "SELECT * FROM User where Email = '" . $email . "' AND Password = '" .$pass . "'";
 	//var_dump($sql);
 	$result = $conn->query($sql);
 	if ($result->num_rows != 0){
@@ -89,5 +89,3 @@ function validateUser($name,$pass){
 //var_dump( validateUser("Bernal", "password"));
 
 ?>
-
-

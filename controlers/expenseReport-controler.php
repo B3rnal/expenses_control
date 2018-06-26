@@ -1,5 +1,6 @@
 <?php
 include ("../model/expenseReport-model.php");
+ini_set('display_errors', 1);
 
 // function debug($msg) {
 //        $msg = str_replace('"', '\\"', $msg); // Escaping double quotes
@@ -98,16 +99,18 @@ function getDepartments(){
 
 function getExpenseIdsByUsers($userId){
 	$result = getAllIdsByUser($userId);//function from Expense-model
+	//var_dump("here");
+	//die();
 	return $result;
 }
 
-function getExpenseIdsBySuppervisor($supId){
+function getExpenseIdsBySupervisor($supId){
 	$result = getAllIdsBySupervisor($supId);//function from Expense-model
 	return $result;
 }
 
 //var_dump("prueba");
-//var_dump(getExpenseIdsBySuppervisor(318));
+//var_dump(getExpenseIdsBySupervisor(318));
 
 //var_dump(getExpenseIds());
 

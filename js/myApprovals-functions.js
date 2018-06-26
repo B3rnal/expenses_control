@@ -75,23 +75,27 @@ function initExpenseTable(id,name,Customid){
                     title: 'Date',
                     width: '10%',
                     type: 'date',
-                    displayFormat: 'yy-mm-dd'
+                    displayFormat: 'yy-mm-dd',
+                    edit: false
                 },
 
                 Place: {
                     title: 'Place/Location',
                     type: 'textarea',
                     list: true,
-                    width: '13%'
+                    width: '13%',
+                    edit: false
                 },
 
                 ExpenseTypeid:{
+                    edit: false,
                     width: '15%',
                     title: 'Type',
                     options: { '1': 'Transportation', '2': 'Lodging, Hotel', '3': 'Auto Rental & Gas', '4': 'Parking', '5': 'Business Meals', '6': 'Personal Meals', '7': 'Internet', '8': 'Mobile', '9': 'Telephone & Fax', '10': 'Enterneiment', '11': 'Supplies', '12': 'Other'  }
                 },
 
                 Detail: {
+                    edit: false,
                     title: 'Description',
                     type: 'textarea',
                     list: true,
@@ -99,17 +103,20 @@ function initExpenseTable(id,name,Customid){
                 },
 
                 Amount:{
+                    edit: false,
                     title: 'Amount',
                     width: '10%'
                 },
 
                 Currency:{
+                    edit: false,
                     title: 'Currency',
                     options: { '1': 'US Dollar', '2': 'CA Dollar', '3': 'Colones' },
                     defaultValue: 1
                 },
 
                 CurrencyChange:{
+                    edit: false,
                     title: 'Exchange',
                     width: '10%',
                     edit: false,
@@ -117,6 +124,7 @@ function initExpenseTable(id,name,Customid){
                 },
 
                 AmountUS:{
+                    edit: false,
                     title: 'Amount (USD)',
                     width: '12%',
                     edit: false,
@@ -126,6 +134,7 @@ function initExpenseTable(id,name,Customid){
 
 
                 Billable:{
+                    edit: false,
                     title: 'Billable',
                     options: { '0': 'No', '1': 'Yes'},
                     defaultValue: 1
@@ -184,7 +193,7 @@ function initExpenseTable(id,name,Customid){
 function getAllExpIds(){
     $.post( "/tables/listExpenses.php", { action: "listIdsBySupervisor", userId: LogedUser} ,function( data ) {
         data=JSON.parse(data);
-        console.log(data);
+        //console.log(data);
         if( ! data.error) {
             //console.log("inside if")
              data.result.forEach(listExpHTMLIds);

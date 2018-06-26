@@ -1,14 +1,10 @@
 <?php
 include ("../controlers/expenseReport-controler.php");
-/*error_reporting(E_ALL);
-ini_set('display_errors', '1');*/
 
 $action = $_GET['action']?$_GET['action']:$_POST['action'];
 $expenseId = $_GET['expId']?$_GET['expId']:$_POST['expId'];
 $userId = $_GET['userId']?$_GET['userId']:$_POST['userId'];
 
-//var_dump(getExpenses(""));
-//echo getExpenses($_POST["ExpenseCustomId"]);
 
 if ($action =='list'){
 	//var_dump(getExpenses($_POST["ExpenseCustomId"]));
@@ -80,10 +76,11 @@ else if ($action =='listIdsByUser'){
     }
     echo json_encode($aResult);
 }
+
 else if ($action =='listIdsBySupervisor'){
 
   $aResult = array();
-  $list = getExpenseIdsBySuppervisor($userId);
+  $list = getExpenseIdsBySupervisor($userId);
   if(empty($list)) {
        $aResult['error'] = 'Empty Data';
     }
@@ -132,7 +129,5 @@ else if ($action =='listIdsBySupervisor'){
 // 			break;
 //
 // }
-
-
 
 ?>

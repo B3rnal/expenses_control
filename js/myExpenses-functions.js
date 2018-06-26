@@ -182,6 +182,7 @@ function initExpenseTable(id,name,Customid){
 //-----------------------------------
 //Expenses Ids
 function getAllExpIds(){
+    //console.log(LogedUser);
     $.post( "/tables/listExpenses.php", { action: "listIdsByUser", userId: LogedUser} ,function( data ) {
         data=JSON.parse(data);
         //console.log(data);
